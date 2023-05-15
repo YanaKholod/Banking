@@ -40,6 +40,7 @@ const Payments = () => {
         {questions.map((item) => (
           <div key={item.id}>
             {item.title}
+            <button>^</button>
             <div>{item.description}</div>
           </div>
         ))}
