@@ -14,7 +14,7 @@ const Cards = () => {
           {cards.map((item) => (
             <div key={item.id}>
               <img src={item.img} alt="" />
-              <NavLink>
+              <NavLink to="">
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
               </NavLink>
