@@ -1,11 +1,54 @@
 import React, { useState } from "react";
 import { menu } from "../utils/menu";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { COLORS } from "../constants/styled";
 
 const Styled = {
+  MenuWrapper: styled.div`
+    background-color: ${COLORS.MENU_BACKGROUND};
+    width: 279px;
+    margin-top: 10px;
+  `,
+  MenuItem: styled(NavLink)`
+    text-decoration: none;
+    padding-left: 35px;
+    color: ${COLORS.TEXT};
+  `,
+  MenuItemString: styled.div`
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  `,
   DropdownWrapper: styled.div`
     position: relative;
+  `,
+  DropdownMenuItem: styled.div`
+    padding: 0 26px;
+    cursor: pointer;
+    &:hover {
+      background-color: #ddd;
+    }
+  `,
+  DropdownMenu: styled.div`
+    position: absolute;
+    top: 20%;
+    left: 100%;
+    background-color: ${COLORS.MENU_BACKGROUND};
+    padding: 8px 0;
+    margin: 0;
+    z-index: 100;
+    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  `,
+  Dropdown: styled.div`
+    background-color: ${COLORS.MENU_BACKGROUND};
+    color: ${COLORS.TEXT};
+    border: none;
+    padding-left: 35px;
   `,
 };
 const Menu = () => {
@@ -16,59 +59,30 @@ const Menu = () => {
   };
 
   return (
-    <div>
+    <Styled.MenuWrapper>
       {menu.map((item) => (
-        <div key={item.id}>
-          <div>
-            <img src={item.img} alt="" />
-            {item.submenu ? (
-              <div>
-                <div onClick={() => toggleMenu()}> {item.name}</div>
-                <div isOpen={isOpen}>
-                  {item.submenu.map((item) => (
-                    <div key={item.title}>{item.title}</div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <Link to={item.link}>{item.name}</Link>
-            )}
-          </div>
-        </div>
+        <Styled.MenuItemString key={item.id} onClick={() => toggleMenu()}>
+          <img src={item.img} alt="" />
+          {item.submenu ? (
+            <Styled.DropdownWrapper>
+              <Styled.Dropdown>{item.name}</Styled.Dropdown>
+              <Styled.DropdownMenu isOpen={isOpen}>
+                {item.submenu.map((item) => (
+                  <Styled.DropdownMenuItem key={item.title}>
+                    {item.title}
+                  </Styled.DropdownMenuItem>
+                ))}
+              </Styled.DropdownMenu>
+            </Styled.DropdownWrapper>
+          ) : (
+            <p>
+              <Styled.MenuItem to={item.link}>{item.name}</Styled.MenuItem>
+            </p>
+          )}
+        </Styled.MenuItemString>
       ))}
-    </div>
+    </Styled.MenuWrapper>
   );
 };
 
 export default Menu;
-
-// const DropdownWrapper = styled.div`
-//   position: relative;
-// `;
-
-// const DropdownButton = styled.button`
-//   background-color: #f5f5f5;
-//   color: #333;
-//   padding: 8px 16px;
-//   border: none;
-//   cursor: pointer;
-// `;
-
-// const DropdownMenu = styled.ul`
-//   position: absolute;
-//   top: 100%;
-//   left: 0;
-//   list-style-type: none;
-//   background-color: #f5f5f5;
-//   padding: 8px 0;
-//   margin: 0;
-//   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-// `;
-
-// const DropdownMenuItem = styled.li`
-//   padding: 8px 16px;
-//   cursor: pointer;
-//   &:hover {
-//     background-color: #ddd;
-//   }
-// `;
