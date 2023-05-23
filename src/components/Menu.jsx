@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { menu } from "../utils/menu";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
+const Styled = {
+  DropdownWrapper: styled.div`
+    position: relative;
+  `,
+};
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +26,7 @@ const Menu = () => {
                 <div onClick={() => toggleMenu()}> {item.name}</div>
                 <div isOpen={isOpen}>
                   {item.submenu.map((item) => (
-                    <div>{item.title}</div>
+                    <div key={item.title}>{item.title}</div>
                   ))}
                 </div>
               </div>
