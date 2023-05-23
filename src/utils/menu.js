@@ -155,6 +155,11 @@ export const menu = [
     name: "Transport",
     link: "/transport",
     img: "https://cdn.privat24.ua/icons/file/ServiceTickets.svg",
+    submenu: [
+      { title: "Railway tickets", linkTo: "" },
+      { title: "Bus tickets", linkTo: "" },
+      { title: "Flight tickets", linkTo: "" },
+    ],
   },
   {
     id: 7,
@@ -193,12 +198,6 @@ export const menu = [
     ],
   },
   {
-    id: 8,
-    name: "Fun",
-    link: "/fun",
-    img: "https://cdn.privat24.ua/icons/file/ServiceEntertainment.svg",
-  },
-  {
     id: 9,
     name: "Charity",
     link: "/charity",
@@ -211,18 +210,18 @@ export const menu = [
     img: "https://cdn.privat24.ua/icons/file/ServiceBusiness.svg",
     submenu: [
       {
-        title: "Еlectronic signature for a natural person",
+        title: "Electronic signature for a natural person",
       },
       {
-        title: "Сurrency transactions salaries and other payments",
+        title: "Currency transactions salaries and other payments",
         linkTo: "",
       },
       {
-        title: "Еlectronic document management",
+        title: "Electronic document management",
         linkTo: "",
       },
       {
-        title: "Еlectronic reporting corporate client documents",
+        title: "Electronic reporting corporate client documents",
         linkTo: "",
       },
     ],

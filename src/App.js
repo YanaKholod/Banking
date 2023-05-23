@@ -7,13 +7,37 @@ import Payments from "./pages/Payments";
 import Communication from "./pages/Communication";
 import Deposits from "./pages/Deposits";
 import Moneybox from "./pages/Moneybox";
-import Credits from "./pages/Credits";
-import Transport from "./pages/Transport";
 import Charity from "./pages/Charity";
-import Fun from "./pages/Fun";
-import Insurance from "./pages/Insurance";
-import Business from "./pages/Business";
 import Footer from "./components/Footer";
+import RailwayTransport from "./pages/TransportSubmenu/RailwayTransport";
+import BusTransport from "./pages/TransportSubmenu/BusTransport";
+import FlightTransport from "./pages/TransportSubmenu/FlightTransport";
+import HealthIns from "./pages/InsuranceSubmenu/HealthIns";
+import ProtectionIns from "./pages/InsuranceSubmenu/ProtectionIns";
+import OscpvIns from "./pages/InsuranceSubmenu/OscpvIns";
+import TravelIns from "./pages/InsuranceSubmenu/TravelIns";
+import RealEstateIns from "./pages/InsuranceSubmenu/RealEstateIns";
+import FraudIns from "./pages/InsuranceSubmenu/FraudIns";
+import ElectronicSignature from "./pages/BusinessSubmenu/ElectronicSignature";
+import TransactionsSalaries from "./pages/BusinessSubmenu/TransactionsSalaries";
+import DocumentManagement from "./pages/BusinessSubmenu/DocumentManagement";
+import CorporateDocuments from "./pages/BusinessSubmenu/CorporateDocuments";
+import Frehat from "./pages/CommunicationSubmenu/Frehat";
+import Volia from "./pages/CommunicationSubmenu/Volia";
+import Kiyvstar from "./pages/CommunicationSubmenu/Kiyvstar";
+import Prosto from "./pages/CommunicationSubmenu/Prosto";
+import Viasat from "./pages/CommunicationSubmenu/Viasat";
+import Troilan from "./pages/CommunicationSubmenu/Troilan";
+import UkrTelecom from "./pages/CommunicationSubmenu/UkrTelecom";
+import Vega from "./pages/CommunicationSubmenu/Vega";
+import MobileTopUp from "./pages/CommunicationSubmenu/MobileTopUp";
+import CreditLimit from "./pages/CreditsSubmenu/CreditLimit";
+import PaymentInInstallments from "./pages/CreditsSubmenu/PaymentInInstallments";
+import InstantInstallment from "./pages/CreditsSubmenu/InstantInstallment";
+import CashLoan from "./pages/CreditsSubmenu/CashLoan";
+import LeasingCars from "./pages/CreditsSubmenu/LeasingCars";
+import HousingLoan from "./pages/CreditsSubmenu/HousingLoan";
+import OverduePayments from "./pages/CreditsSubmenu/OverduePayments";
 
 function App() {
   return (
@@ -29,13 +53,55 @@ function App() {
             <Route path="communication" element={<Communication />} />
             <Route path="deposits" element={<Deposits />} />
             <Route path="moneybox" element={<Moneybox />} />
-            <Route path="credits" element={<Credits />} />
             <Route path="cards" element={<Cards />} />
-            <Route path="transport" element={<Transport />} />
-            <Route path="insurance" element={<Insurance />} />
-            <Route path="fun" element={<Fun />} />
             <Route path="charity" element={<Charity />} />
-            <Route path="business" element={<Business />} />
+            <Route
+              path="transport/railwayTickets"
+              element={<RailwayTransport />}
+            />
+            <Route path="transport/busTickets" element={<BusTransport />} />
+            <Route
+              path="transport/flightTickets"
+              element={<FlightTransport />}
+            />
+            <Route path="insurance/health" element={<HealthIns />} />
+            <Route path="insurance/forEveryDay" element={<ProtectionIns />} />
+            <Route path="insurance/oscpv" element={<OscpvIns />} />
+            <Route path="insurance/travel" element={<TravelIns />} />
+            <Route path="insurance/realEstate" element={<RealEstateIns />} />
+            <Route path="insurance/fraud" element={<FraudIns />} />
+            <Route path="business/esfanp" element={<ElectronicSignature />} />
+            <Route
+              path="business/transactionsSalaries"
+              element={<TransactionsSalaries />}
+            />
+            <Route
+              path="business/documentManagement"
+              element={<DocumentManagement />}
+            />
+            <Route
+              path="business/corporateClients"
+              element={<CorporateDocuments />}
+            />
+            <Route path="comm/mobile" element={<MobileTopUp />} />
+            <Route path="comm/volia" element={<Volia />} />
+            <Route path="comm/kiyvstar" element={<Kiyvstar />} />
+            <Route path="comm/ukrtel" element={<UkrTelecom />} />
+            <Route path="comm/vega" element={<Vega />} />
+            <Route path="comm/viasat" element={<Viasat />} />
+            <Route path="comm/prosto" element={<Prosto />} />
+            <Route path="comm/triolan" element={<Troilan />} />
+            <Route path="comm/frehat" element={<Frehat />} />
+            <Route path="credits/limits" element={<CreditLimit />} />
+            <Route
+              path="credits/payments"
+              element={<PaymentInInstallments />}
+            />
+            <Route path="credits/instant" element={<InstantInstallment />} />
+            <Route path="credits/cashLoan" element={<CashLoan />} />
+            <Route path="credits/leasing" element={<LeasingCars />} />
+            <Route path="credits/housingLoan" element={<HousingLoan />} />
+            <Route path="credits/overdue" element={<OverduePayments />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
