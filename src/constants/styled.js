@@ -1,5 +1,6 @@
 export const COLORS = {
-  HEADER_BACKGROUND: "#212121",
+  HEADER_BACKGROUND: "#303030",
+  FOOTER_BACKGROUND: "#303030",
   MENU_BACKGROUND: "#212121",
   CONTENT_BACKGROUND: "#0F0F0F",
   BLOCK_BACKGROUND: "#212121",
@@ -19,4 +20,7 @@ export const TEXT = {
   BOLD_TEXT: "16px",
   BUTTON_TEXT: "16px",
   MENU_ITEM: "16px",
+};
+export const SVGS = {
+  RIGHT_ARROW: "https://www.svgrepo.com/show/27797/right-arrow.svg",
 };

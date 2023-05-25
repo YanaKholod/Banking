@@ -1,9 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
+const Styled = {
+  Wrapper: styled.div`
+    width: 100%;
+    margin-left: 20px;
+  `,
+};
 const MainContent = () => {
   return (
-    <div>
+    <Styled.Wrapper>
       <div>
         IMG DIV
         <img alt=""></img>
@@ -64,7 +71,7 @@ const MainContent = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Styled.Wrapper>
   );
 };
 

@@ -11,7 +11,7 @@ const Styled = {
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: "Gill Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
     box-sizing: border-box;
   `,
 };

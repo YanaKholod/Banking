@@ -38,14 +38,24 @@ import CashLoan from "./pages/CreditsSubmenu/CashLoan";
 import LeasingCars from "./pages/CreditsSubmenu/LeasingCars";
 import HousingLoan from "./pages/CreditsSubmenu/HousingLoan";
 import OverduePayments from "./pages/CreditsSubmenu/OverduePayments";
+import styled from "styled-components";
+import { COLORS } from "./constants/styled";
 
+const Styled = {
+  Page: styled.div`
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: ${COLORS.CONTENT_BACKGROUND};
+    color: ${COLORS.TEXT};
+  `,
+};
 function App() {
   return (
     <BrowserRouter>
-      <div className="header">
+      <Styled.Page>
         <Header />
-      </div>
-      <div className="content">
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<HomePage />} />
@@ -105,10 +115,8 @@ function App() {
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </div>
-      <div className="footer">
         <Footer />
-      </div>
+      </Styled.Page>
     </BrowserRouter>
   );
 }
