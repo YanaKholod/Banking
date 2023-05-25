@@ -4,15 +4,24 @@ import MainContent from "../components/MainContent";
 import styled from "styled-components";
 
 const Styled = {
-  Wrapper: styled.div``,
+  Wrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 15px;
+    height: 100vh;
+  `,
+  Menu: styled.div`
+    width: 100%;
+  `,
 };
 const HomePage = () => {
   return (
-    <div>
-      HomePage
-      <Menu />
+    <Styled.Wrapper>
+      <Styled.Menu>
+        <Menu />
+      </Styled.Menu>
       <MainContent />
-    </div>
+    </Styled.Wrapper>
   );
 };
 
