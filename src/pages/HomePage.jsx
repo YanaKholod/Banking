@@ -6,13 +6,10 @@ import styled from "styled-components";
 const Styled = {
   Wrapper: styled.div`
     display: flex;
-    justify-content: space-between;
-    margin: 0px 15px;
+    margin: 20px;
     height: 100vh;
   `,
-  Menu: styled.div`
-    width: 100%;
-  `,
+  Menu: styled.div``,
 };
 const HomePage = () => {
   return (

@@ -1,21 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
-import MenuItem from "./MenuItem";
+import { menu } from "../utils/menu";
+import { NavLink } from "react-router-dom";
 
 const Styled = {
   MenuWrapper: styled.div`
     background-color: ${COLORS.MENU_BACKGROUND};
-    width: 279px;
-    margin-top: 10px;
-    padding: 15px 0;
+    color: ${COLORS.TEXT};
     font-size: 16px;
+    display: flex;
+  `,
+  LeftMenu: styled.div`
+    width: 270px;
+    padding: 16px 0;
+  `,
+  RightMenu: styled.div`
+    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+    z-index: 998;
+  `,
+  RightMenuItem: styled.div`
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 250px;
+    hyphens: auto;
+    padding: 15px 10px;
+    :hover {
+      background-color: ${COLORS.HOVER};
+    }
+  `,
+  ItemWrapper: styled(NavLink)`
+    padding: 8px 20px;
+    text-decoration: none;
+    color: ${COLORS.TEXT};
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    :hover {
+      background-color: ${COLORS.HOVER};
+    }
+  `,
+  MainSvg: styled.img`
+    width: 32px;
+    height: 32px;
+    padding-right: 15px;
+  `,
+  Svg: styled.img`
+    width: 12px;
+    height: 12px;
+    filter: contrast(150%);
+  `,
+  Position: styled.div`
+    margin-left: auto;
   `,
 };
 const Menu = () => {
+  const [subMenuItems, setSubmenuItems] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleMenu = (index) => {
+    if (openIndex === index) {
+      setOpenIndex(null);
+      setSubmenuItems(null);
+    } else {
+      setOpenIndex(index);
+      if (menu[index].submenu) {
+        setSubmenuItems(menu[index].submenu);
+      }
+    }
+  };
+
   return (
     <Styled.MenuWrapper>
-      <MenuItem />
+      <Styled.LeftMenu>
+        {menu.map((item, index) => (
+          <Styled.MenuWrapper key={item.id}>
+            <Styled.ItemWrapper
+              to={item.link}
+              onClick={() => toggleMenu(index)}
+            >
+              <Styled.MainSvg src={item.img} alt="" />
+              <div>{item.name}</div>
+              {item.submenu ? (
+                <Styled.Position>
+                  <Styled.Svg
+                    src="https://icons.veryicon.com/png/o/miscellaneous/8atour/arrow-right-50.png"
+                    alt=""
+                  />
+                </Styled.Position>
+              ) : (
+                <div></div>
+              )}
+            </Styled.ItemWrapper>
+          </Styled.MenuWrapper>
+        ))}
+      </Styled.LeftMenu>
+      {subMenuItems && (
+        <Styled.RightMenu isOpen={subMenuItems}>
+          {subMenuItems.map((item) => (
+            <Styled.RightMenuItem key={item.title}>
+              <Styled.MainSvg src={item.img} alt="" />
+              <div>{item.title}</div>
+            </Styled.RightMenuItem>
+          ))}
+        </Styled.RightMenu>
+      )}
     </Styled.MenuWrapper>
   );
 };

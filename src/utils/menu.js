@@ -4,95 +4,56 @@ export const menu = [
     name: "Payments",
     link: "/payments",
     img: "https://cdn.privat24.ua/icons/file/ServicePayments.svg",
-    // submenu: [
-    //   {
-    //     title: "Army help",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Charity for Ukrainians",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Utility payments",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Internet and TV",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Taxes and fees",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Education and kindergartens",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Insurance companies",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Makeup",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Repayment of loans",
-    //     linkTo: "",
-    //   },
-    //   {
-    //     title: "Bolts",
-    //     linkTo: "",
-    //   },
-
-    //   {
-    //     title: "Travel companies",
-    //     linkTo: "",
-    //   },
-    // ],
   },
   {
     id: 1,
     name: "Communication",
-    link: "/communication",
     img: "https://cdn.privat24.ua/icons/file/ServiceCommunication.svg",
     submenu: [
       {
         title: "Mobile top-up",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceMobile.svg",
       },
       {
         title: "Volia",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceVolia.svg",
       },
       {
         title: "Kiyvstar",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceKyivstar.svg",
       },
       {
         title: "UkrTelecom",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceUkrtel.svg",
       },
       {
         title: "Vega",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceVega.svg",
       },
       {
         title: "PROSTO",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceProsto.svg",
       },
       {
         title: "Viasat",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceViasat.svg",
       },
       {
         title: "Triolan",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceTriolan.svg",
       },
       {
         title: "Frehat",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceFregat.svg",
       },
     ],
   },
@@ -111,36 +72,42 @@ export const menu = [
   {
     id: 4,
     name: "Credits",
-    link: "/credits",
     img: "https://cdn.privat24.ua/icons/file/ServiceCredit.svg",
     submenu: [
       {
         title: "Сredit limit",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceCreditLimit.svg",
       },
       {
         title: "Payment in installments",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServicePartPayments.svg",
       },
       {
         title: "Instant installment",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceFastInstallment.svg",
       },
       {
         title: "Cash loan",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceCreditCash.svg",
       },
       {
         title: "Cars on credit and leasing",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceAutoCredit.svg",
       },
       {
         title: "Housing loan",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceCreditHouse.svg",
       },
       {
         title: "Work with overdue payments",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceCreditCollectionCompanies.svg",
       },
     ],
   },
@@ -153,47 +120,64 @@ export const menu = [
   {
     id: 6,
     name: "Transport",
-    link: "/transport",
     img: "https://cdn.privat24.ua/icons/file/ServiceTickets.svg",
     submenu: [
-      { title: "Railway tickets", linkTo: "" },
-      { title: "Bus tickets", linkTo: "" },
-      { title: "Flight tickets", linkTo: "" },
+      {
+        title: "Railway tickets",
+        linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceTrain.svg",
+      },
+      {
+        title: "Bus tickets",
+        linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceBus.svg",
+      },
+      {
+        title: "Flight tickets",
+        linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceAvia.svg",
+      },
     ],
   },
   {
     id: 7,
     name: "Insurance",
-    link: "/insurance",
     img: "https://cdn.privat24.ua/icons/file/ServiceInsurance.svg",
     submenu: [
       {
         title: "Health insurance",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceInsuranceHealth.svg",
       },
       {
         title: "Protection for every day",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceDailyInsurance.svg",
       },
       {
         title: "OSCPV",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceAutoInsurance.svg",
       },
       {
         title: "Green card",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceGreenCardInsurance.svg",
       },
       {
         title: "Travel insurance",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceTouristicInsurance.svg",
       },
       {
         title: "Real estate without inspection",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceHomeInsurance.svg",
       },
       {
         title: "Fraud protection",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceInsuranceCriminals.svg",
       },
     ],
   },
@@ -206,23 +190,27 @@ export const menu = [
   {
     id: 10,
     name: "Business",
-    link: "/business",
     img: "https://cdn.privat24.ua/icons/file/ServiceBusiness.svg",
     submenu: [
       {
         title: "Electronic signature for a natural person",
+        linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessDigitalSign.svg",
       },
       {
         title: "Currency transactions salaries and other payments",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessStatements.svg",
       },
       {
         title: "Electronic document management",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessDocumentManagement.svg",
       },
       {
         title: "Electronic reporting corporate client documents",
         linkTo: "",
+        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessDocuments.svg",
       },
     ],
   },

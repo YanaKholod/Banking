@@ -12,6 +12,7 @@ export const COLORS = {
   DISABLED_HOVER: "#5b5b5b",
   ACCENT: "#8dc641",
   DESCRIPTION_COLOR: "rgba(255, 255, 255, 0.54)",
+  HOVER: "#5B5B5B;;",
 };
 
 export const TEXT = {
