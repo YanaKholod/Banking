@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import CardWidgets from "./CardWidgets";
 
 const Styled = {
   Wrapper: styled.div`
@@ -17,6 +18,7 @@ const MainContent = () => {
       </div>
       <div>
         Services
+        <CardWidgets />
         {/* <div>
           Digital cards to CattBank
           <div>
