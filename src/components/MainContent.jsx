@@ -17,19 +17,19 @@ const MainContent = () => {
       </div>
       <div>
         Services
-        <div>
+        {/* <div>
           Digital cards to CattBank
           <div>
             Credit limit up to 200 000 UAH. Issue and payments without
             commission.
           </div>
           <button>Look at the cards</button>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           Card of another bank of Ukraine and the world
           <div>Pay quickly with your bank cards</div>
           <button>Add card</button>
-        </div>
+        </div> */}
         <div>
           Transfer to card
           <form>
