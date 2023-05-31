@@ -44,7 +44,6 @@ import { COLORS } from "./constants/styled";
 const Styled = {
   Page: styled.div`
     display: flex;
-    height: 100vh;
     flex-direction: column;
     justify-content: space-between;
     background-color: ${COLORS.CONTENT_BACKGROUND};
