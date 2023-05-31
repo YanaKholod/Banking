@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { menu } from "../utils/menu";
 import { NavLink } from "react-router-dom";
+import { ICONS } from "../constants/icons";
 
 const Styled = {
   MenuWrapper: styled.div`
@@ -85,10 +86,7 @@ const Menu = () => {
               <div>{item.name}</div>
               {item.submenu ? (
                 <Styled.Position>
-                  <Styled.Svg
-                    src="https://icons.veryicon.com/png/o/miscellaneous/8atour/arrow-right-50.png"
-                    alt=""
-                  />
+                  <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
                 </Styled.Position>
               ) : (
                 <div></div>

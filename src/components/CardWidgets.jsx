@@ -6,16 +6,16 @@ import { COLORS } from "../constants/styled";
 const Styled = {
   WidgetWrapper: styled.div`
     display: flex;
-    justify-content: space-between;
     margin-bottom: 16px;
   `,
   EachWrapper: styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-right: 20px;
     height: auto;
     padding: 24px 16px;
-    width: 344px;
+    width: 100%;
     background-color: ${COLORS.MENU_BACKGROUND};
     b {
       margin: 0px 0px 16px;

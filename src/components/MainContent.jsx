@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import CardWidgets from "./CardWidgets";
+import ReplenishmentWidgets from "./ReplenishmentWidgets";
 
 const Styled = {
   Wrapper: styled.div`
@@ -19,31 +20,7 @@ const MainContent = () => {
       <div>
         Services
         <CardWidgets />
-        {/* <div>
-          Digital cards to CattBank
-          <div>
-            Credit limit up to 200 000 UAH. Issue and payments without
-            commission.
-          </div>
-          <button>Look at the cards</button>
-        </div> */}
-        {/* <div>
-          Card of another bank of Ukraine and the world
-          <div>Pay quickly with your bank cards</div>
-          <button>Add card</button>
-        </div> */}
-        <div>
-          Transfer to card
-          <form>
-            <input></input>
-          </form>
-        </div>
-        <div>
-          Renewal of mobile
-          <form>
-            <input></input>
-          </form>
-        </div>
+        <ReplenishmentWidgets />
         <div>
           Payment
           <form>
