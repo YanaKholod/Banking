@@ -3,11 +3,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import CardWidgets from "./CardWidgets";
 import ReplenishmentWidgets from "./ReplenishmentWidgets";
+import WhatNewWidget from "./WhatNewWidget";
+import CreditsConverter from "./CreditsConverter";
 
 const Styled = {
   Wrapper: styled.div`
     width: 100%;
-    margin-left: 20px;
+    margin-left: 15px;
   `,
 };
 const MainContent = () => {
@@ -21,34 +23,8 @@ const MainContent = () => {
         Services
         <CardWidgets />
         <ReplenishmentWidgets />
-        <div>
-          Payment
-          <form>
-            <input></input>
-          </form>
-        </div>
-        <div>
-          What's new with Cat24
-          <NavLink>єInnovation card 🏠</NavLink>
-          <NavLink>Avtotsivilka and "Payment by parts" 🤝</NavLink>
-        </div>
-        <div>
-          Credit products
-          <div>
-            Partial payment <p>Buy now pay later</p>
-          </div>
-          <div>
-            Loans <p>Pennies on the card online</p>
-          </div>
-        </div>
-        <div>
-          Currency Converter
-          <form>
-            <input></input>
-            <button>||</button>
-            <input></input>
-          </form>
-        </div>
+        <WhatNewWidget />
+        <CreditsConverter />
       </div>
     </Styled.Wrapper>
   );

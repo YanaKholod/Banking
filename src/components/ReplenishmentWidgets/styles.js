@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
+
 export const Styled = {
   Wrapper: styled.div`
     background-color: ${COLORS.MENU_BACKGROUND};
@@ -12,7 +13,6 @@ export const Styled = {
     display: flex;
     align-items: center;
     margin: 0px 0px 16px;
-
     img {
       width: 24px;
       height: 24px;
@@ -34,6 +34,7 @@ export const Styled = {
   `,
   Input: styled.input`
     padding: 8px 30px 8px 8px;
+    width: 100%;
     text-align: left;
     font-weight: 400;
     font-size: 16px;

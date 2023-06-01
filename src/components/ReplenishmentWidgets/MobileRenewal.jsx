@@ -3,10 +3,6 @@ import { useForm } from "react-hook-form";
 import { Styled } from "./styles";
 import { ICONS } from "../../constants/icons";
 
-// const MobileStyled = {
-//   Requisites: styled.div``,
-// };
-
 const MobileRenewal = () => {
   const { register, handleSubmit, errors, reset } = useForm({
     mode: "onBlur",
@@ -21,10 +17,7 @@ const MobileRenewal = () => {
   return (
     <Styled.Wrapper>
       <Styled.MainInfo>
-        <img
-          alt=""
-          src="https://cdn.privat24.ua/icons/file/ServiceMobile.svg"
-        />
+        <img alt="" src={ICONS.MOBILE_RENEVAL} />
         <b> Renewal of mobile</b>
       </Styled.MainInfo>
       <form onSubmit={handleSubmit(onSubmit)}>

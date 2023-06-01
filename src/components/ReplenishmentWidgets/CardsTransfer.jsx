@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "./styles";
+import { ICONS } from "../../constants/icons";
 
 const CardsTransfer = () => {
   const { register, handleSubmit, errors, reset } = useForm({
@@ -16,7 +17,7 @@ const CardsTransfer = () => {
   return (
     <Styled.Wrapper>
       <Styled.MainInfo>
-        <img alt="" src="https://cdn.privat24.ua/icons/file/ServiceP2P.svg" />
+        <img alt="" src={ICONS.CARD_TRANSFER} />
         <b>Transfer to card</b>
       </Styled.MainInfo>
       <form onSubmit={handleSubmit(onSubmit)}>
