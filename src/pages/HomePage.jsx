@@ -6,8 +6,7 @@ import styled from "styled-components";
 const Styled = {
   Wrapper: styled.div`
     display: flex;
-    margin: 20px 120px;
-    /* height: 100vh; */
+    margin: 20px 80px;
   `,
   Menu: styled.div``,
 };
