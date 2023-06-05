@@ -63,6 +63,8 @@ export const Styled = {
     border: none;
     background-color: ${COLORS.MENU_BACKGROUND};
     color: rgba(255, 255, 255, 0.87);
+    font-weight: 500;
+    font-size: 17px;
   `,
   Ukraine: styled.img`
     width: 16px;
