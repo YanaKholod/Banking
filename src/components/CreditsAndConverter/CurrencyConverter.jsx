@@ -53,7 +53,6 @@ const Styled = {
     padding: 5px;
     border: none;
     background-color: ${COLORS.MENU_BACKGROUND};
-
     color: rgba(255, 255, 255, 0.87);
   `,
   LineWrapper: styled.div`
@@ -73,7 +72,7 @@ const Styled = {
     border-style: none;
     border-width: 0px;
     border-color: rgb(77, 77, 77);
-    margin: 10px 10px;
+    margin: 15px 5px;
   `,
 };
 
