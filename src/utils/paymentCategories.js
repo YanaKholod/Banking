@@ -98,3 +98,26 @@ export const questions = [
     description: `Go to the All Templates menu, find the one you want, click on the three dots, and select Remove Template.`,
   },
 ];
+
+export const divContents = [
+  {
+    name: "Payment in installments",
+    description: "Buy now, pay later.",
+    img: "https://cdn.privat24.ua/icons/file/ServicePartPayments.svg",
+  },
+  {
+    name: "Cash loan",
+    description: "Money to the card online",
+    img: "https://cdn.privat24.ua/icons/file/ServiceCreditCash.svg",
+  },
+  {
+    name: "Cars leasing",
+    description: "Do not deny yourself comfort",
+    img: "https://cdn.privat24.ua/icons/file/ServiceAutoCredit.svg",
+  },
+  {
+    name: "Housing loan",
+    description: "Mortgage at the rental price",
+    img: "https://cdn.privat24.ua/icons/file/ServiceCreditHouse.svg",
+  },
+];
