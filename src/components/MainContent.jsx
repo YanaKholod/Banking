@@ -1,10 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import CardWidgets from "./CardWidgets";
 import ReplenishmentWidgets from "./ReplenishmentWidgets";
 import WhatNewWidget from "./WhatNewWidget";
 import CreditsConverter from "./CreditsConverter";
+import MainPageCarousel from "./Carousel/MainPageCarousel";
 
 const Styled = {
   Wrapper: styled.div`
@@ -16,11 +16,9 @@ const MainContent = () => {
   return (
     <Styled.Wrapper>
       <div>
-        IMG DIV
-        <img alt=""></img>
+        <MainPageCarousel />
       </div>
       <div>
-        Services
         <CardWidgets />
         <ReplenishmentWidgets />
         <WhatNewWidget />

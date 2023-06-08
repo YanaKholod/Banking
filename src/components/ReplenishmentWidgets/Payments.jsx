@@ -15,7 +15,7 @@ const Payments = () => {
   };
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper isFirst>
       <Styled.MainInfo>
         <img alt="" src={ICONS.PAYMENTS} />
         <b>Payments</b>

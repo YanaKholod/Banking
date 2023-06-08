@@ -15,7 +15,10 @@ const Styled = {
 const Header = () => {
   return (
     <Styled.Wrapper>
-      <div>Header</div>
+      {/* <img
+        alt=""
+        src="https://png.pngtree.com/png-clipart/20220620/ourmid/pngtree-pink-cute-cat-icon-animal-png-yuri-png-image_5230763.png"
+      /> */}
       <div>Header</div>
     </Styled.Wrapper>
   );

@@ -15,7 +15,7 @@ const CardsTransfer = () => {
   };
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper isFirst>
       <Styled.MainInfo>
         <img alt="" src={ICONS.CARD_TRANSFER} />
         <b>Transfer to card</b>
