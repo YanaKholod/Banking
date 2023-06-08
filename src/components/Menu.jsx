@@ -18,15 +18,16 @@ const Styled = {
   `,
   RightMenu: styled.div`
     display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-    z-index: 998;
+    z-index: 999;
+    padding: 16px 0px;
+    border-left: 1px solid grey;
   `,
   RightMenuItem: styled.div`
     display: flex;
     align-items: center;
-    padding: 10px;
-    width: 250px;
+    padding: 8px 20px;
+    width: 220px;
     hyphens: auto;
-    padding: 15px 10px;
     :hover {
       background-color: ${COLORS.HOVER};
     }

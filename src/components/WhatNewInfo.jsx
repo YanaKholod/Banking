@@ -9,7 +9,6 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     padding: 16px;
     width: 100%;
-    margin-right: 20px;
     width: 100%;
   `,
   Header: styled(Link)`

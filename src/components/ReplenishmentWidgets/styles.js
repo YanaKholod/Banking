@@ -6,7 +6,7 @@ export const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     padding: 16px;
     width: 100%;
-    margin-right: 20px;
+    margin-right: ${(props) => (props.isFirst ? "15px" : "0")};
     width: 100%;
   `,
   MainInfo: styled.div`

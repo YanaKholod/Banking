@@ -8,7 +8,6 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     padding: 16px;
     width: 100%;
-    margin-right: 20px;
     width: 100%;
   `,
   Header: styled.div`
@@ -85,7 +84,7 @@ const CurrencyConverter = () => {
   const exchangeRates = {
     USD: 1,
     EUR: 0.85,
-    UAH: 28.5,
+    UAH: 36.5,
   };
 
   const convertCurrency = () => {

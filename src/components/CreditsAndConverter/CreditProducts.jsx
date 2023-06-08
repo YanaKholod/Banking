@@ -10,7 +10,7 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     padding: 16px;
     width: 100%;
-    margin-right: 20px;
+    margin-right: ${(props) => (props.isFirst ? "15px" : "0")};
     width: 100%;
   `,
   Header: styled.div`
@@ -107,8 +107,8 @@ const CreditProducts = () => {
     const endIndex = startIndex + itemsPerPage;
     const slicedDivContents = divContents.slice(startIndex, endIndex);
 
-    return slicedDivContents.map(({ name, index, description, img }) => (
-      <Styled.ItemWrapper key={index}>
+    return slicedDivContents.map(({ name, description, img }) => (
+      <Styled.ItemWrapper key={name}>
         <Styled.ItemPosition>
           <Styled.ItemImg alt="" src={img} />
           <Styled.ItemName> {name}</Styled.ItemName>
@@ -117,9 +117,8 @@ const CreditProducts = () => {
       </Styled.ItemWrapper>
     ));
   };
-
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper isFirst>
       <Styled.Header>
         <Styled.Img alt="" src={ICONS.CREDIT_SERVICE} />
         <b>Credit products</b>

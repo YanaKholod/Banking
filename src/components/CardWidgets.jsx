@@ -12,7 +12,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 20px;
+    margin-right: ${(props) => (props.isFirst ? "15px" : "0")};
     height: auto;
     padding: 24px 16px;
     width: 100%;
@@ -58,7 +58,7 @@ const Styled = {
 const CardWidgets = () => {
   return (
     <Styled.WidgetWrapper>
-      <Styled.EachWrapper>
+      <Styled.EachWrapper isFirst>
         <b>Digital cards form CatBank</b>
         <Styled.Description>
           <div>
