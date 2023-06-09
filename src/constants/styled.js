@@ -13,6 +13,7 @@ export const COLORS = {
   ACCENT: "#8dc641",
   DESCRIPTION_COLOR: "rgba(255, 255, 255, 0.54)",
   HOVER: "#5B5B5B",
+  FOREGROUND: "#303030",
 };
 
 export const TEXT = {

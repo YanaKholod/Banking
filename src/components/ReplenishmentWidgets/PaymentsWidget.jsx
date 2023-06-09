@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Styled } from "./styles";
 import { ICONS } from "../../constants/icons";
 
-const Payments = () => {
+const PaymentsWidget = () => {
   const { register, handleSubmit, errors, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "" },
@@ -55,4 +55,4 @@ const Payments = () => {
   );
 };
 
-export default Payments;
+export default PaymentsWidget;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Payments from "./ReplenishmentWidgets/Payments";
 import WhatNewInfo from "./WhatNewInfo";
+import PaymentsWidget from "./ReplenishmentWidgets/PaymentsWidget";
 
 const Styled = {
   Wrapper: styled.div`
@@ -13,7 +13,7 @@ const Styled = {
 const WhatNewWidget = () => {
   return (
     <Styled.Wrapper>
-      <Payments />
+      <PaymentsWidget />
       <WhatNewInfo />
     </Styled.Wrapper>
   );

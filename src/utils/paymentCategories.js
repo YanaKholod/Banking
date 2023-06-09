@@ -121,3 +121,14 @@ export const divContents = [
     img: "https://cdn.privat24.ua/icons/file/ServiceCreditHouse.svg",
   },
 ];
+
+export const cityOptions = [
+  { id: 0, value: "Kyiv" },
+  { id: 1, value: "Kharkiv" },
+  { id: 2, value: "Odesa" },
+  { id: 3, value: "Dnipro" },
+  { id: 4, value: "Zaporizhzhia" },
+  { id: 5, value: "Lviv" },
+  { id: 6, value: "Kryvyi Rih" },
+  { id: 7, value: "Mykolaiv" },
+];
