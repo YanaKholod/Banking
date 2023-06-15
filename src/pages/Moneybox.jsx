@@ -1,15 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { conditions, howToStart, questions, services } from "../utils/moneybox";
+import { MoneyboxIcon } from "../constants/icons";
 
 const Moneybox = () => {
   return (
     <div>
       <div>
-        <img
-          src="https://cdn.privat24.ua/icons/file/ServiceMoneybox.svg"
-          alt=""
-        />
+        <MoneyboxIcon width="48px" height="48px" />
         <div>
           <h2>Treasury</h2>
           <div>A simple and convenient way of saving</div>

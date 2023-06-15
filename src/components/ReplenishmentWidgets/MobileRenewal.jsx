@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "./PaymentStyles";
-import { ICONS } from "../../constants/icons";
+import { MobileRenevalIcon, UkraineIcon } from "../../constants/icons";
 
 const MobileRenewal = () => {
   const { register, handleSubmit, errors, reset } = useForm({
@@ -17,13 +17,15 @@ const MobileRenewal = () => {
   return (
     <Styled.Wrapper>
       <Styled.MainInfo>
-        <img alt="" src={ICONS.MOBILE_RENEVAL} />
+        <div>
+          <MobileRenevalIcon width="24px" height="24px" />
+        </div>
         <b> Renewal of mobile</b>
       </Styled.MainInfo>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Styled.Requisites>
           <div>
-            <Styled.Ukraine src={ICONS.UKRAINE} alt="" />
+            <UkraineIcon height="16px" width="16px" />
           </div>
           <Styled.Select>
             <option>+380</option>

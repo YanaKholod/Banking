@@ -1,17 +1,19 @@
+import { CalculatorIcon, PercentIcon, QuestionIcon } from "../constants/icons";
+
 export const depositsCategories = [
   {
     id: 0,
     title: "Conditions of deposits",
-    img: "https://www.svgrepo.com/show/55532/percent.svg",
+    svg: <PercentIcon width="32px" height="32px" />,
   },
   {
     id: 1,
     title: "Calculator",
-    img: "https://www.svgrepo.com/show/8777/calculator.svg",
+    svg: <CalculatorIcon width="32px" height="32px" />,
   },
   {
     id: 2,
     title: "Questions",
-    img: "https://www.svgrepo.com/show/505468/question-small.svg",
+    svg: <QuestionIcon width="32px" height="32px" />,
   },
 ];

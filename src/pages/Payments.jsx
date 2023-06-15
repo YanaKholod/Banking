@@ -7,38 +7,22 @@ import {
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { useForm } from "react-hook-form";
+import {
+  StyleDescription,
+  StyleHeader,
+  StyleMainImg,
+  StyleTitle,
+  StyleWrapper,
+} from "../utils/generalStyled";
+import { BottomArrowIcon, PaymentsIcon } from "../constants/icons";
 
 const Styled = {
-  Wrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    margin: 0px 80px;
-    padding: 24px 0;
-  `,
-  Header: styled.div`
-    display: flex;
-    margin-bottom: 25px;
-    img {
-      margin-right: 16px;
-    }
-  `,
-  Payments: styled.div`
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.87);
-    font-size: 20px;
-    line-height: 28px;
-  `,
   Titles: styled.div`
     font-weight: 600;
     font-size: 20px;
     line-height: 28px;
     margin-bottom: 7px;
     padding: 0 24px;
-  `,
-  Description: styled.div`
-    color: rgba(255, 255, 255, 0.54);
-    font-size: 14px;
-    line-height: 22px;
   `,
   NewPaymentForm: styled.div`
     display: flex;
@@ -217,7 +201,6 @@ const Payments = () => {
     setIsOpen(updatedOpenState);
     setActiveAnswer(!activeAnswer);
   };
-  console.log("activeAnsre", activeAnswer);
   const { register, handleSubmit, errors, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "", city: "" },
@@ -229,19 +212,18 @@ const Payments = () => {
   };
 
   return (
-    <Styled.Wrapper>
-      <Styled.Header>
-        <img
-          src="https://cdn.privat24.ua/icons/file/ServicePayments.svg"
-          alt=""
-        />
+    <StyleWrapper>
+      <StyleHeader>
+        <StyleMainImg>
+          <PaymentsIcon width="48px" height="48px" />
+        </StyleMainImg>
         <div>
-          <Styled.Payments>Payments</Styled.Payments>
-          <Styled.Description>
+          <StyleTitle>Payments</StyleTitle>
+          <StyleDescription>
             Don't waste time on queues and money on extra commissions
-          </Styled.Description>
+          </StyleDescription>
         </div>
-      </Styled.Header>
+      </StyleHeader>
       <Styled.NewPaymentForm>
         <Styled.Titles>New payment</Styled.Titles>
         <Styled.PaymentDescription>
@@ -302,27 +284,7 @@ const Payments = () => {
               >
                 {item.title}
                 <div>
-                  <svg
-                    height="24px"
-                    width="24px"
-                    version="1.1"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="none"
-                      strokeWidth="1"
-                    >
-                      <path
-                        d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"
-                        fill="#FFF"
-                        fillRule="nonzero"
-                      ></path>
-                      <path d="M0 0h24v24H0z"></path>
-                    </g>
-                  </svg>
+                  <BottomArrowIcon width="24px" height="24px" />
                 </div>
               </Styled.QuestionLine>
               {isOpen[index] && (
@@ -332,7 +294,7 @@ const Payments = () => {
           ))}
         </div>
       </Styled.QuestionsWrapper>
-    </Styled.Wrapper>
+    </StyleWrapper>
   );
 };
 
