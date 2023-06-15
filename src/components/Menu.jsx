@@ -11,12 +11,19 @@ const Styled = {
     color: ${COLORS.TEXT};
     font-size: 16px;
     display: flex;
+    position: relative;
   `,
   LeftMenu: styled.div`
     width: 270px;
     padding: 16px 0;
   `,
   RightMenu: styled.div`
+    position: absolute;
+    right: -97%;
+    top: 0;
+    bottom: 0;
+    background-color: ${COLORS.MENU_BACKGROUND};
+    color: ${COLORS.TEXT};
     display: ${({ isOpen }) => (isOpen ? "block" : "none")};
     z-index: 999;
     padding: 16px 0px;

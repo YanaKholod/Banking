@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "./PaymentStyles";
-import { ICONS } from "../../constants/icons";
+import { CardTransferIcon } from "../../constants/icons";
 
 const CardsTransfer = () => {
   const { register, handleSubmit, errors, reset } = useForm({
@@ -17,7 +17,9 @@ const CardsTransfer = () => {
   return (
     <Styled.Wrapper isFirst>
       <Styled.MainInfo>
-        <img alt="" src={ICONS.CARD_TRANSFER} />
+        <div>
+          <CardTransferIcon height="24px" width="24px" />
+        </div>
         <b>Transfer to card</b>
       </Styled.MainInfo>
       <form onSubmit={handleSubmit(onSubmit)}>

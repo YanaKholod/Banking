@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "./PaymentStyles";
-import { ICONS } from "../../constants/icons";
+import { ICONS, PaymentsIcon } from "../../constants/icons";
 
 const PaymentsWidget = () => {
   const { register, handleSubmit, errors, reset } = useForm({
@@ -17,7 +17,9 @@ const PaymentsWidget = () => {
   return (
     <Styled.Wrapper isFirst>
       <Styled.MainInfo>
-        <img alt="" src={ICONS.PAYMENTS} />
+        <div>
+          <PaymentsIcon width="24px" height="24px" />
+        </div>
         <b>Payments</b>
       </Styled.MainInfo>
       <form onSubmit={handleSubmit(onSubmit)}>

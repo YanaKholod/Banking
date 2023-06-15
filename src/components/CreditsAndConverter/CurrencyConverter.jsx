@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
-import { ICONS } from "../../constants/icons";
+import { ConverterIcon, DollarIcon, ICONS } from "../../constants/icons";
 
 const Styled = {
   Wrapper: styled.div`
@@ -16,11 +16,9 @@ const Styled = {
     margin: 0px 0px 16px;
     text-decoration: none;
     color: ${COLORS.TEXT};
-  `,
-  Img: styled.img`
-    width: 24px;
-    height: 24px;
-    padding-right: 7px;
+    div {
+      padding-right: 7px;
+    }
   `,
   Input: styled.input`
     padding: 8px 30px 8px 8px;
@@ -126,7 +124,9 @@ const CurrencyConverter = () => {
   return (
     <Styled.Wrapper>
       <Styled.Header>
-        <Styled.Img alt="" src={ICONS.CONVERTER} />
+        <div>
+          <ConverterIcon width="24px" height="24px" />
+        </div>
         <b>Currency converter</b>
       </Styled.Header>
       <div>

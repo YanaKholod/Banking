@@ -13,10 +13,8 @@ export const Styled = {
     display: flex;
     align-items: center;
     margin: 0px 0px 16px;
-    img {
-      width: 24px;
-      height: 24px;
-      padding-right: 5px;
+    div {
+      padding-right: 9px;
     }
   `,
   Requisites: styled.div`

@@ -1,12 +1,13 @@
 import React from "react";
 import { cards } from "../utils/cards";
 import { NavLink } from "react-router-dom";
+import { CardTransferIcon } from "../constants/icons";
 
 const Cards = () => {
   return (
     <div>
       <div>
-        <img src="https://cdn.privat24.ua/icons/file/ServiceCard.svg" alt="" />
+        <CardTransferIcon width="48px" height="48px" />
         <div>
           <h2>Add card</h2>
         </div>

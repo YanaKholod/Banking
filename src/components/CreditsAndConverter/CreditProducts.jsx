@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
 import { Link } from "react-router-dom";
-import { ICONS } from "../../constants/icons";
+import { CreditServicesIcon, ICONS } from "../../constants/icons";
 import { divContents } from "../../utils/paymentCategories";
 
 const Styled = {
@@ -19,6 +19,9 @@ const Styled = {
     margin: 0px 0px 16px;
     text-decoration: none;
     color: ${COLORS.TEXT};
+    div {
+      padding-right: 7px;
+    }
   `,
   Arrow: styled.div`
     margin-left: auto;
@@ -27,11 +30,6 @@ const Styled = {
       height: 12px;
       width: 12px;
     }
-  `,
-  Img: styled.img`
-    width: 24px;
-    height: 24px;
-    padding-right: 7px;
   `,
   LeftArrow: styled.button`
     transform: rotate(180deg);
@@ -120,7 +118,9 @@ const CreditProducts = () => {
   return (
     <Styled.Wrapper isFirst>
       <Styled.Header>
-        <Styled.Img alt="" src={ICONS.CREDIT_SERVICE} />
+        <div>
+          <CreditServicesIcon width="24px" height="24px" />
+        </div>
         <b>Credit products</b>
         <Styled.Arrow>
           <Styled.LeftArrow
