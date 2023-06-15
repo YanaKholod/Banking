@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Styled } from "./styles";
+import { Styled } from "./PaymentStyles";
 import { ICONS } from "../../constants/icons";
 
 const PaymentsWidget = () => {
