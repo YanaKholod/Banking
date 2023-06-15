@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   cityOptions,
   paymentsCategories,
@@ -180,19 +180,44 @@ const Styled = {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    padding: 8px 24px;
     cursor: pointer;
-    :hover {
-      background-color: ${COLORS.FOREGROUND};
-    }
   `,
   QuestionLine: styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 6px 2px;
+    color: rgba(255, 255, 255, 0.588);
+
+    :hover {
+      background-color: ${COLORS.FOREGROUND};
+    }
+    background-color: ${({ isActive }) =>
+      isActive ? "${COLORS.FOREGROUND}" : "none"};
   `,
-  ArrowDownButton: styled.button``,
+  ArrowDownButton: styled.button`
+    flex-shrink: 0;
+    height: 24px;
+    opacity: 0.87;
+  `,
+  Answer: styled.div`
+    margin-top: 5px;
+    padding: 8px 0;
+    color: white;
+    padding-left: 10px;
+  `,
 };
 const Payments = () => {
+  const [isOpen, setIsOpen] = useState([]);
+  const [activeAnswer, setActiveAnswer] = useState(false);
+
+  const handleToggle = (index) => {
+    const updatedOpenState = [...isOpen];
+    updatedOpenState[index] = !updatedOpenState[index];
+    setIsOpen(updatedOpenState);
+    setActiveAnswer(!activeAnswer);
+  };
+  console.log("activeAnsre", activeAnswer);
   const { register, handleSubmit, errors, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "", city: "" },
@@ -202,6 +227,7 @@ const Payments = () => {
     console.log(data);
     reset();
   };
+
   return (
     <Styled.Wrapper>
       <Styled.Header>
@@ -268,11 +294,14 @@ const Payments = () => {
       <Styled.QuestionsWrapper>
         <h3>Frequently asked questions</h3>
         <div>
-          {questions.map((item) => (
+          {questions.map((item, index) => (
             <Styled.QuestionItem key={item.id}>
-              <Styled.QuestionLine>
+              <Styled.QuestionLine
+                isActive={activeAnswer}
+                onClick={() => handleToggle(index)}
+              >
                 {item.title}
-                <button>
+                <div>
                   <svg
                     height="24px"
                     width="24px"
@@ -294,9 +323,11 @@ const Payments = () => {
                       <path d="M0 0h24v24H0z"></path>
                     </g>
                   </svg>
-                </button>
+                </div>
               </Styled.QuestionLine>
-              <div>{item.description}</div>
+              {isOpen[index] && (
+                <Styled.Answer>{item.description}</Styled.Answer>
+              )}
             </Styled.QuestionItem>
           ))}
         </div>
