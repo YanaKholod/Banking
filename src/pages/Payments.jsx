@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   cityOptions,
   paymentsCategories,
@@ -12,7 +12,7 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0px 38px;
+    margin: 0px 80px;
     padding: 24px 0;
   `,
   Header: styled.div`
@@ -47,10 +47,12 @@ const Styled = {
     border-radius: 2px;
     padding: 24px 0;
     margin-bottom: 16px;
+    width: 100%;
   `,
   Input: styled.input`
     padding: 8px 30px 8px 8px;
     width: 100%;
+
     text-align: left;
     font-weight: 400;
     font-size: 16px;
@@ -66,7 +68,7 @@ const Styled = {
     outline: none;
     border: none;
     border-bottom: 1px solid ${COLORS.HOVER};
-    margin-left: 5px;
+    margin-left: 10px;
     :hover {
       border-bottom: 3px solid ${COLORS.HOVER};
     }
@@ -157,6 +159,9 @@ const Styled = {
   RequisitesLine: styled.div`
     display: flex;
     margin: 10px 18px;
+    label {
+      color: rgba(255, 255, 255, 0.588);
+    }
   `,
   QuestionsWrapper: styled.div`
     display: flex;
@@ -224,18 +229,21 @@ const Payments = () => {
             placeholder="IBAN, EDRPOU, account number or owners name"
             {...register("IBAN", { required: true, maxLength: 34 })}
           />
-          <Styled.Input
-            type="text"
-            name="city"
-            list="cities"
-            placeholder="Enter the settlement"
-            {...register("city", { required: true, maxLength: 16 })}
-          />
-          <Styled.Datalist id="cities">
-            {cityOptions.map((city) => (
-              <option key={city.id} value={city.value}></option>
-            ))}
-          </Styled.Datalist>
+          <label>
+            City
+            <Styled.Input
+              type="text"
+              name="city"
+              list="cities"
+              placeholder="Enter the city"
+              {...register("city", { required: true, maxLength: 16 })}
+            />
+            <Styled.Datalist id="cities">
+              {cityOptions.map((city) => (
+                <option key={city.id} value={city.value}></option>
+              ))}
+            </Styled.Datalist>
+          </label>
         </Styled.RequisitesLine>
       </Styled.NewPaymentForm>
       <Styled.PopularTemplatesForm>
