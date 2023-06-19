@@ -14,6 +14,7 @@ export const COLORS = {
   DESCRIPTION_COLOR: "rgba(255, 255, 255, 0.54)",
   HOVER: "#5B5B5B",
   FOREGROUND: "#303030",
+  LIGHTER_FOREGROUND: "#3a3a3a",
 };
 
 export const TEXT = {

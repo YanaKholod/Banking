@@ -663,7 +663,7 @@ export const BusinessICon = ({ width, height }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xlinkHref="http://www.w3.org/1999/xlink"
       width="48"
       height="48"
       version="1.1"
@@ -678,25 +678,25 @@ export const BusinessICon = ({ width, height }) => {
           fx="100%"
           fy="0%"
         >
-          <stop offset="0%" stop-color="#FFF" stop-opacity=".382" />
-          <stop offset="100%" stop-color="#FFF" stop-opacity="0" />
+          <stop offset="0%" stopColor="#FFF" stopOpacity=".382" />
+          <stop offset="100%" stopColor="#FFF" stopOpacity="0" />
         </radialGradient>
         <path
           id="serviceBusiness_svg__a"
           d="M14.77 0h18.46C41.389 0 48 6.612 48 14.77v18.46C48 41.389 41.388 48 33.23 48H14.77C6.611 48 0 41.388 0 33.23V14.77C0 6.611 6.612 0 14.77 0z"
         />
       </defs>
-      <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+      <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
         <g>
-          <use fill="#15B6D2" xlink:href="#serviceBusiness_svg__a" />
+          <use fill="#15B6D2" xlinkHref="#serviceBusiness_svg__a" />
           <use
             fill="url(#serviceBusiness_svg__b)"
-            xlink:href="#serviceBusiness_svg__a"
+            xlinkHref="#serviceBusiness_svg__a"
           />
         </g>
         <path
           fill="#FFF"
-          fill-rule="nonzero"
+          fillRule="nonzero"
           d="M22 14h4a2 2 0 012 2v2h4a2 2 0 012 2v11a2 2 0 01-2 2H16a2 2 0 01-2-2V20c0-1.11.89-2 2-2h4v-2c0-1.11.89-2 2-2zm4 4v-2h-4v2h4z"
         />
       </g>
