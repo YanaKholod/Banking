@@ -36,7 +36,6 @@ const Styled = {
   Input: styled.input`
     padding: 8px 30px 8px 8px;
     width: 100%;
-
     text-align: left;
     font-weight: 400;
     font-size: 16px;
@@ -177,7 +176,7 @@ const Styled = {
       background-color: ${COLORS.FOREGROUND};
     }
     background-color: ${({ isActive }) =>
-      isActive ? "${COLORS.FOREGROUND}" : "none"};
+      isActive ? `${COLORS.FOREGROUND}` : "none"};
   `,
   ArrowDownButton: styled.button`
     flex-shrink: 0;
