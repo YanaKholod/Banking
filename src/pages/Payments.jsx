@@ -175,8 +175,6 @@ const Styled = {
     :hover {
       background-color: ${COLORS.FOREGROUND};
     }
-    background-color: ${({ isActive }) =>
-      isActive ? `${COLORS.FOREGROUND}` : "none"};
   `,
   ArrowDownButton: styled.button`
     flex-shrink: 0;

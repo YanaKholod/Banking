@@ -9,7 +9,7 @@ import {
   StyleWrapper,
 } from "../utils/generalStyled";
 import { NavLink } from "react-router-dom";
-import { DepositsIcon, ICONS, SafeboxIcon } from "../constants/icons";
+import { DepositsIcon, ICONS } from "../constants/icons";
 import { COLORS } from "../constants/styled";
 
 const Styled = {
