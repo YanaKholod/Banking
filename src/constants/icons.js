@@ -362,7 +362,6 @@ export const MoneyboxIcon = ({ width, height }) => {
         height="48"
         x="0"
         y="0"
-        maskType="alpha"
         maskUnits="userSpaceOnUse"
       >
         <rect width="48" height="48" fill="#fff" rx="10" />
@@ -700,6 +699,26 @@ export const BusinessICon = ({ width, height }) => {
           d="M22 14h4a2 2 0 012 2v2h4a2 2 0 012 2v11a2 2 0 01-2 2H16a2 2 0 01-2-2V20c0-1.11.89-2 2-2h4v-2c0-1.11.89-2 2-2zm4 4v-2h-4v2h4z"
         />
       </g>
+    </svg>
+  );
+};
+
+export const TermsIcon = ({ width, height }) => {
+  return (
+    <svg
+      height={height}
+      width={width}
+      version="1.1"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm0 2h7v5h5v11H6V4zm2 8v2h8v-2H8zm0 4v2h5v-2H8z"
+        fill="#FFF"
+        fillRule="nonzero"
+        stroke="none"
+        strokeWidth="1"
+      ></path>
     </svg>
   );
 };
