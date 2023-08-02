@@ -10,50 +10,13 @@ import {
   StyleMainImg,
   StyleTitle,
   StyleWrapper,
+  QuestionsWrapper,
+  QuestionItem,
+  QuestionLine,
+  AnswerLine,
 } from "../utils/generalStyled";
 
 const Styled = {
-  QuestionsWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    background-color: ${COLORS.MENU_BACKGROUND};
-    border-radius: 2px;
-    padding: 0px 24px;
-    h3 {
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 28px;
-      margin-bottom: 8px;
-      font-weight: 400;
-    }
-  `,
-  QuestionItem: styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    cursor: pointer;
-  `,
-  QuestionLine: styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 2px;
-    color: rgba(255, 255, 255, 0.588);
-    :hover {
-      background-color: ${COLORS.FOREGROUND};
-    }
-  `,
-  ArrowDownButton: styled.button`
-    flex-shrink: 0;
-    height: 24px;
-    opacity: 0.87;
-  `,
-  Answer: styled.div`
-    margin-top: 5px;
-    padding: 8px 0;
-    color: white;
-    padding-left: 10px;
-  `,
   TreasureBox: styled.div`
     display: flex;
     justify-content: center;
@@ -84,6 +47,7 @@ const Styled = {
     justify-content: center;
     flex-direction: column;
     margin: 0 24px;
+
     & > :first-child {
       color: rgba(255, 255, 255, 0.54);
       font-size: 14px;
@@ -147,12 +111,59 @@ const Styled = {
     }
     div {
       display: flex;
-      align-items: center;
+      align-items: baseline;
     }
   `,
   ItemBoxStarting: styled.div`
     display: flex;
     flex-direction: column;
+  `,
+  ConditionsBlock: styled.div`
+    margin: 18px 0px;
+    background-color: ${COLORS.MENU_BACKGROUND};
+    border-radius: 2px;
+    padding: 0px 16px;
+    h2 {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      margin-bottom: 8px;
+      font-weight: 400;
+    }
+  `,
+  Container: styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 14px;
+  `,
+  BlockInContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-basis: 46%;
+    margin: 5px;
+    padding: 10px;
+    background-color: ${COLORS.FOREGROUND};
+    h3 {
+      margin-top: 0;
+      display: flex;
+      align-items: start;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+    p {
+      margin: auto;
+      padding: 0px 4px;
+    }
+    div {
+      margin-top: 3px;
+      display: flex;
+      height: 70px; //change with media
+      border-radius: 16px;
+      background-color: ${COLORS.DISABLED_HOVER};
+      padding: 15px 7px;
+    }
   `,
 };
 const Moneybox = () => {
@@ -209,41 +220,39 @@ const Moneybox = () => {
           ))}
         </div>
       </Styled.HowToStartBlock>
-      <div>
+      <Styled.ConditionsBlock>
         <h2>Conditions of accumulation</h2>
         <p>Connect, try different options and save with a smile!</p>
-        <div>
+        <Styled.Container>
           {conditions.map((item) => (
-            <div key={item.id}>
+            <Styled.BlockInContainer key={item.id}>
               <h3>{item.name}</h3>
               <p>{item.description1} </p>
-              <p>{item.description2} </p>
-            </div>
+              <div>{item.description2} </div>
+            </Styled.BlockInContainer>
           ))}
-        </div>
-        <div>
-          <Styled.QuestionsWrapper>
-            <h2>Frequently asked questions</h2>
-            <div>
-              {questions.map((item, index) => (
-                <Styled.QuestionItem key={item.id}>
-                  <Styled.QuestionLine
-                    isActive={activeAnswer}
-                    onClick={() => handleToggle(index)}
-                  >
-                    {item.title}
-                    <div>
-                      <BottomArrowIcon width="24px" height="24px" />
-                    </div>
-                  </Styled.QuestionLine>
-                  {isOpen[index] && (
-                    <Styled.Answer>{item.description}</Styled.Answer>
-                  )}
-                </Styled.QuestionItem>
-              ))}
-            </div>
-          </Styled.QuestionsWrapper>
-        </div>
+        </Styled.Container>
+      </Styled.ConditionsBlock>
+      <div>
+        <QuestionsWrapper>
+          <h3>Frequently asked questions</h3>
+          <div>
+            {questions.map((item, index) => (
+              <QuestionItem key={item.id}>
+                <QuestionLine
+                  isActive={activeAnswer}
+                  onClick={() => handleToggle(index)}
+                >
+                  {item.title}
+                  <div>
+                    <BottomArrowIcon width="24px" height="24px" />
+                  </div>
+                </QuestionLine>
+                {isOpen[index] && <AnswerLine>{item.description}</AnswerLine>}
+              </QuestionItem>
+            ))}
+          </div>
+        </QuestionsWrapper>
       </div>
     </StyleWrapper>
   );
