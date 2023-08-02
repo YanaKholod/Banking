@@ -13,6 +13,10 @@ import {
   StyleMainImg,
   StyleTitle,
   StyleWrapper,
+  QuestionsWrapper,
+  QuestionItem,
+  QuestionLine,
+  AnswerLine,
 } from "../utils/generalStyled";
 import { BottomArrowIcon, PaymentsIcon } from "../constants/icons";
 
@@ -146,47 +150,6 @@ const Styled = {
       color: rgba(255, 255, 255, 0.588);
     }
   `,
-  QuestionsWrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    background-color: ${COLORS.MENU_BACKGROUND};
-    border-radius: 2px;
-    padding: 0px 24px;
-    h3 {
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 28px;
-      margin-bottom: 8px;
-    }
-  `,
-  QuestionItem: styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    cursor: pointer;
-  `,
-  QuestionLine: styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 2px;
-    color: rgba(255, 255, 255, 0.588);
-
-    :hover {
-      background-color: ${COLORS.FOREGROUND};
-    }
-  `,
-  ArrowDownButton: styled.button`
-    flex-shrink: 0;
-    height: 24px;
-    opacity: 0.87;
-  `,
-  Answer: styled.div`
-    margin-top: 5px;
-    padding: 8px 0;
-    color: white;
-    padding-left: 10px;
-  `,
 };
 const Payments = () => {
   const [isOpen, setIsOpen] = useState([]);
@@ -198,6 +161,7 @@ const Payments = () => {
     setIsOpen(updatedOpenState);
     setActiveAnswer(!activeAnswer);
   };
+
   const { register, handleSubmit, errors, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "", city: "" },
@@ -270,12 +234,12 @@ const Payments = () => {
           </Styled.CategoryList>
         </Styled.Categories>
       </Styled.PopularTemplatesForm>
-      <Styled.QuestionsWrapper>
+      <QuestionsWrapper>
         <h3>Frequently asked questions</h3>
         <div>
           {questions.map((item, index) => (
-            <Styled.QuestionItem key={item.id}>
-              <Styled.QuestionLine
+            <QuestionItem key={item.id}>
+              <QuestionLine
                 isActive={activeAnswer}
                 onClick={() => handleToggle(index)}
               >
@@ -283,14 +247,12 @@ const Payments = () => {
                 <div>
                   <BottomArrowIcon width="24px" height="24px" />
                 </div>
-              </Styled.QuestionLine>
-              {isOpen[index] && (
-                <Styled.Answer>{item.description}</Styled.Answer>
-              )}
-            </Styled.QuestionItem>
+              </QuestionLine>
+              {isOpen[index] && <AnswerLine>{item.description}</AnswerLine>}
+            </QuestionItem>
           ))}
         </div>
-      </Styled.QuestionsWrapper>
+      </QuestionsWrapper>
     </StyleWrapper>
   );
 };
