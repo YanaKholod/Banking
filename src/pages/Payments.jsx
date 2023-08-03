@@ -194,9 +194,9 @@ const Payments = () => {
         <Styled.RequisitesLine>
           <Styled.Input
             type="text"
-            name="IBAN"
+            name="iban"
             placeholder="IBAN, EDRPOU, account number or owners name"
-            {...register("IBAN", { required: true, maxLength: 34 })}
+            {...register("inab", { required: true, maxLength: 34 })}
           />
           <label>
             City
