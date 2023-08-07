@@ -140,7 +140,8 @@ const Deposits = () => {
           <h2>Deposit operation in 60 seconds</h2>
           <div>
             <Styled.MyDepositsSpan>
-              <NavLink>"My deposits" </NavLink>
+              <NavLink to="">"My deposits" </NavLink>
+              {/* replenishmennt link */}
               <span>are:</span>
             </Styled.MyDepositsSpan>
             <ul>

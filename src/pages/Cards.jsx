@@ -72,6 +72,7 @@ const Cards = () => {
         {cards.map((item) => (
           <Styled.OneBlock key={item.id}>
             <Styled.CardInfo to="">
+              {/* replenishmennt link */}
               <img src={item.img} alt="" />
               <Styled.CardDescription>
                 <div>{item.name}</div>
