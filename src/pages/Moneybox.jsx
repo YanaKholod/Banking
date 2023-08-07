@@ -90,6 +90,9 @@ const Styled = {
     margin-right: 12px;
     text-decoration: none;
     color: black;
+    /* :hover {
+
+    } */
   `,
   MoneyboxButton: styled(NavLink)`
     font-size: 16px;
@@ -100,6 +103,10 @@ const Styled = {
     border: none;
     background-color: ${COLORS.LIGHTER_FOREGROUND};
     color: white;
+    text-decoration: none;
+    /* :hover {
+
+    } */
   `,
   HowToStartBlock: styled.div`
     background-color: ${COLORS.MENU_BACKGROUND};
