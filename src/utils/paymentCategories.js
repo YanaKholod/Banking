@@ -99,7 +99,7 @@ export const questions = [
   },
 ];
 
-export const divContents = [
+const divContents = [
   {
     name: "Payment in installments",
     description: "Buy now, pay later.",
@@ -121,6 +121,7 @@ export const divContents = [
     img: "https://cdn.privat24.ua/icons/file/ServiceCreditHouse.svg",
   },
 ];
+export { divContents };
 
 export const cityOptions = [
   { id: 0, value: "Kyiv" },

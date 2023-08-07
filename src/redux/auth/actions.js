@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "smth";
+axios.defaults.baseURL = "http://localhost:8080/api/";
 
 const token = {
   set(token) {
@@ -16,45 +16,49 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials) => {
     try {
-      const { data } = await axios.post("/users/signup", credentials);
+      const { data } = await axios.post("/register", credentials);
 
       token.set(data.token);
       return data;
     } catch (error) {
       console.log(error.message);
+      throw error;
     }
   }
 );
 //credentials - имена полей в форме по типу name, password, email,
 // они прокидіваются в диспатч как обьект с полями
 
-export const logIn = createAsyncThunk("auth/logIn", async (credentials) => {
+export const login = createAsyncThunk("auth/login", async (credentials) => {
   try {
-    const { data } = await axios.post("/users/logIn", credentials);
+    const { data } = await axios.post("/login", credentials);
 
     token.set(data.token);
     return data;
   } catch (error) {
     console.log(error.message);
+    throw error;
   }
 });
 
-export const logOut = createAsyncThunk("auth/logOut", async () => {
+export const logout = createAsyncThunk("auth/logout", async () => {
   try {
-    await axios.post("/users/logOut");
+    await axios.post("/logout");
 
     token.unset();
   } catch (error) {
     console.log(error.message);
   }
 });
-export const getUser = createAsyncThunk("auth/getUser", async (token) => {
-  try {
-    const response = await axios.post("/api/getUser", { token });
 
-    const { user, isLoggedIn } = response.data;
-    return { user, isLoggedIn };
+export const getUser = createAsyncThunk("auth/current", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get("/current");
+
+    const { phone, fullName } = response.data;
+    return { phone, fullName };
   } catch (error) {
     console.log(error.message);
+    throw error;
   }
 });
