@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BottomArrowIcon,
-  CharityIcon,
-  ICONS,
-  InfoIcon,
-  RightArrowIcon,
-} from "../constants/icons";
+import { CharityIcon, ICONS, InfoIcon } from "../constants/icons";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import {
@@ -15,11 +9,15 @@ import {
   StyleWrapper,
 } from "../utils/generalStyled";
 import { charityOrganizations } from "../utils/charityOrganizations";
+import { NavLink } from "react-router-dom";
 
 const Styled = {
-  MainWrapper: styled.div`
+  MainWrapper: styled(NavLink)`
     background-color: ${COLORS.MENU_BACKGROUND};
     padding-top: 15px;
+    text-decoration: none;
+    color: white;
+
     h3 {
       font-weight: 600;
       white-space: pre-line;
@@ -27,9 +25,10 @@ const Styled = {
       font-size: 16px;
       display: flex;
       justify-content: space-between;
+      padding: 0px 10px;
     }
     div {
-      padding: 5px;
+      padding: 10px;
       margin-top: auto;
     }
   `,
@@ -45,6 +44,10 @@ const Styled = {
     height: 12px;
     filter: contrast(90%);
   `,
+  HorizontalLine: styled.hr`
+    width: 95%;
+    border: 1px solid rgba(255, 255, 255, 0.54);
+  `,
 };
 
 const Charity = () => {
@@ -58,12 +61,14 @@ const Charity = () => {
           <StyleTitle>Charity</StyleTitle>
         </div>
       </StyleHeader>
-      <Styled.MainWrapper>
+      <Styled.MainWrapper to="">
+        {/* way to replenishment for paying */}
         {charityOrganizations.map((item) => (
-          <Styled.Block>
+          <Styled.Block key={item.id}>
             <h3>
               {item.name} <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
             </h3>
+            <Styled.HorizontalLine />
             <div>
               {item.description} <InfoIcon width="12px" height="12px" />
             </div>

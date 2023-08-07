@@ -79,7 +79,7 @@ const Styled = {
     display: flex;
     align-items: center;
   `,
-  StartButton: styled.button`
+  StartButton: styled(NavLink)`
     font-size: 16px;
     line-height: 1.5;
     font-weight: 600;
@@ -88,8 +88,10 @@ const Styled = {
     border: none;
     background-color: ${COLORS.ACCENT};
     margin-right: 12px;
+    text-decoration: none;
+    color: black;
   `,
-  MoneyboxButton: styled.button`
+  MoneyboxButton: styled(NavLink)`
     font-size: 16px;
     line-height: 1.5;
     font-weight: 600;
@@ -200,13 +202,16 @@ const Moneybox = () => {
             </Styled.ItemBox>
           ))}
         </Styled.ItemBoxWrapper>
-        <Styled.Terms>
+        <Styled.Terms to="">
+          {/* replenishmennt link */}
           <TermsIcon width="24px" height="24px" />
           <div>Terms and conditions</div>
         </Styled.Terms>
         <Styled.Buttons>
-          <Styled.StartButton>Start saving</Styled.StartButton>
-          <Styled.MoneyboxButton>My piggy bank</Styled.MoneyboxButton>
+          <Styled.StartButton to="">Start saving</Styled.StartButton>
+          {/* link to go  */}
+          <Styled.MoneyboxButton to="">My piggy bank</Styled.MoneyboxButton>
+          {/* link to go  */}
         </Styled.Buttons>
       </Styled.TreasureBox>
       <Styled.HowToStartBlock>
