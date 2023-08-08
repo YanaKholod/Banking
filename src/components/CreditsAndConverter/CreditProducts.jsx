@@ -68,7 +68,7 @@ const Styled = {
     justify-content: space-around;
   `,
   ItemDescr: styled.div`
-    color: rgba(255, 255, 255, 0.54);
+    color: ${COLORS.LIGHTER_TEXT};
     font-size: 12px;
     line-height: 20px;
     hyphens: auto;

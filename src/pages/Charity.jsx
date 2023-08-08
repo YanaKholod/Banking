@@ -46,7 +46,7 @@ const Styled = {
   `,
   HorizontalLine: styled.hr`
     width: 95%;
-    border: 1px solid rgba(255, 255, 255, 0.54);
+    border: 1px solid ${COLORS.LIGHTER_TEXT};
   `,
 };
 

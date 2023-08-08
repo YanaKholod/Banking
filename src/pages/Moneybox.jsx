@@ -49,7 +49,7 @@ const Styled = {
     margin: 0 24px;
 
     & > :first-child {
-      color: rgba(255, 255, 255, 0.54);
+      color: ${COLORS.LIGHTER_TEXT};
       font-size: 14px;
       line-height: 22px;
       display: inline-block;
@@ -66,7 +66,7 @@ const Styled = {
     line-height: 22px;
     display: flex;
     align-items: center;
-    color: rgba(255, 255, 255, 0.54);
+    color: ${COLORS.LIGHTER_TEXT};
     margin-bottom: 24px;
     :hover {
       color: ${COLORS.ACCENT};

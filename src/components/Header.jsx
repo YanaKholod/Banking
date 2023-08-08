@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { NavLink } from "react-router-dom";
+import RegistrationForm from "../pages/RegistrationForm";
+import LoginForm from "../pages/LoginForm";
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
 
 const Styled = {
   Wrapper: styled.div`
@@ -11,6 +15,7 @@ const Styled = {
     height: 64px;
     background-color: ${COLORS.HEADER_BACKGROUND};
     color: ${COLORS.TEXT};
+    /* z-index: 998; */
   `,
   Logo: styled.div``,
   Buttons: styled.div`
@@ -44,23 +49,59 @@ const Styled = {
     margin-right: 12px;
     text-decoration: none;
     color: black;
+
     /* :hover {
 
     } */
   `,
+  CustomRodal: styled(Rodal)`
+    .rodal-dialog {
+      background-color: ${COLORS.HEADER_BACKGROUND};
+    }
+  `,
 };
 const Header = () => {
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [registerModalVisible, setRegisterModalVisible] = useState(false);
+
+  const openLoginModal = () => {
+    setLoginModalVisible(true);
+  };
+
+  const closeLoginModal = () => {
+    setLoginModalVisible(false);
+  };
+
+  const openRegisterModal = () => {
+    setRegisterModalVisible(true);
+  };
+
+  const closeRegisterModal = () => {
+    setRegisterModalVisible(false);
+  };
   return (
     <Styled.Wrapper>
-      {/* <img
-        alt=""
-        src="https://png.pngtree.com/png-clipart/20220620/ourmid/pngtree-pink-cute-cat-icon-animal-png-yuri-png-image_5230763.png"
-      /> */}
       <Styled.Logo>Header</Styled.Logo>
       <Styled.Buttons>
-        <Styled.Login>Login</Styled.Login>
-        <Styled.Register>Register</Styled.Register>
+        <Styled.Login onClick={openLoginModal}>Login</Styled.Login>
+        <Styled.Register onClick={openRegisterModal}>Register</Styled.Register>
       </Styled.Buttons>
+      <Styled.CustomRodal
+        width={320}
+        height={350}
+        visible={loginModalVisible}
+        onClose={closeLoginModal}
+      >
+        <LoginForm />
+      </Styled.CustomRodal>
+      <Styled.CustomRodal
+        width={320}
+        height={400}
+        visible={registerModalVisible}
+        onClose={closeRegisterModal}
+      >
+        <RegistrationForm />
+      </Styled.CustomRodal>
     </Styled.Wrapper>
   );
 };

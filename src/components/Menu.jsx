@@ -25,7 +25,7 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     color: ${COLORS.TEXT};
     display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-    z-index: 999;
+    z-index: 998;
     padding: 16px 0px;
     border-left: 1px solid grey;
   `,

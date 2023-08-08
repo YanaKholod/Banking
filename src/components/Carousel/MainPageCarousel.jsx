@@ -8,8 +8,9 @@ const Styled = {
     height: auto;
     width: 100%;
     margin: 0px auto;
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-bottom: 15px;
+    z-index: 100;
   `,
 };
 
