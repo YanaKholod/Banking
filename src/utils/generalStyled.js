@@ -21,7 +21,7 @@ export const StyleTitle = styled.div`
   line-height: 28px;
 `;
 export const StyleDescription = styled.div`
-  color: rgba(255, 255, 255, 0.54);
+  color: ${COLORS.LIGHTER_TEXT};
   font-size: 14px;
   line-height: 22px;
 `;

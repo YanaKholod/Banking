@@ -52,7 +52,7 @@ const Styled = {
     justify-content: center;
     padding-left: 10px;
     p {
-      color: rgba(255, 255, 255, 0.54);
+      color: ${COLORS.LIGHTER_TEXT};
     }
   `,
 };

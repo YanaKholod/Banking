@@ -69,7 +69,7 @@ export const Styled = {
     height: 16px;
   `,
   Description: styled.div`
-    color: rgba(255, 255, 255, 0.54);
+    color: ${COLORS.LIGHTER_TEXT};
     font-size: 12px;
     line-height: 20px;
     padding-bottom: 0px;
