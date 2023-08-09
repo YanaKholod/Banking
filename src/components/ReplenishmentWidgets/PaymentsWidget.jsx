@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "./PaymentStyles";
-import { ICONS, PaymentsIcon } from "../../constants/icons";
+import { PaymentsIcon } from "../../constants/icons";
 
 const PaymentsWidget = () => {
-  const { register, handleSubmit, errors, reset } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "" },
   });

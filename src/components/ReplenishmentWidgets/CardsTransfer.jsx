@@ -4,7 +4,7 @@ import { Styled } from "./PaymentStyles";
 import { CardTransferIcon } from "../../constants/icons";
 
 const CardsTransfer = () => {
-  const { register, handleSubmit, errors, reset } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: { cardNumber: "" },
   });

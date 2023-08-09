@@ -58,16 +58,20 @@ const RegistrationForm = () => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const result = await dispatch(register(data));
-      if (register.fulfilled.match(result)) {
-        console.log("Registration successful:", result.payload);
-      } else {
-        console.log("Registration unsuccessful:", result.error);
-      }
-    } catch (error) {
-      console.log("Registration error:", error);
-    }
+    // try {
+    const formattedPhoneNumber = `+380${data.phone}`;
+    const result = await dispatch(
+      register({ ...data, phone: formattedPhoneNumber })
+    );
+    console.log("RESULT", result);
+    //   if (register.fulfilled.match(result)) {
+    //     console.log("Registration successful:", result.payload);
+    //   } else {
+    //     console.log("Registration unsuccessful:", result.error);
+    //   }
+    // } catch (error) {
+    //   console.log("Registration error:", error);
+    // }
     reset();
   };
 
@@ -91,7 +95,7 @@ const RegistrationForm = () => {
           </Styled.Field>
         ))}
         <Styled.Button type="submit" disabled={!isValid}>
-          Login
+          Register
         </Styled.Button>
       </Styled.Form>
     </Styled.Wrapper>

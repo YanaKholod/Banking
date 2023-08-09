@@ -1,24 +1,30 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "http://localhost:8080/api/";
+// axios.defaults.baseURL = "https://banking-5ah7.onrender.com/api";
+
+const api = axios.create({
+  baseURL: "https://banking-5ah7.onrender.com/api",
+});
 
 const token = {
   set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authorization = ``;
+    api.defaults.headers.common.Authorization = ``;
   },
 };
 
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials) => {
+    console.log("credentials", credentials);
+    console.log("axios", axios);
     try {
-      const { data } = await axios.post("/register", credentials);
+      const { data } = await api.post("/auth/register", credentials);
 
-      token.set(data.token);
+      // token.set(data.token);
       return data;
     } catch (error) {
       console.log(error.message);
@@ -31,7 +37,7 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk("auth/login", async (credentials) => {
   try {
-    const { data } = await axios.post("/login", credentials);
+    const { data } = await axios.post("/auth/login", credentials);
 
     token.set(data.token);
     return data;
@@ -62,3 +68,5 @@ export const getUser = createAsyncThunk("auth/current", async (_, thunkAPI) => {
     throw error;
   }
 });
+
+export default api;

@@ -88,7 +88,7 @@ const Header = () => {
       </Styled.Buttons>
       <Styled.CustomRodal
         width={320}
-        height={350}
+        height={330}
         visible={loginModalVisible}
         onClose={closeLoginModal}
       >

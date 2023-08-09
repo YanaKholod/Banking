@@ -49,7 +49,11 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const result = await dispatch(login(data));
+      const formattedPhoneNumber = `+380${data.phone}`;
+
+      const result = await dispatch(
+        login({ ...data, phone: formattedPhoneNumber })
+      );
 
       if (register.fulfilled.match(result)) {
         console.log("Login successful:", result.payload);

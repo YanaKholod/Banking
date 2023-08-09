@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
-import { ConverterIcon, DollarIcon, ICONS } from "../../constants/icons";
+import { ConverterIcon } from "../../constants/icons";
 
 const Styled = {
   Wrapper: styled.div`

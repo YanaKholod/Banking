@@ -10,7 +10,9 @@ const MobileRenewal = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    const formattedPhoneNumber = `+380${data.phoneNumber}`;
+    console.log(formattedPhoneNumber);
+
     reset();
   };
 
@@ -31,7 +33,7 @@ const MobileRenewal = () => {
             <option>+380</option>
           </Styled.Select>
           <Styled.Input
-            type="text"
+            type="phone"
             name="phoneNumber"
             placeholder="000000000"
             {...register("phoneNumber", {

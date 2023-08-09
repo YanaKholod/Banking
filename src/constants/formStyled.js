@@ -21,9 +21,9 @@ export const Styled = {
     margin: 0;
     text-align: center;
     width: 300px;
-    @media (max-width: 550px) {
+    /* @media (max-width: 550px) {
       width: 250px;
-    }
+    } */
   `,
   Input: styled.input`
     padding: 8px 30px 8px 8px;
