@@ -60,7 +60,7 @@ const RegistrationForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const formattedPhoneNumber = `+380${data.phone}`;
+      const formattedPhoneNumber = `+38${data.phone}`;
       const result = await dispatch(
         registerUser({ ...data, phone: formattedPhoneNumber })
       );
