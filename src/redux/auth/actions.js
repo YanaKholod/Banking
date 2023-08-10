@@ -3,10 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://banking-5ah7.onrender.com/api";
 
-// const api = axios.create({
-//   baseURL: "https://banking-5ah7.onrender.com/api",
-// });
-
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -44,9 +40,9 @@ export const login = createAsyncThunk("auth/login", async (credentials) => {
   }
 });
 
-export const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk("auth/logout", async (user) => {
   try {
-    await axios.post("/logout");
+    await axios.post("/auth/logout", user);
 
     token.unset();
   } catch (error) {
@@ -55,8 +51,10 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 });
 
 export const getUser = createAsyncThunk("auth/current", async (_, thunkAPI) => {
+  console.log("action");
   try {
-    const response = await axios.get("/current");
+    console.log("try");
+    const response = await axios.get("/auth/current");
 
     const { phone, fullName } = response.data;
     return { phone, fullName };

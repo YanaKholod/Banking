@@ -56,62 +56,54 @@ function App() {
       <Styled.Page>
         <Header />
         <Routes>
-          <Route element={<PrivateRoute />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="payments" element={<Payments />} />
-            <Route path="communication" element={<Communication />} />
-            <Route path="deposits" element={<Deposits />} />
-            <Route path="moneybox" element={<Moneybox />} />
-            <Route path="cards" element={<Cards />} />
-            <Route path="charity" element={<Charity />} />
-            <Route
-              path="transport/railwayTickets"
-              element={<RailwayTransport />}
-            />
-            <Route path="transport/busTickets" element={<BusTransport />} />
-            <Route
-              path="transport/flightTickets"
-              element={<FlightTransport />}
-            />
-            <Route path="insurance/health" element={<HealthIns />} />
-            <Route path="insurance/forEveryDay" element={<ProtectionIns />} />
-            <Route path="insurance/oscpv" element={<OscpvIns />} />
-            <Route path="insurance/travel" element={<TravelIns />} />
-            <Route path="insurance/realEstate" element={<RealEstateIns />} />
-            <Route path="insurance/fraud" element={<FraudIns />} />
-            <Route path="business/esfanp" element={<ElectronicSignature />} />
-            <Route
-              path="business/transactionsSalaries"
-              element={<TransactionsSalaries />}
-            />
-            <Route
-              path="business/documentManagement"
-              element={<DocumentManagement />}
-            />
-            <Route
-              path="business/corporateClients"
-              element={<CorporateDocuments />}
-            />
-            <Route path="comm/mobile" element={<MobileTopUp />} />
-            <Route path="comm/volia" element={<Volia />} />
-            <Route path="comm/kiyvstar" element={<Kiyvstar />} />
-            <Route path="comm/ukrtel" element={<UkrTelecom />} />
-            <Route path="comm/vega" element={<Vega />} />
-            <Route path="comm/viasat" element={<Viasat />} />
-            <Route path="comm/prosto" element={<Prosto />} />
-            <Route path="comm/triolan" element={<Troilan />} />
-            <Route path="comm/frehat" element={<Frehat />} />
-            <Route path="credits/limits" element={<CreditLimit />} />
-            <Route
-              path="credits/payments"
-              element={<PaymentInInstallments />}
-            />
-            <Route path="credits/instant" element={<InstantInstallment />} />
-            <Route path="credits/cashLoan" element={<CashLoan />} />
-            <Route path="credits/leasing" element={<LeasingCars />} />
-            <Route path="credits/housingLoan" element={<HousingLoan />} />
-            <Route path="credits/overdue" element={<OverduePayments />} />
-          </Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="payments" element={<Payments />} />
+          <Route path="communication" element={<Communication />} />
+          <Route path="deposits" element={<Deposits />} />
+          <Route path="moneybox" element={<Moneybox />} />
+          <Route path="cards" element={<Cards />} />
+          <Route path="charity" element={<Charity />} />
+          <Route
+            path="transport/railwayTickets"
+            element={<RailwayTransport />}
+          />
+          <Route path="transport/busTickets" element={<BusTransport />} />
+          <Route path="transport/flightTickets" element={<FlightTransport />} />
+          <Route path="insurance/health" element={<HealthIns />} />
+          <Route path="insurance/forEveryDay" element={<ProtectionIns />} />
+          <Route path="insurance/oscpv" element={<OscpvIns />} />
+          <Route path="insurance/travel" element={<TravelIns />} />
+          <Route path="insurance/realEstate" element={<RealEstateIns />} />
+          <Route path="insurance/fraud" element={<FraudIns />} />
+          <Route path="business/esfanp" element={<ElectronicSignature />} />
+          <Route
+            path="business/transactionsSalaries"
+            element={<TransactionsSalaries />}
+          />
+          <Route
+            path="business/documentManagement"
+            element={<DocumentManagement />}
+          />
+          <Route
+            path="business/corporateClients"
+            element={<CorporateDocuments />}
+          />
+          <Route path="comm/mobile" element={<MobileTopUp />} />
+          <Route path="comm/volia" element={<Volia />} />
+          <Route path="comm/kiyvstar" element={<Kiyvstar />} />
+          <Route path="comm/ukrtel" element={<UkrTelecom />} />
+          <Route path="comm/vega" element={<Vega />} />
+          <Route path="comm/viasat" element={<Viasat />} />
+          <Route path="comm/prosto" element={<Prosto />} />
+          <Route path="comm/triolan" element={<Troilan />} />
+          <Route path="comm/frehat" element={<Frehat />} />
+          <Route path="credits/limits" element={<CreditLimit />} />
+          <Route path="credits/payments" element={<PaymentInInstallments />} />
+          <Route path="credits/instant" element={<InstantInstallment />} />
+          <Route path="credits/cashLoan" element={<CashLoan />} />
+          <Route path="credits/leasing" element={<LeasingCars />} />
+          <Route path="credits/housingLoan" element={<HousingLoan />} />
+          <Route path="credits/overdue" element={<OverduePayments />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

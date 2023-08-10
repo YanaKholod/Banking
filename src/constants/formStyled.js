@@ -70,14 +70,13 @@ export const Styled = {
     background-color: ${COLORS.ACCENT};
     color: black;
     border-radius: 8px;
-    width: 50%;
-    height: 50px;
+    width: 40%;
     font-size: 16px;
     line-height: 1.5;
     font-weight: 600;
     cursor: pointer;
     margin-bottom: 4px;
-    padding: 8px 16px;
+    padding: 6px 16px;
     position: relative;
     z-index: 10;
 
@@ -96,5 +95,10 @@ export const Styled = {
     align-items: start;
     margin-bottom: 20px;
     width: 100%;
+  `,
+  ButtonLine: styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
   `,
 };

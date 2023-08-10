@@ -6,6 +6,8 @@ import RegistrationForm from "../pages/RegistrationForm";
 import LoginForm from "../pages/LoginForm";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/auth/actions";
 
 const Styled = {
   Wrapper: styled.div`
@@ -34,6 +36,7 @@ const Styled = {
     color: white;
     text-decoration: none;
     margin-right: 7px;
+    cursor: pointer;
     /* :hover {
 
     } */
@@ -49,6 +52,7 @@ const Styled = {
     margin-right: 12px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 
     /* :hover {
 
@@ -59,10 +63,31 @@ const Styled = {
       background-color: ${COLORS.HEADER_BACKGROUND};
     }
   `,
+  LoggedInButton: styled.div`
+    display: flex;
+    align-items: center;
+  `,
+  Logout: styled.button`
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: ${COLORS.ACCENT};
+    margin-right: 12px;
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+    cursor: pointer;
+  `,
 };
 const Header = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [registerModalVisible, setRegisterModalVisible] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
@@ -79,29 +104,50 @@ const Header = () => {
   const closeRegisterModal = () => {
     setRegisterModalVisible(false);
   };
+
+  const logoutLogic = () => {
+    dispatch(logout());
+    setLoginModalVisible(false);
+    setRegisterModalVisible(false);
+  };
   return (
     <Styled.Wrapper>
       <Styled.Logo>Header</Styled.Logo>
-      <Styled.Buttons>
-        <Styled.Login onClick={openLoginModal}>Login</Styled.Login>
-        <Styled.Register onClick={openRegisterModal}>Register</Styled.Register>
-      </Styled.Buttons>
-      <Styled.CustomRodal
-        width={320}
-        height={330}
-        visible={loginModalVisible}
-        onClose={closeLoginModal}
-      >
-        <LoginForm />
-      </Styled.CustomRodal>
-      <Styled.CustomRodal
-        width={320}
-        height={400}
-        visible={registerModalVisible}
-        onClose={closeRegisterModal}
-      >
-        <RegistrationForm />
-      </Styled.CustomRodal>
+      {!isLoggedIn ? (
+        <div>
+          <Styled.Buttons>
+            <Styled.Login onClick={openLoginModal}>Login</Styled.Login>
+            <Styled.Register onClick={openRegisterModal}>
+              Register
+            </Styled.Register>
+          </Styled.Buttons>
+          <Styled.CustomRodal
+            width={320}
+            height={330}
+            visible={loginModalVisible}
+            onClose={closeLoginModal}
+          >
+            <LoginForm closeLoginModal={closeLoginModal} />
+          </Styled.CustomRodal>
+          <Styled.CustomRodal
+            width={320}
+            height={400}
+            visible={registerModalVisible}
+            onClose={closeRegisterModal}
+          >
+            <RegistrationForm closeRegisterModal={closeRegisterModal} />
+          </Styled.CustomRodal>
+        </div>
+      ) : (
+        <Styled.LoggedInButton>
+          <div>
+            <h3>Hello, {user.fullName}!</h3>
+          </div>
+          <div>
+            <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
+          </div>
+        </Styled.LoggedInButton>
+      )}
     </Styled.Wrapper>
   );
 };
