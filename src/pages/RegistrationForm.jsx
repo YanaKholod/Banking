@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { ukrainePhoneRegex } from "../constants/reduxUsers";
 import { Styled } from "../constants/formStyled";
+import { registerUser } from "../redux/auth/actions";
 
 const registerInputsData = [
   {
@@ -58,20 +59,19 @@ const RegistrationForm = () => {
   });
 
   const onSubmit = async (data) => {
-    // try {
-    const formattedPhoneNumber = `+380${data.phone}`;
-    const result = await dispatch(
-      register({ ...data, phone: formattedPhoneNumber })
-    );
-    console.log("RESULT", result);
-    //   if (register.fulfilled.match(result)) {
-    //     console.log("Registration successful:", result.payload);
-    //   } else {
-    //     console.log("Registration unsuccessful:", result.error);
-    //   }
-    // } catch (error) {
-    //   console.log("Registration error:", error);
-    // }
+    try {
+      const formattedPhoneNumber = `+38${data.phone}`;
+      const result = await dispatch(
+        registerUser({ ...data, phone: formattedPhoneNumber })
+      );
+      if (register.fulfilled.match(result)) {
+        console.log("Registration successful:", result.payload);
+      } else {
+        console.log("Registration unsuccessful:", result.error);
+      }
+    } catch (error) {
+      console.log("Registration error:", error);
+    }
     reset();
   };
 
