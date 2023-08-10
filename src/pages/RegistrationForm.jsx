@@ -13,7 +13,7 @@ const registerInputsData = [
     labelName: "Full Name",
     placeholder: "Enter your full name",
     validationRules: {
-      required: "Full name is required",
+      required: "Required field!",
     },
   },
   {
@@ -23,7 +23,7 @@ const registerInputsData = [
     labelName: "Phone",
     placeholder: "Enter your phone number",
     validationRules: {
-      required: "This field is required and must be a valid phone number",
+      required: "Required field!",
       pattern: {
         value: ukrainePhoneRegex,
       },
@@ -39,14 +39,13 @@ const registerInputsData = [
       required: "Required field!",
       minLength: {
         value: 6,
-        message:
-          "This field is required and must be at least 6 characters long",
+        message: "Must be at least 6 characters long",
       },
     },
   },
 ];
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ closeRegisterModal }) => {
   const dispatch = useDispatch();
 
   const {
@@ -64,11 +63,7 @@ const RegistrationForm = () => {
       const result = await dispatch(
         registerUser({ ...data, phone: formattedPhoneNumber })
       );
-      if (register.fulfilled.match(result)) {
-        console.log("Registration successful:", result.payload);
-      } else {
-        console.log("Registration unsuccessful:", result.error);
-      }
+      console.log("Registration successful:", result);
     } catch (error) {
       console.log("Registration error:", error);
     }
@@ -86,6 +81,14 @@ const RegistrationForm = () => {
               type={item.inputType}
               {...register(item.inputName, item.validationRules)}
               placeholder={item.placeholder}
+              {...(item.inputType === "phone" && { maxLength: 10 })} // Set the maximum length for phone input
+              {...(item.inputType === "phone" && {
+                onInput: (e) => {
+                  if (e.target.value.length > 10) {
+                    e.target.value = e.target.value.slice(0, 10);
+                  }
+                },
+              })}
             />
             <Styled.Errors>
               {errors[item.inputName] && (
@@ -94,9 +97,18 @@ const RegistrationForm = () => {
             </Styled.Errors>
           </Styled.Field>
         ))}
-        <Styled.Button type="submit" disabled={!isValid}>
-          Register
-        </Styled.Button>
+        <Styled.ButtonLine>
+          <Styled.Button type="submit" disabled={!isValid}>
+            Register
+          </Styled.Button>
+          <Styled.Button
+            onClick={() => {
+              closeRegisterModal();
+            }}
+          >
+            Cancel
+          </Styled.Button>
+        </Styled.ButtonLine>
       </Styled.Form>
     </Styled.Wrapper>
   );

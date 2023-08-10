@@ -13,7 +13,7 @@ const loginInputsData = [
     labelName: "Phone",
     placeholder: "Enter your phone number",
     validationRules: {
-      required: "This field is required and must be a valid phone number",
+      required: "Required field!",
       pattern: {
         value: ukrainePhoneRegex,
       },
@@ -29,13 +29,12 @@ const loginInputsData = [
       required: "Required field!",
       minLength: {
         value: 6,
-        message:
-          "This field is required and must be at least 6 characters long",
+        message: "Must be at least 6 characters long",
       },
     },
   },
 ];
-const LoginForm = () => {
+const LoginForm = ({ closeLoginModal }) => {
   const dispatch = useDispatch();
 
   const {
@@ -54,12 +53,7 @@ const LoginForm = () => {
       const result = await dispatch(
         login({ ...data, phone: formattedPhoneNumber })
       );
-
-      if (register.fulfilled.match(result)) {
-        console.log("Login successful:", result.payload);
-      } else {
-        console.log("Login unsuccessful:", result.error);
-      }
+      console.log("Login successful:", result);
     } catch (error) {
       console.log("Login error:", error);
     }
@@ -77,6 +71,14 @@ const LoginForm = () => {
               type={item.inputType}
               {...register(item.inputName, item.validationRules)}
               placeholder={item.placeholder}
+              {...(item.inputType === "phone" && { maxLength: 10 })} // Set the maximum length for phone input
+              {...(item.inputType === "phone" && {
+                onInput: (e) => {
+                  if (e.target.value.length > 10) {
+                    e.target.value = e.target.value.slice(0, 10);
+                  }
+                },
+              })}
             />
             <Styled.Errors>
               {errors[item.inputName] && (
@@ -85,9 +87,18 @@ const LoginForm = () => {
             </Styled.Errors>
           </Styled.Field>
         ))}
-        <Styled.Button type="submit" disabled={!isValid}>
-          Login
-        </Styled.Button>
+        <Styled.ButtonLine>
+          <Styled.Button type="submit" disabled={!isValid}>
+            Login
+          </Styled.Button>
+          <Styled.Button
+            onClick={() => {
+              closeLoginModal();
+            }}
+          >
+            Cancel
+          </Styled.Button>
+        </Styled.ButtonLine>
       </Styled.Form>
     </Styled.Wrapper>
   );
