@@ -41,7 +41,7 @@ import styled from "styled-components";
 import { COLORS } from "./constants/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUser } from "./redux/auth/actions";
+import { getCurrentUser } from "./redux/auth/actions";
 
 const Styled = {
   Page: styled.div`
@@ -53,12 +53,14 @@ const Styled = {
   `,
 };
 function App() {
-  // const dispatch = useDispatch();
-  // const { isRefreshing } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
-  // useEffect(() => {
-  //   dispatch(getUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    if (token) {
+      dispatch(getCurrentUser());
+    }
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
