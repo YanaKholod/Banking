@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
-import PrivateRoute from "./utils/privateRoute";
 import Cards from "./pages/Cards";
 import Payments from "./pages/Payments";
 import Communication from "./pages/Communication";
@@ -40,6 +39,9 @@ import HousingLoan from "./pages/CreditsSubmenu/HousingLoan";
 import OverduePayments from "./pages/CreditsSubmenu/OverduePayments";
 import styled from "styled-components";
 import { COLORS } from "./constants/styled";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "./redux/auth/actions";
 
 const Styled = {
   Page: styled.div`
@@ -51,6 +53,13 @@ const Styled = {
   `,
 };
 function App() {
+  // const dispatch = useDispatch();
+  // const { isRefreshing } = useSelector((state) => state.auth);
+
+  // useEffect(() => {
+  //   dispatch(getUser());
+  // }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Styled.Page>
