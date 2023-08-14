@@ -43,6 +43,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "./redux/auth/actions";
 import CompaniesForAdmin from "./Companies/CompaniesForAdmin";
+import AdminRoute from "./PrivateRoute/AdminRoute";
 
 const Styled = {
   Page: styled.div`
@@ -55,13 +56,13 @@ const Styled = {
 };
 function App() {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (token) {
       dispatch(getCurrentUser());
     }
-  }, [dispatch]);
+  }, [token, dispatch]);
 
   return (
     <BrowserRouter>
