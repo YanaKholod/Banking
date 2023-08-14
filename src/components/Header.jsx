@@ -8,7 +8,6 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/auth/actions";
-import CompaniesForAdmin from "../Companies/CompaniesForAdmin";
 
 const Styled = {
   Wrapper: styled.div`
@@ -156,11 +155,8 @@ const Header = () => {
           </Styled.Greeting>
           <div>
             <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
+            {user.role === "admin" && <Link to="admin">Companies</Link>}
           </div>
-          <Link to="admin">
-            Component with companies
-            <CompaniesForAdmin />
-          </Link>
         </Styled.LoggedInButton>
       )}
     </Styled.Wrapper>
