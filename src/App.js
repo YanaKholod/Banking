@@ -42,6 +42,7 @@ import { COLORS } from "./constants/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "./redux/auth/actions";
+import CompaniesForAdmin from "./Companies/CompaniesForAdmin";
 
 const Styled = {
   Page: styled.div`
@@ -67,6 +68,7 @@ function App() {
       <Styled.Page>
         <Header />
         <Routes>
+          <Route path="admin" element={<CompaniesForAdmin />} />
           <Route path="/" element={<HomePage />} />
           <Route path="payments" element={<Payments />} />
           <Route path="communication" element={<Communication />} />

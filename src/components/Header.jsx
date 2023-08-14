@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import RegistrationForm from "../pages/RegistrationForm";
 import LoginForm from "../pages/LoginForm";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/auth/actions";
+import CompaniesForAdmin from "../Companies/CompaniesForAdmin";
 
 const Styled = {
   Wrapper: styled.div`
@@ -81,6 +82,15 @@ const Styled = {
     margin-left: 20px;
     cursor: pointer;
   `,
+  Greeting: styled.div`
+    p {
+      color: ${COLORS.LIGHTER_TEXT};
+      margin-bottom: 3px;
+    }
+    span {
+      color: ${COLORS.LIGHTER_TEXT};
+    }
+  `,
 };
 const Header = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -140,12 +150,17 @@ const Header = () => {
         </div>
       ) : (
         <Styled.LoggedInButton>
-          <div>
-            <h3>Hello, {user.fullName}!</h3>
-          </div>
+          <Styled.Greeting>
+            <p>Hello, {user.fullName}!</p>
+            {user.role === "admin" && <span> Role: {user.role}</span>}
+          </Styled.Greeting>
           <div>
             <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
           </div>
+          <Link to="admin">
+            Component with companies
+            <CompaniesForAdmin />
+          </Link>
         </Styled.LoggedInButton>
       )}
     </Styled.Wrapper>

@@ -9,11 +9,7 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isRefreshing: false,
   },
-  reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -42,7 +38,5 @@ const authSlice = createSlice({
       });
   },
 });
-
-export const { setToken } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;
