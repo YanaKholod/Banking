@@ -1,51 +1,52 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { ukrainePhoneRegex } from "../constants/reduxUsers";
 import { Styled } from "../constants/formStyled";
-import { registerUser } from "../redux/auth/actions";
 
-const registerInputsData = [
+const companyInputsData = [
   {
     id: 0,
     inputType: "text",
-    inputName: "fullName",
-    labelName: "Full Name",
-    placeholder: "Enter your full name",
+    inputName: "companyName",
+    labelName: "Company name",
+    placeholder: "Enter company name",
     validationRules: {
       required: "Required field!",
     },
   },
   {
     id: 1,
-    inputType: "phone",
-    inputName: "phone",
-    labelName: "Phone",
-    placeholder: "Enter your phone number",
+    inputType: "text",
+    inputName: "iban",
+    labelName: "Iban",
+    placeholder: "Enter Iban",
     validationRules: {
       required: "Required field!",
-      pattern: {
-        value: ukrainePhoneRegex,
-      },
     },
   },
   {
     id: 2,
-    inputType: "password",
-    labelName: "Password",
-    placeholder: "Enter your password",
-    inputName: "password",
+    inputType: "text",
+    labelName: "Edpnou",
+    placeholder: "Enter edpnou",
+    inputName: "edpnou",
     validationRules: {
       required: "Required field!",
-      minLength: {
-        value: 6,
-        message: "Must be at least 6 characters long",
-      },
+    },
+  },
+  {
+    id: 3,
+    inputType: "text",
+    labelName: "Country code",
+    placeholder: "Enter country code",
+    inputName: "countryCode",
+    validationRules: {
+      required: "Required field!",
     },
   },
 ];
 
-const RegistrationForm = ({ closeRegisterModal }) => {
+const CompanyForm = ({ closeCompanyModal }) => {
   const dispatch = useDispatch();
 
   const {
@@ -57,38 +58,19 @@ const RegistrationForm = ({ closeRegisterModal }) => {
     mode: "onBlur",
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const formattedPhoneNumber = `+38${data.phone}`;
-      const result = await dispatch(
-        registerUser({ ...data, phone: formattedPhoneNumber })
-      );
-      console.log("Registration successful:", result);
-    } catch (error) {
-      console.log("Registration error:", error);
-    }
-    reset();
-  };
+  const onSubmit = async () => {};
 
   return (
     <Styled.Wrapper>
       <p>Registration</p>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-        {registerInputsData.map((item) => (
+        {companyInputsData.map((item) => (
           <Styled.Field key={item.id}>
             <Styled.Label>{item.labelName}</Styled.Label>
             <Styled.Input
               type={item.inputType}
               {...register(item.inputName, item.validationRules)}
               placeholder={item.placeholder}
-              {...(item.inputType === "phone" && { maxLength: 10 })}
-              {...(item.inputType === "phone" && {
-                onInput: (e) => {
-                  if (e.target.value.length > 10) {
-                    e.target.value = e.target.value.slice(0, 10);
-                  }
-                },
-              })}
             />
             <Styled.Errors>
               {errors[item.inputName] && (
@@ -99,11 +81,11 @@ const RegistrationForm = ({ closeRegisterModal }) => {
         ))}
         <Styled.ButtonLine>
           <Styled.Button type="submit" disabled={!isValid}>
-            Register
+            Submit
           </Styled.Button>
           <Styled.Button
             onClick={() => {
-              closeRegisterModal();
+              closeCompanyModal();
             }}
           >
             Cancel
@@ -114,4 +96,4 @@ const RegistrationForm = ({ closeRegisterModal }) => {
   );
 };
 
-export default RegistrationForm;
+export default CompanyForm;

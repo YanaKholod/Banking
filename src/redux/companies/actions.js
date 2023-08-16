@@ -12,5 +12,17 @@ export const fetchAllCompanies = createAsyncThunk("companies/all", async () => {
     throw error;
   }
 });
+export const deleteCompanyById = createAsyncThunk(
+  "companies/delete",
+  async (_id) => {
+    try {
+      const response = await axios.delete(`/companies/delete/${_id}`);
+      return response;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
 
 export default axios;
