@@ -12,7 +12,6 @@ const MobileRenewal = () => {
   const onSubmit = (data) => {
     const formattedPhoneNumber = `+380${data.phoneNumber}`;
     console.log(formattedPhoneNumber);
-
     reset();
   };
 
