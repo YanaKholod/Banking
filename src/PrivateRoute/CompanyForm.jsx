@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { Styled } from "../constants/formStyled";
 
 const companyInputsData = [
@@ -30,7 +29,6 @@ const companyInputsData = [
     labelName: "Edpnou",
     placeholder: "Enter edpnou",
     inputName: "edpnou",
-
     validationRules: {
       required: "Required field!",
     },
@@ -102,6 +100,22 @@ const CompanyForm = ({
               type={item.inputType}
               {...register(item.inputName, item.validationRules)}
               placeholder={item.placeholder}
+              {...(item.inputName === "iban" && { maxLength: 26 })}
+              {...(item.inputName === "iban" && {
+                onInput: (e) => {
+                  if (e.target.value.length > 26) {
+                    e.target.value = e.target.value.slice(0, 26);
+                  }
+                },
+              })}
+              {...(item.inputName === "edpnou" && { maxLength: 6 })}
+              {...(item.inputName === "edpnou" && {
+                onInput: (e) => {
+                  if (e.target.value.length > 6) {
+                    e.target.value = e.target.value.slice(0, 6);
+                  }
+                },
+              })}
             />
             <Styled.Errors>
               {errors[item.inputName] && (

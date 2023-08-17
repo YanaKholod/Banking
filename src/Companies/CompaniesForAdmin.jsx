@@ -159,7 +159,7 @@ const CompaniesForAdmin = () => {
           ))}
           <Styled.CustomRodal
             width={370}
-            height={480}
+            height={490}
             visible={companyFormIsVisible}
             onClose={closeCompanyModal}
           >
