@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCompanyById,
   fetchAllCompanies,
+  updateCompany,
 } from "../redux/companies/actions";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
@@ -101,12 +102,14 @@ const CompaniesForAdmin = () => {
   const handleDeleteCompany = (_id) => {
     dispatch(deleteCompanyById(_id));
   };
-  const handleEditCompany = (_id) => {
-    // dispatch(getCompanyById(_id))
+  const handleEditCompany = async (data) => {
+    setCompanyFormIsVisible(true);
+
+    await dispatch(updateCompany(data));
+    await dispatch(fetchAllCompanies());
   };
   const openCompanyModal = () => {
     setCompanyFormIsVisible(true);
-    // const companyData=dispatch(getCompanyById(_id))
   };
   const closeCompanyModal = () => {
     setCompanyFormIsVisible(false);
@@ -135,7 +138,13 @@ const CompaniesForAdmin = () => {
               <Styled.Cell>{item.countryCode}</Styled.Cell>
               <Styled.Cell>{item.edpnou}</Styled.Cell>
               <Styled.ButtonCell>
-                <Styled.Button onClick={openCompanyModal}>Edit</Styled.Button>
+                <Styled.Button
+                  onClick={() => {
+                    handleEditCompany(item);
+                  }}
+                >
+                  Edit
+                </Styled.Button>
                 <Styled.Button onClick={() => handleDeleteCompany(item._id)}>
                   Delete
                 </Styled.Button>
