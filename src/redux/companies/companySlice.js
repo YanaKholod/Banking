@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllCompanies, deleteCompanyById } from "./actions";
+import { fetchAllCompanies, deleteCompanyById, updateCompany } from "./actions";
 
 const companySlice = createSlice({
   name: "companies",
@@ -32,6 +32,22 @@ const companySlice = createSlice({
         state.error = null;
       })
       .addCase(deleteCompanyById.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(updateCompany.pending, (state, action) => {
+        state.isLoggedIn = true;
+      })
+      .addCase(updateCompany.fulfilled, (state, action) => {
+        console.log(action.payload, "actpay");
+        const updatedCompanyIndex = state.companies.findIndex(
+          (company) => company._id === action.payload._id
+        );
+        if (updatedCompanyIndex !== -1) {
+          state.companies[updatedCompanyIndex] = action.payload;
+        }
+        state.error = null;
+      })
+      .addCase(updateCompany.rejected, (state, action) => {
         state.error = action.payload;
       });
   },

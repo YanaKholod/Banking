@@ -25,4 +25,18 @@ export const deleteCompanyById = createAsyncThunk(
   }
 );
 
+export const updateCompany = createAsyncThunk(
+  "companies/change",
+  async (data) => {
+    console.log("data in action", data);
+    try {
+      const response = await axios.put(`/companies/change/${data._id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
+
 export default axios;
