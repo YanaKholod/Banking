@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addCompany,
   deleteCompanyById,
   fetchAllCompanies,
   updateCompany,
@@ -14,10 +15,11 @@ import CompanyForm from "../PrivateRoute/CompanyForm";
 const Styled = {
   Wrapper: styled.div`
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     margin: 15px;
+    height: 100vh;
   `,
   Container: styled.div`
     width: 100%;
@@ -88,6 +90,7 @@ const Styled = {
 
 const CompaniesForAdmin = () => {
   const [companyFormIsVisible, setCompanyFormIsVisible] = useState(false);
+  const [activeCompany, setActiveCompany] = useState({});
 
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companies.companies);
@@ -99,20 +102,27 @@ const CompaniesForAdmin = () => {
     }
   }, [dispatch, user.role]);
 
-  const handleDeleteCompany = (_id) => {
-    dispatch(deleteCompanyById(_id));
+  const handleDeleteCompany = async (_id) => {
+    await dispatch(deleteCompanyById(_id));
+    await dispatch(fetchAllCompanies());
   };
-  const handleEditCompany = async (data) => {
-    setCompanyFormIsVisible(true);
 
+  const handleEditCompany = async (data) => {
     await dispatch(updateCompany(data));
     await dispatch(fetchAllCompanies());
   };
-  const openCompanyModal = () => {
+
+  const handleCreateCompanySubmit = async (data) => {
+    await dispatch(addCompany(data));
+    await dispatch(fetchAllCompanies());
+  };
+  const openCompanyModal = (item) => {
+    setActiveCompany(item);
     setCompanyFormIsVisible(true);
   };
   const closeCompanyModal = () => {
     setCompanyFormIsVisible(false);
+    setActiveCompany({});
   };
 
   return (
@@ -138,27 +148,28 @@ const CompaniesForAdmin = () => {
               <Styled.Cell>{item.countryCode}</Styled.Cell>
               <Styled.Cell>{item.edpnou}</Styled.Cell>
               <Styled.ButtonCell>
-                <Styled.Button
-                  onClick={() => {
-                    handleEditCompany(item);
-                  }}
-                >
+                <Styled.Button onClick={() => openCompanyModal(item)}>
                   Edit
                 </Styled.Button>
                 <Styled.Button onClick={() => handleDeleteCompany(item._id)}>
                   Delete
                 </Styled.Button>
-                <Styled.CustomRodal
-                  width={370}
-                  height={480}
-                  visible={companyFormIsVisible}
-                  onClose={closeCompanyModal}
-                >
-                  <CompanyForm closeCompanyModal={closeCompanyModal} />
-                </Styled.CustomRodal>
               </Styled.ButtonCell>
             </Styled.Row>
           ))}
+          <Styled.CustomRodal
+            width={370}
+            height={480}
+            visible={companyFormIsVisible}
+            onClose={closeCompanyModal}
+          >
+            <CompanyForm
+              closeCompanyModal={closeCompanyModal}
+              itemData={activeCompany}
+              handleEditCompanySubmit={handleEditCompany}
+              handleCreateCompanySubmit={handleCreateCompanySubmit}
+            />
+          </Styled.CustomRodal>
         </Styled.Container>
       )}
       {user.role !== "admin" && (

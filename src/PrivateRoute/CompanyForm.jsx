@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Styled } from "../constants/formStyled";
@@ -30,6 +30,7 @@ const companyInputsData = [
     labelName: "Edpnou",
     placeholder: "Enter edpnou",
     inputName: "edpnou",
+
     validationRules: {
       required: "Required field!",
     },
@@ -44,21 +45,51 @@ const companyInputsData = [
       required: "Required field!",
     },
   },
+  {
+    id: 4,
+    inputType: "hidden",
+    labelName: "",
+    placeholder: "",
+    inputName: "id",
+  },
 ];
 
-const CompanyForm = ({ closeCompanyModal }) => {
-  const dispatch = useDispatch();
-
+const CompanyForm = ({
+  closeCompanyModal,
+  itemData,
+  handleEditCompanySubmit,
+  handleCreateCompanySubmit,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    setValue,
   } = useForm({
     mode: "onBlur",
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data) => {
+    if (data.id) {
+      await handleEditCompanySubmit(data);
+    } else {
+      const { id, ...newCompanyData } = data;
+      await handleCreateCompanySubmit(newCompanyData);
+    }
+    reset();
+    closeCompanyModal();
+  };
+
+  useEffect(() => {
+    if (itemData) {
+      setValue("companyName", itemData.companyName || "");
+      setValue("countryCode", itemData.countryCode || "");
+      setValue("iban", itemData.iban || "");
+      setValue("edpnou", itemData.edpnou || "");
+      setValue("id", itemData._id);
+    }
+  }, [itemData, setValue]);
 
   return (
     <Styled.Wrapper>

@@ -12,12 +12,13 @@ export const fetchAllCompanies = createAsyncThunk("companies/all", async () => {
     throw error;
   }
 });
+
 export const deleteCompanyById = createAsyncThunk(
   "companies/delete",
   async (_id) => {
     try {
-      const response = await axios.delete(`/companies/delete/${_id}`);
-      return response;
+      await axios.delete(`/companies/delete/${_id}`);
+      return _id;
     } catch (error) {
       console.log(error.message);
       throw error;
@@ -28,9 +29,25 @@ export const deleteCompanyById = createAsyncThunk(
 export const updateCompany = createAsyncThunk(
   "companies/change",
   async (data) => {
-    console.log("data in action", data);
     try {
-      const response = await axios.put(`/companies/change/${data._id}`);
+      const response = await axios.patch(`/companies/change/${data.id}`, {
+        ...data,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
+export const addCompany = createAsyncThunk(
+  "companies/addCompany",
+  async (data) => {
+    console.log("actionData", data);
+    try {
+      const response = await axios.post("/companies/", {
+        ...data,
+      });
       return response.data;
     } catch (error) {
       console.log(error.message);
