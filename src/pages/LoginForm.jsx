@@ -71,7 +71,7 @@ const LoginForm = ({ closeLoginModal }) => {
               type={item.inputType}
               {...register(item.inputName, item.validationRules)}
               placeholder={item.placeholder}
-              {...(item.inputType === "phone" && { maxLength: 10 })} // Set the maximum length for phone input
+              {...(item.inputType === "phone" && { maxLength: 10 })}
               {...(item.inputType === "phone" && {
                 onInput: (e) => {
                   if (e.target.value.length > 10) {

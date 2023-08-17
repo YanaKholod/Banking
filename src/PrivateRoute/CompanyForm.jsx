@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { Styled } from "../constants/formStyled";
 
 const companyInputsData = [
@@ -44,21 +43,51 @@ const companyInputsData = [
       required: "Required field!",
     },
   },
+  {
+    id: 4,
+    inputType: "hidden",
+    labelName: "",
+    placeholder: "",
+    inputName: "id",
+  },
 ];
 
-const CompanyForm = ({ closeCompanyModal }) => {
-  const dispatch = useDispatch();
-
+const CompanyForm = ({
+  closeCompanyModal,
+  itemData,
+  handleEditCompanySubmit,
+  handleCreateCompanySubmit,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    setValue,
   } = useForm({
     mode: "onBlur",
   });
 
-  const onSubmit = async () => {};
+  const onSubmit = async (data) => {
+    if (data.id) {
+      await handleEditCompanySubmit(data);
+    } else {
+      const { id, ...newCompanyData } = data;
+      await handleCreateCompanySubmit(newCompanyData);
+    }
+    reset();
+    closeCompanyModal();
+  };
+
+  useEffect(() => {
+    if (itemData) {
+      setValue("companyName", itemData.companyName || "");
+      setValue("countryCode", itemData.countryCode || "");
+      setValue("iban", itemData.iban || "");
+      setValue("edpnou", itemData.edpnou || "");
+      setValue("id", itemData._id);
+    }
+  }, [itemData, setValue]);
 
   return (
     <Styled.Wrapper>
@@ -71,6 +100,22 @@ const CompanyForm = ({ closeCompanyModal }) => {
               type={item.inputType}
               {...register(item.inputName, item.validationRules)}
               placeholder={item.placeholder}
+              {...(item.inputName === "iban" && { maxLength: 26 })}
+              {...(item.inputName === "iban" && {
+                onInput: (e) => {
+                  if (e.target.value.length > 26) {
+                    e.target.value = e.target.value.slice(0, 26);
+                  }
+                },
+              })}
+              {...(item.inputName === "edpnou" && { maxLength: 6 })}
+              {...(item.inputName === "edpnou" && {
+                onInput: (e) => {
+                  if (e.target.value.length > 6) {
+                    e.target.value = e.target.value.slice(0, 6);
+                  }
+                },
+              })}
             />
             <Styled.Errors>
               {errors[item.inputName] && (
