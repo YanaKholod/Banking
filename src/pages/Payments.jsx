@@ -196,7 +196,7 @@ const Payments = () => {
             type="text"
             name="iban"
             placeholder="IBAN, EDRPOU, account number or owners name"
-            {...register("inab", { required: true, maxLength: 34 })}
+            {...register("iban", { required: true, maxLength: 26 })}
           />
           <label>
             City

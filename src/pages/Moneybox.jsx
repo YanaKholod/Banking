@@ -47,7 +47,6 @@ const Styled = {
     justify-content: center;
     flex-direction: column;
     margin: 0 24px;
-
     & > :first-child {
       color: ${COLORS.LIGHTER_TEXT};
       font-size: 14px;

@@ -79,11 +79,24 @@ const Styled = {
     border: none;
     background-color: ${COLORS.ACCENT};
     margin-right: 12px;
-    text-decoration: none;
     color: black;
     margin-left: 20px;
     cursor: pointer;
   `,
+  CustomButton: styled(Link)`
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin-right: 10px;
+    background-color: transparent;
+    color: ${COLORS.ACCENT};
+    border: 1px solid ${COLORS.ACCENT};
+    text-decoration: none;
+    cursor: pointer;
+  `,
+
   Greeting: styled.div`
     p {
       color: ${COLORS.LIGHTER_TEXT};
@@ -158,6 +171,9 @@ const Header = () => {
           </Styled.Greeting>
           <div>
             <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
+            {user.role === "user" && (
+              <Styled.CustomButton to="/settings">Settings</Styled.CustomButton>
+            )}
             {user.role === "admin" && <Link to="admin">Companies</Link>}
           </div>
         </Styled.LoggedInButton>
