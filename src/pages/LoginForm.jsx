@@ -50,10 +50,7 @@ const LoginForm = ({ closeLoginModal }) => {
     try {
       const formattedPhoneNumber = `+38${data.phone}`;
 
-      const result = await dispatch(
-        login({ ...data, phone: formattedPhoneNumber })
-      );
-      console.log("Login successful:", result);
+      await dispatch(login({ ...data, phone: formattedPhoneNumber }));
     } catch (error) {
       console.log("Login error:", error);
     }
