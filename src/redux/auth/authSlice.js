@@ -4,12 +4,16 @@ import { getCurrentUser, login, logout, registerUser } from "./actions";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: { password: null, phone: null },
+    user: { password: null, phone: null, transactions: [] },
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
   },
-  reducers: {},
+  reducers: {
+    addTransaction: (state, action) => {
+      state.user.transactions.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -38,5 +42,7 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { addTransaction } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

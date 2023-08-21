@@ -56,4 +56,18 @@ export const addCompany = createAsyncThunk(
   }
 );
 
+export const fetchCompanyByIdentifier = createAsyncThunk(
+  "companies/fetchByIdentifier",
+  async (identifier) => {
+    try {
+      const response = await axios.get(`/companies/identifier/${identifier}`);
+
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
+
 export default axios;

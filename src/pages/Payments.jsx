@@ -19,6 +19,9 @@ import {
   AnswerLine,
 } from "../utils/generalStyled";
 import { BottomArrowIcon, PaymentsIcon } from "../constants/icons";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCompanyByIdentifier } from "../redux/companies/actions";
 
 const Styled = {
   Titles: styled.div`
@@ -145,15 +148,42 @@ const Styled = {
   `,
   RequisitesLine: styled.div`
     display: flex;
+    align-items: end;
     margin: 10px 18px;
     label {
       color: rgba(255, 255, 255, 0.588);
+    }
+  `,
+  SearchButton: styled.button`
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition-duration: 450ms;
+    color: ${COLORS.ACCENT};
+    background-color: transparent;
+    border: 1px solid ${COLORS.ACCENT};
+    text-decoration: none;
+    height: fit-content;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    margin-left: 10px;
+    :hover {
+      color: black;
+      background-color: ${COLORS.ACCENT};
     }
   `,
 };
 const Payments = () => {
   const [isOpen, setIsOpen] = useState([]);
   const [activeAnswer, setActiveAnswer] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const dispatch = useDispatch();
+  const dropdownCompanies = useSelector(
+    (state) => state.companies.dropdownCompanies
+  );
 
   const handleToggle = (index) => {
     const updatedOpenState = [...isOpen];
@@ -171,6 +201,24 @@ const Payments = () => {
     console.log(data);
     reset();
   };
+
+  const handleSearch = async (event) => {
+    let identifier = event.target.value;
+    console.log(identifier, "identif");
+    if (identifier.length > 3) {
+      await dispatch(fetchCompanyByIdentifier(identifier));
+    }
+  };
+  console.log("dropdownCompanies", dropdownCompanies);
+  // const handleInputChange = (data) => {
+  //   console.log(data, "data");
+  //   if (data) {
+  //     handleSearch(data.identifier);
+  //   }
+  // };
+  // const handleCompanySelect = () => {
+  //   setSearchResults([]);
+  // };
 
   return (
     <StyleWrapper>
@@ -190,29 +238,31 @@ const Payments = () => {
         <Styled.PaymentDescription>
           To create a payment, use the search
         </Styled.PaymentDescription>
-        <form onSubmit={handleSubmit(onSubmit)} />
+        <form onSubmit={handleSubmit(handleSearch)} />
         <Styled.RequisitesLine>
           <Styled.Input
             type="text"
             name="iban"
             placeholder="IBAN, EDRPOU, account number or owners name"
-            {...register("iban", { required: true, maxLength: 26 })}
+            {...register("identifier", { required: true, maxLength: 26 })}
+            onChange={handleSearch}
           />
-          <label>
-            City
-            <Styled.Input
-              type="text"
-              name="city"
-              list="cities"
-              placeholder="Enter the city"
-              {...register("city", { required: true, maxLength: 16 })}
-            />
-            <Styled.Datalist id="cities">
-              {cityOptions.map((city) => (
-                <option key={city.id} value={city.value}></option>
+          {/* {dropdownCompanies.length > 0 && (
+            <div>
+              {dropdownCompanies.map((company) => (
+                <div
+                  key={company._id}
+
+                  // onClick={() => handleCompanySelect(company)}
+                >
+                  {company.companyName}
+                </div>
               ))}
-            </Styled.Datalist>
-          </label>
+            </div>
+          )} */}
+          <div>
+            <Styled.SearchButton type="submit">Search</Styled.SearchButton>
+          </div>
         </Styled.RequisitesLine>
       </Styled.NewPaymentForm>
       <Styled.PopularTemplatesForm>

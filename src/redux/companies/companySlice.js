@@ -4,6 +4,7 @@ import {
   deleteCompanyById,
   updateCompany,
   addCompany,
+  fetchCompanyByIdentifier,
 } from "./actions";
 
 const companySlice = createSlice({
@@ -12,6 +13,8 @@ const companySlice = createSlice({
     companies: [],
     error: null,
     isLoggedIn: false,
+    dropdownCompanies: [],
+    companyForTransaction: {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -53,6 +56,18 @@ const companySlice = createSlice({
         state.error = null;
       })
       .addCase(addCompany.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(fetchCompanyByIdentifier.pending, (state) => {
+        state.isLoggedIn = true;
+        state.error = null;
+      })
+      .addCase(fetchCompanyByIdentifier.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.dropdownCompanies = action.payload;
+      })
+      .addCase(fetchCompanyByIdentifier.rejected, (state, action) => {
+        state.isLoggedIn = false;
         state.error = action.payload;
       });
   },
