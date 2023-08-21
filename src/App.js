@@ -45,6 +45,7 @@ import { getCurrentUser } from "./redux/auth/actions";
 import CompaniesForAdmin from "./Companies/CompaniesForAdmin";
 import AdminRoute from "./PrivateRoute/AdminRoute";
 import SettingsPage from "./PrivateRoute/SettingsPage";
+import PaymentForm from "./PrivateRoute/PaymentForm";
 
 const Styled = {
   Page: styled.div`
@@ -70,6 +71,7 @@ function App() {
       <Styled.Page>
         <Header />
         <Routes>
+          {/* <Route path="paymentForm" element={<PaymentForm />} /> */}
           <Route path="settings" element={<SettingsPage />} />
           <Route path="admin" element={<CompaniesForAdmin />} />
           <Route path="/" element={<HomePage />} />
