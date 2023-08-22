@@ -73,14 +73,11 @@ const StyledForm = {
 
 const PaymentForm = () => {
   const { companyId } = useParams();
-  console.log("companyId", companyId);
   const dispatch = useDispatch();
   const companyForTransaction = useSelector(
     (state) => state.companies.companyForTransaction
   );
   const currentUser = useSelector((state) => state.auth.user);
-  console.log("currentUser", currentUser);
-  console.log("companyForTransaction", companyForTransaction);
 
   useEffect(() => {
     dispatch(fetchCompanyById(companyId));

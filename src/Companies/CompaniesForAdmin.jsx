@@ -70,7 +70,7 @@ const Styled = {
       background-color: ${COLORS.HEADER_BACKGROUND};
     }
     .rodal-mask {
-      background-color: rgba(0, 0, 0, 0.063);
+      background-color: rgba(0, 0, 0, 0.414);
     }
   `,
   CreateRow: styled.div`
