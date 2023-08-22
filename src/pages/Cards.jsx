@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { cards } from "../utils/cards";
-import { NavLink } from "react-router-dom";
 import { CardTransferIcon } from "../constants/icons";
 import {
   StyleHeader,
@@ -10,6 +9,10 @@ import {
 } from "../utils/generalStyled";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
+import CardModal from "../PrivateRoute/CardModal";
+import { Link, useNavigate } from "react-router-dom";
 
 const Styled = {
   CardsBlock: styled.div`
@@ -32,7 +35,8 @@ const Styled = {
       margin-right: 10px;
     }
   `,
-  OneBlock: styled.div`
+  OneBlock: styled(Link)`
+    text-decoration: none;
     margin: 5px 0px;
     padding: 10px;
     :hover {
@@ -40,7 +44,7 @@ const Styled = {
       background-color: ${COLORS.FOREGROUND};
     }
   `,
-  CardInfo: styled(NavLink)`
+  CardInfo: styled.div`
     display: flex;
     flex-direction: row;
     text-decoration: none;
@@ -55,8 +59,37 @@ const Styled = {
       color: ${COLORS.LIGHTER_TEXT};
     }
   `,
+  CustomRodal: styled(Rodal)`
+    .rodal-dialog {
+      background-color: ${COLORS.HEADER_BACKGROUND};
+      .rodal-mask {
+        background-color: rgba(0, 0, 0, 0.414);
+      }
+    }
+  `,
 };
 const Cards = () => {
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  // const openCardModal = (card) => {
+  //   setOpenModal(true);
+  //   setSelectedCard(card);
+  // };
+
+  // const closeCardModal = () => {
+  //   setOpenModal(false);
+  //   setSelectedCard(null);
+  // };
+  const openCardModal = (card) => {
+    setSelectedCard(card);
+    setOpenModal(true);
+  };
+
+  const closeCardModal = () => {
+    setSelectedCard(null);
+    setOpenModal(false);
+  };
+
   return (
     <StyleWrapper>
       <StyleHeader>
@@ -70,9 +103,13 @@ const Cards = () => {
       <Styled.CardsBlock>
         <h3>Choose the product</h3>
         {cards.map((item) => (
-          <Styled.OneBlock key={item.id}>
-            <Styled.CardInfo to="">
-              {/* replenishmennt link */}
+          <Styled.OneBlock
+            key={item.id}
+            onClick={() => {
+              openCardModal(item);
+            }}
+          >
+            <Styled.CardInfo>
               <img src={item.img} alt="" />
               <Styled.CardDescription>
                 <div>{item.name}</div>
@@ -82,6 +119,15 @@ const Cards = () => {
           </Styled.OneBlock>
         ))}
       </Styled.CardsBlock>
+      <Styled.CustomRodal
+        width={500}
+        height={500}
+        // visible={isOpenModal}
+        visible={selectedCard !== null}
+        onClose={closeCardModal}
+      >
+        {selectedCard && <CardModal card={selectedCard} />}
+      </Styled.CustomRodal>
     </StyleWrapper>
   );
 };
