@@ -43,7 +43,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "./redux/auth/actions";
 import CompaniesForAdmin from "./Companies/CompaniesForAdmin";
-import AdminRoute from "./PrivateRoute/AdminRoute";
 import SettingsPage from "./PrivateRoute/SettingsPage";
 import PaymentForm from "./PrivateRoute/PaymentForm";
 
@@ -58,7 +57,7 @@ const Styled = {
 };
 function App() {
   const dispatch = useDispatch();
-  const { token, user } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (token) {
@@ -71,7 +70,7 @@ function App() {
       <Styled.Page>
         <Header />
         <Routes>
-          {/* <Route path="paymentForm" element={<PaymentForm />} /> */}
+          <Route path="payment/:companyId" element={<PaymentForm />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="admin" element={<CompaniesForAdmin />} />
           <Route path="/" element={<HomePage />} />

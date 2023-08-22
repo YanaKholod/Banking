@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import {
-  cityOptions,
-  paymentsCategories,
-  questions,
-} from "../utils/paymentCategories";
+import { paymentsCategories, questions } from "../utils/paymentCategories";
 import styled from "styled-components";
-import { COLORS } from "../constants/styled";
+import { COLORS, TEXT } from "../constants/styled";
 import { useForm } from "react-hook-form";
 import {
   StyleDescription,
@@ -18,7 +14,12 @@ import {
   QuestionLine,
   AnswerLine,
 } from "../utils/generalStyled";
-import { BottomArrowIcon, PaymentsIcon } from "../constants/icons";
+import {
+  BottomArrowIcon,
+  ICONS,
+  PaymentsIcon,
+  RightArrowIcon,
+} from "../constants/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyByIdentifier } from "../redux/companies/actions";
@@ -41,6 +42,7 @@ const Styled = {
     width: 100%;
   `,
   Input: styled.input`
+    /* position: relative; */
     padding: 8px 30px 8px 8px;
     width: 100%;
     text-align: left;
@@ -150,6 +152,7 @@ const Styled = {
     display: flex;
     align-items: end;
     margin: 10px 18px;
+    width: 100%;
     label {
       color: rgba(255, 255, 255, 0.588);
     }
@@ -169,17 +172,64 @@ const Styled = {
     display: flex;
     justify-content: end;
     align-items: end;
-    margin-left: 10px;
+    margin-left: 20px;
     :hover {
       color: black;
       background-color: ${COLORS.ACCENT};
     }
   `,
+  InputLine: styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    div {
+      display: flex;
+    }
+  `,
+  DropdownMenu: styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 0px 10px;
+    width: 100%;
+    background-color: transparent;
+    max-height: 350px;
+    overflow-y: auto;
+    display: ${(props) => (props.visability ? "block" : "none")};
+  `,
+  DropdownItem: styled(Link)`
+    text-decoration: none;
+    color: ${COLORS.TEXT};
+    padding: 10px 5px;
+    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    :hover {
+      background-color: ${COLORS.LIGHTER_FOREGROUND};
+    }
+    img {
+      width: 12px;
+      height: 12px;
+    }
+  `,
+  Company: styled.div`
+    display: flex;
+    flex-direction: column;
+    p {
+      margin: 0;
+      margin-top: 4px;
+      color: ${COLORS.LIGHTER_TEXT};
+    }
+  `,
+  Link: styled(Link)`
+    text-decoration: none;
+  `,
 };
 const Payments = () => {
   const [isOpen, setIsOpen] = useState([]);
   const [activeAnswer, setActiveAnswer] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const dispatch = useDispatch();
   const dropdownCompanies = useSelector(
     (state) => state.companies.dropdownCompanies
@@ -204,21 +254,19 @@ const Payments = () => {
 
   const handleSearch = async (event) => {
     let identifier = event.target.value;
-    console.log(identifier, "identif");
-    if (identifier.length > 3) {
+    if (identifier.length > 2) {
       await dispatch(fetchCompanyByIdentifier(identifier));
+      setDropdownVisible(true);
+    } else {
+      await dispatch(fetchCompanyByIdentifier());
+      setDropdownVisible(false);
     }
   };
-  console.log("dropdownCompanies", dropdownCompanies);
-  // const handleInputChange = (data) => {
-  //   console.log(data, "data");
-  //   if (data) {
-  //     handleSearch(data.identifier);
-  //   }
-  // };
-  // const handleCompanySelect = () => {
-  //   setSearchResults([]);
-  // };
+
+  const cleanDropdown = async () => {
+    await dispatch(fetchCompanyByIdentifier());
+    setDropdownVisible(false);
+  };
 
   return (
     <StyleWrapper>
@@ -240,29 +288,43 @@ const Payments = () => {
         </Styled.PaymentDescription>
         <form onSubmit={handleSubmit(handleSearch)} />
         <Styled.RequisitesLine>
-          <Styled.Input
-            type="text"
-            name="iban"
-            placeholder="IBAN, EDRPOU, account number or owners name"
-            {...register("identifier", { required: true, maxLength: 26 })}
-            onChange={handleSearch}
-          />
-          {/* {dropdownCompanies.length > 0 && (
-            <div>
-              {dropdownCompanies.map((company) => (
-                <div
-                  key={company._id}
-
-                  // onClick={() => handleCompanySelect(company)}
-                >
-                  {company.companyName}
-                </div>
-              ))}
-            </div>
-          )} */}
-          <div>
-            <Styled.SearchButton type="submit">Search</Styled.SearchButton>
-          </div>
+          <Styled.InputLine>
+            <Styled.Input
+              type="text"
+              name="iban"
+              placeholder="IBAN, EDRPOU, account number or owners name"
+              {...register("identifier", { required: true, maxLength: 26 })}
+              onChange={handleSearch}
+            />
+            {dropdownCompanies.length > 0 && (
+              <Styled.DropdownMenu visability={isDropdownVisible}>
+                {dropdownCompanies.map((company) => (
+                  <div
+                    key={company._id}
+                    onClick={() => {
+                      cleanDropdown();
+                    }}
+                  >
+                    <Styled.DropdownItem
+                      key={company._id}
+                      to={{
+                        pathname: `/payment/${company._id}`,
+                        state: company,
+                      }}
+                    >
+                      <Styled.Company>
+                        {company.companyName}
+                        <p> {company.iban}</p>
+                      </Styled.Company>
+                      <div>
+                        <img src={ICONS.RIGHT_ARROW} alt="" />
+                      </div>
+                    </Styled.DropdownItem>
+                  </div>
+                ))}
+              </Styled.DropdownMenu>
+            )}
+          </Styled.InputLine>
         </Styled.RequisitesLine>
       </Styled.NewPaymentForm>
       <Styled.PopularTemplatesForm>
