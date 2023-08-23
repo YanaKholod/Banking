@@ -41,7 +41,7 @@ const companyInputsData = [
   },
   {
     id: 4,
-    inputType: "text",
+    inputType: "number",
     labelName: "Sum",
     placeholder: "00.00",
     inputName: "sum",
@@ -78,7 +78,7 @@ const PaymentForm = () => {
     (state) => state.companies.companyForTransaction
   );
   const currentUser = useSelector((state) => state.auth.user);
-
+  console.log();
   useEffect(() => {
     dispatch(fetchCompanyById(companyId));
   }, [dispatch]);
@@ -96,7 +96,14 @@ const PaymentForm = () => {
   const onSubmit = async (data) => {
     //logic for transaction
     //dispatch an action for adding transaction from user to company
-    console.log({ ...data, user: currentUser });
+    console.log("smth in paymnent", {
+      ...data,
+      user: {
+        id: currentUser.id,
+        fullName: currentUser.fullName,
+        cards: currentUser.cards,
+      },
+    });
   };
   const resetForm = () => {
     reset({ sum: "", purpose: "" });
@@ -113,7 +120,7 @@ const PaymentForm = () => {
   return (
     <StyledForm.MainWrapper>
       <Styled.Wrapper>
-        <p>Registration</p>
+        <p>Payment</p>
         <StyledForm.Form onSubmit={handleSubmit(onSubmit)}>
           {companyInputsData.map((item) => (
             <Styled.Field key={item.id}>

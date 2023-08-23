@@ -50,6 +50,12 @@ export const Styled = {
     :focus {
       border-bottom: 3px solid ${COLORS.ACCENT};
     }
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
   `,
   Label: styled.label`
     align-items: center;
