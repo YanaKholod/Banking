@@ -43,7 +43,6 @@ export const updateCompany = createAsyncThunk(
 export const addCompany = createAsyncThunk(
   "companies/addCompany",
   async (data) => {
-    console.log("actionData", data);
     try {
       const response = await axios.post("/companies/", {
         ...data,

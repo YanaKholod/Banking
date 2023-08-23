@@ -96,6 +96,7 @@ const CompaniesForAdmin = () => {
   const companies = useSelector((state) => state.companies.companies);
   const { user } = useSelector((state) => state.auth);
 
+  console.log("COMPANIES", companies);
   useEffect(() => {
     if (user.role === "admin") {
       dispatch(fetchAllCompanies());

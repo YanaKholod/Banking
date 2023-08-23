@@ -165,16 +165,26 @@ const Header = () => {
         </div>
       ) : (
         <Styled.LoggedInButton>
-          <Styled.Greeting>
-            <p>Hello, {user.fullName}!</p>
-            {user.role === "admin" && <span> Role: {user.role}</span>}
-          </Styled.Greeting>
+          {user ? (
+            <Styled.Greeting>
+              <p>Hello, {user.fullName}!</p>
+              {user.role === "admin" && <span> Role: {user.role}</span>}
+            </Styled.Greeting>
+          ) : (
+            <p></p>
+          )}
           <div>
-            <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
-            {user.role === "user" && (
-              <Styled.CustomButton to="/settings">Settings</Styled.CustomButton>
+            {user && (
+              <>
+                <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
+                {user.role === "user" && (
+                  <Styled.CustomButton to="/settings">
+                    Settings
+                  </Styled.CustomButton>
+                )}
+                {user.role === "admin" && <Link to="admin">Companies</Link>}
+              </>
             )}
-            {user.role === "admin" && <Link to="admin">Companies</Link>}
           </div>
         </Styled.LoggedInButton>
       )}
