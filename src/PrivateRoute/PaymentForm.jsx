@@ -78,7 +78,7 @@ const PaymentForm = () => {
     (state) => state.companies.companyForTransaction
   );
   const currentUser = useSelector((state) => state.auth.user);
-  console.log();
+
   useEffect(() => {
     dispatch(fetchCompanyById(companyId));
   }, [dispatch]);
