@@ -6,6 +6,8 @@ export const cards = [
     description:
       "All the advantages and possibilities of ordinary cards, only without plastic. Payment for purchases and services without fees, including with Apple Pay and Google Pay",
     linkTo: "/digital",
+    cardType: "Digital",
+    balance: 20000.0,
   },
   {
     id: 1,
@@ -14,6 +16,8 @@ export const cards = [
     description:
       "The card is only for purchases and payments on the Internet. Issuance and maintenance of the card is free. No physical plastic.",
     linkTo: "/inet",
+    cardType: "Internet",
+    balance: 50000.0,
   },
   {
     id: 2,
@@ -22,5 +26,7 @@ export const cards = [
     description:
       "Have you received a new card? Click to sign the contract and start using.",
     linkTo: "/plastic",
+    cardType: "Plastic",
+    balance: 10000.0,
   },
 ];

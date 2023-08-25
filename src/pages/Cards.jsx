@@ -12,7 +12,7 @@ import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import CardModal from "../PrivateRoute/CardModal";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Styled = {
   CardsBlock: styled.div`
