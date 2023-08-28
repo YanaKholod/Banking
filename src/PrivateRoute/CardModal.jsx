@@ -4,6 +4,7 @@ import { COLORS } from "../constants/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
+import { updateCurrentUserCard } from "../redux/auth/actions";
 
 const StyledCards = {
   Wrapper: styled.div`
@@ -89,12 +90,9 @@ const StyledCards = {
     margin-top: 20px;
   `,
 };
-const CardModal = ({ card }) => {
+const CardModal = ({ card, closeCardModal }) => {
   const currentUser = useSelector((state) => state.auth.user);
-
-  // console.log("currentUser", currentUser);
-  console.log("card", card);
-
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -105,21 +103,6 @@ const CardModal = ({ card }) => {
     mode: "onBlur",
   });
 
-  const onSubmit = async (data) => {
-    //logic for transaction
-    //dispatch an action for adding transaction from user to company
-    console.log("data", data);
-    console.log({
-      ...data,
-      user: currentUser,
-      card: {
-        cardType: data.cardType,
-        cardNumber: data.cardNumber,
-        balance: data.balance,
-      },
-    });
-  };
-
   const generateRandomNumber = () => {
     const randomNumber = Math.floor(Math.random() * 10000);
     return randomNumber.toString().padStart(4, "0");
@@ -128,6 +111,23 @@ const CardModal = ({ card }) => {
   const generateRandomCreditCardNumber = () => {
     const groups = Array.from({ length: 4 }, generateRandomNumber);
     return groups.join(" ");
+  };
+
+  useEffect(() => {
+    if (card) {
+      setValue("cardType", card.cardType || "");
+      setValue("cardNumber", generateRandomCreditCardNumber() || "");
+      setValue("balance", card.balance || "");
+    }
+  }, [card, setValue]);
+
+  const resetForm = () => {
+    closeCardModal();
+  };
+  const onSubmit = async (data) => {
+    await dispatch(updateCurrentUserCard({ card: data, user: currentUser }));
+    reset();
+    closeCardModal();
   };
 
   return (
@@ -140,9 +140,6 @@ const CardModal = ({ card }) => {
                 type="text"
                 name="cardType"
                 {...register("cardType")}
-                defaultValue={card.cardType}
-                // defaultValue={card.cardType}
-                // {...register(card.cardType)}
                 disabled
               />
             </StyledCards.CardName>
@@ -151,8 +148,6 @@ const CardModal = ({ card }) => {
                 type="text"
                 name="cardNumber"
                 {...register("cardNumber")}
-                defaultValue={generateRandomCreditCardNumber()}
-                // defaultValue={generateRandomCreditCardNumber()}
                 disabled
               />
             </div>
@@ -166,24 +161,20 @@ const CardModal = ({ card }) => {
           <StyledCards.Input
             type="text"
             name="balance"
-            // defaultValue={card.balance}
             {...register("balance")}
-            defaultValue={card.balance}
             disabled
           />
         </StyledCards.AdditionalInfo>
 
         <StyledCards.ButtonLine>
           <Styled.Button
-          //   onClick={() => {
-          //     resetForm();
-          //   }}
+            onClick={() => {
+              resetForm();
+            }}
           >
             Cancel
           </Styled.Button>
-          <Styled.Button type="submit" disabled={!isValid}>
-            Submit
-          </Styled.Button>
+          <Styled.Button type="submit">Submit</Styled.Button>
         </StyledCards.ButtonLine>
       </StyledCards.Form>
     </StyledCards.Wrapper>
