@@ -8,6 +8,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/auth/actions";
+import { HeaderIcon } from "../constants/icons";
 
 const Styled = {
   Wrapper: styled.div`
@@ -19,7 +20,13 @@ const Styled = {
     color: ${COLORS.TEXT};
     /* z-index: 998; */
   `,
-  Logo: styled.div``,
+  Logo: styled(Link)`
+    img {
+      padding-left: 20px;
+      width: 65px;
+      height: 55px;
+    }
+  `,
   Buttons: styled.div`
     padding: 10px;
     display: flex;
@@ -137,7 +144,12 @@ const Header = () => {
   };
   return (
     <Styled.Wrapper>
-      <Styled.Logo>Header</Styled.Logo>
+      <Styled.Logo to="/">
+        <img
+          src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/19452/cartoon-cat-face-clipart-md.png"
+          alt=""
+        />
+      </Styled.Logo>
       {!isLoggedIn ? (
         <div>
           <Styled.Buttons>

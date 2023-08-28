@@ -63,7 +63,7 @@ const CardWidgets = () => {
         <Styled.Description>
           <div>
             <Styled.Img
-              src="https://cdn.privat24.ua/cardimage/kun_gold.jpg"
+              src="https://wallpapercave.com/wp/wp9126648.jpg"
               alt=""
             />
           </div>
@@ -79,7 +79,7 @@ const CardWidgets = () => {
         <Styled.Description>
           <div>
             <Styled.Img
-              src="https://next.privat24.ua/assets/c2abc892709768213b5d.svg"
+              src="https://i.ibb.co/xzkjL8q/51-Hb-TJMm3k-L-AC-SL1500-1.jpg"
               alt=""
             />
           </div>

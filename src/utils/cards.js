@@ -1,7 +1,7 @@
 export const cards = [
   {
     id: 0,
-    img: "https://cdn.privat24.ua/cardimage/kun_gold.jpg",
+    img: "https://wallpapercave.com/wp/wp9126648.jpg",
     name: "Digital card",
     description:
       "All the advantages and possibilities of ordinary cards, only without plastic. Payment for purchases and services without fees, including with Apple Pay and Google Pay",
@@ -11,7 +11,7 @@ export const cards = [
   },
   {
     id: 1,
-    img: "https://cdn.privat24.ua/cardimage/visa_default.jpg",
+    img: "https://wallpapercave.com/wp/wp4358501.jpg",
     name: "Internet Card",
     description:
       "The card is only for purchases and payments on the Internet. Issuance and maintenance of the card is free. No physical plastic.",
@@ -21,7 +21,7 @@ export const cards = [
   },
   {
     id: 2,
-    img: "https://next.privat24.ua/assets/238e413fd3bd22140dfa.svg",
+    img: "https://i.postimg.cc/QN5z8FJc/51-Ze-LNXdv-L-AC-SL1500-1.jpg",
     name: "Plastic card",
     description:
       "Have you received a new card? Click to sign the contract and start using.",

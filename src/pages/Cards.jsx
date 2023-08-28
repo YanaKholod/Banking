@@ -46,7 +46,7 @@ const Styled = {
   `,
   CardInfo: styled.div`
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     text-decoration: none;
     color: white;
   `,
@@ -71,23 +71,15 @@ const Styled = {
 const Cards = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  // const openCardModal = (card) => {
-  //   setOpenModal(true);
-  //   setSelectedCard(card);
-  // };
-
-  // const closeCardModal = () => {
-  //   setOpenModal(false);
-  //   setSelectedCard(null);
-  // };
   const openCardModal = (card) => {
     setSelectedCard(card);
     setOpenModal(true);
   };
 
   const closeCardModal = () => {
-    setSelectedCard(null);
     setOpenModal(false);
+
+    setSelectedCard(null);
   };
 
   return (
@@ -122,11 +114,12 @@ const Cards = () => {
       <Styled.CustomRodal
         width={500}
         height={500}
-        // visible={isOpenModal}
         visible={selectedCard !== null}
         onClose={closeCardModal}
       >
-        {selectedCard && <CardModal card={selectedCard} />}
+        {selectedCard && (
+          <CardModal card={selectedCard} closeCardModal={closeCardModal} />
+        )}
       </Styled.CustomRodal>
     </StyleWrapper>
   );

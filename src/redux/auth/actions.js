@@ -66,4 +66,46 @@ export const getCurrentUser = createAsyncThunk(
     }
   }
 );
+
+export const updateCurrentUserCard = createAsyncThunk(
+  "auth/updateCurrentUserCard",
+  async ({ card, user }) => {
+    try {
+      const response = await axios.patch("/auth/change", {
+        phone: user.phone,
+        card,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
+// export const updateCurrentUserCard = createAsyncThunk(
+//   "auth/updateCurrentUserCard",
+//   async ({ card, user }) => {
+//     console.log("CARD ACTION", {
+//       phone: user.phone,
+//       cards: [...user.cards, card],
+//     });
+//     try {
+//       const response = await axios.patch("/auth/change", {
+//         phone: user.phone,
+//         cards: [...user.cards, card], // card,
+//         // phone,
+//         // password,
+//         // fullName,
+//         // cardType: card.cardType,
+//         // cardNumber: card.cardNumber,
+//         // balance: card.balance,
+//       });
+//       return response.data;
+//     } catch (error) {
+//       console.log(error.message);
+//       throw error;
+//     }
+//   }
+// );
+
 export default axios;
