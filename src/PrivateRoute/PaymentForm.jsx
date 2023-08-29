@@ -5,8 +5,16 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyById } from "../redux/companies/actions";
+import { getCurrentUser, updateTransaction } from "../redux/auth/actions";
 
 const companyInputsData = [
+  {
+    id: 30,
+    inputType: "hidden",
+    labelName: "",
+    placeholder: "",
+    inputName: "id",
+  },
   {
     id: 0,
     inputType: "text",
@@ -80,8 +88,10 @@ const PaymentForm = () => {
   const currentUser = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    dispatch(fetchCompanyById(companyId));
-  }, [dispatch]);
+    if (currentUser) {
+      dispatch(fetchCompanyById(companyId));
+    }
+  }, [dispatch, currentUser]);
 
   const {
     register,
@@ -94,22 +104,28 @@ const PaymentForm = () => {
   });
 
   const onSubmit = async (data) => {
-    //logic for transaction
-    //dispatch an action for adding transaction from user to company
-    console.log("smth in paymnent", {
-      ...data,
-      user: {
-        id: currentUser.id,
-        fullName: currentUser.fullName,
-        cards: currentUser.cards,
-      },
-    });
+    const numericSum = parseFloat(data.sum);
+    dispatch(
+      updateTransaction({
+        user: currentUser,
+        selectedCard: data.selectedCard,
+        transactionInfo: {
+          purpose: data.purpose,
+          sum: numericSum,
+        },
+        company: {
+          id: data.id,
+        },
+      })
+    );
+    dispatch(getCurrentUser());
   };
   const resetForm = () => {
     reset({ sum: "", purpose: "" });
   };
   useEffect(() => {
     if (companyForTransaction) {
+      setValue("id", companyForTransaction._id);
       setValue("companyName", companyForTransaction.companyName || "");
       setValue("countryCode", companyForTransaction.countryCode || "");
       setValue("iban", companyForTransaction.iban || "");
@@ -127,7 +143,7 @@ const PaymentForm = () => {
               <Styled.Label>{item.labelName}</Styled.Label>
               <Styled.Input
                 type={item.inputType}
-                {...register(item.inputName, item.validationRules)}
+                {...register(item.inputName, { required: true })}
                 placeholder={item.placeholder}
                 disabled={item.isDisabled}
                 inputMode={item.inputMode}
@@ -144,6 +160,21 @@ const PaymentForm = () => {
               />
             </Styled.Field>
           ))}
+          <Styled.Field>
+            <Styled.Label>Select card</Styled.Label>
+            {currentUser.cards && currentUser.cards.length > 0 ? (
+              <select {...register("selectedCard", { required: true })}>
+                <option value="">Select a card</option>
+                {currentUser.cards.map((card) => (
+                  <option key={card._id} value={card._id}>
+                    {card.cardType} - {card.balance} UAH
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <p>No cards available</p>
+            )}{" "}
+          </Styled.Field>
           <Styled.ButtonLine>
             <Styled.Button
               onClick={() => {
