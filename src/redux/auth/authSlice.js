@@ -5,6 +5,7 @@ import {
   logout,
   registerUser,
   updateCurrentUserCard,
+  updateTransaction,
 } from "./actions";
 
 const authSlice = createSlice({
@@ -52,7 +53,18 @@ const authSlice = createSlice({
       })
       .addCase(updateCurrentUserCard.rejected, (state) => {
         state.isLoggedIn = true;
-
+        state.isRefreshing = false;
+      })
+      .addCase(updateTransaction.pending, (state) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = true;
+      })
+      .addCase(updateTransaction.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(updateTransaction.rejected, (state) => {
+        state.isLoggedIn = true;
         state.isRefreshing = false;
       });
   },

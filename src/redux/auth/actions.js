@@ -25,9 +25,6 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
-//credentials - имена полей в форме по типу name, password, email,
-// они прокидіваются в диспатч как обьект с полями
-
 export const login = createAsyncThunk("auth/login", async (user) => {
   try {
     const { data } = await axios.post("/auth/login", user);
@@ -72,7 +69,7 @@ export const updateCurrentUserCard = createAsyncThunk(
   async ({ card, user }) => {
     try {
       const response = await axios.patch("/auth/change", {
-        phone: user.phone,
+        id: user.id,
         card,
       });
       return response.data;
@@ -82,30 +79,23 @@ export const updateCurrentUserCard = createAsyncThunk(
     }
   }
 );
-// export const updateCurrentUserCard = createAsyncThunk(
-//   "auth/updateCurrentUserCard",
-//   async ({ card, user }) => {
-//     console.log("CARD ACTION", {
-//       phone: user.phone,
-//       cards: [...user.cards, card],
-//     });
-//     try {
-//       const response = await axios.patch("/auth/change", {
-//         phone: user.phone,
-//         cards: [...user.cards, card], // card,
-//         // phone,
-//         // password,
-//         // fullName,
-//         // cardType: card.cardType,
-//         // cardNumber: card.cardNumber,
-//         // balance: card.balance,
-//       });
-//       return response.data;
-//     } catch (error) {
-//       console.log(error.message);
-//       throw error;
-//     }
-//   }
-// );
 
+export const updateTransaction = createAsyncThunk(
+  "transactions/addTransaction",
+  async ({ user, selectedCard, transactionInfo, company }) => {
+    try {
+      const response = await axios.patch("/auth/transaction", {
+        userId: user.id,
+        cardId: selectedCard,
+        amount: transactionInfo.sum,
+        purpose: transactionInfo.purpose,
+        companyId: company.id,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
 export default axios;
