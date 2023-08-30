@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchAllUsers,
   getCurrentUser,
   login,
   logout,
@@ -15,6 +16,8 @@ const authSlice = createSlice({
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
+    usersArray: [],
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -65,6 +68,20 @@ const authSlice = createSlice({
       })
       .addCase(updateTransaction.rejected, (state) => {
         state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(fetchAllUsers.pending, (state) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(fetchAllUsers.fulfilled, (state, action) => {
+        console.log("fetchAllUsers", action.payload);
+        state.usersArray = action.payload;
+        state.error = null;
+        state.isRefreshing = false;
+      })
+      .addCase(fetchAllUsers.rejected, (state, action) => {
+        state.error = action.payload;
         state.isRefreshing = false;
       });
   },

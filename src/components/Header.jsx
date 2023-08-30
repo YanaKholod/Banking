@@ -194,7 +194,7 @@ const Header = () => {
                     Settings
                   </Styled.CustomButton>
                 )}
-                {user.role === "admin" && <Link to="admin">Companies</Link>}
+                {user.role === "admin" && <Link to="admin/users">Admin</Link>}
               </>
             )}
           </div>

@@ -64,6 +64,16 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
+export const fetchAllUsers = createAsyncThunk("users/all", async () => {
+  try {
+    const response = await axios.get("/auth/all");
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+});
+
 export const updateCurrentUserCard = createAsyncThunk(
   "auth/updateCurrentUserCard",
   async ({ card, user }) => {

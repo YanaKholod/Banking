@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyById } from "../redux/companies/actions";
 import { getCurrentUser, updateTransaction } from "../redux/auth/actions";
+import { COLORS } from "../constants/styled";
 
 const companyInputsData = [
   {
@@ -76,6 +77,15 @@ const StyledForm = {
     margin: 0;
     text-align: center;
     width: 90%;
+  `,
+  Select: styled.select`
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 17px;
+    background-color: transparent;
+    border: 1px solid ${COLORS.LIGHTER_TEXT};
+    border-radius: 4px;
+    color: ${COLORS.TEXT};
   `,
 };
 
@@ -161,16 +171,18 @@ const PaymentForm = () => {
             </Styled.Field>
           ))}
           <Styled.Field>
-            <Styled.Label>Select card</Styled.Label>
+            {/* <Styled.Label>Select card</Styled.Label> */}
             {currentUser.cards && currentUser.cards.length > 0 ? (
-              <select {...register("selectedCard", { required: true })}>
-                <option value="">Select a card</option>
+              <StyledForm.Select
+                {...register("selectedCard", { required: true })}
+              >
+                <option value="">Select card</option>
                 {currentUser.cards.map((card) => (
                   <option key={card._id} value={card._id}>
                     {card.cardType} - {card.balance} UAH
                   </option>
                 ))}
-              </select>
+              </StyledForm.Select>
             ) : (
               <p>No cards available</p>
             )}{" "}
