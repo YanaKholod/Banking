@@ -42,9 +42,11 @@ import { COLORS } from "./constants/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "./redux/auth/actions";
-import CompaniesForAdmin from "./Companies/CompaniesForAdmin";
 import SettingsPage from "./PrivateRoute/SettingsPage";
 import PaymentForm from "./PrivateRoute/PaymentForm";
+import CompaniesForAdmin from "./Admin/CompaniesForAdmin";
+import UsersForAdmin from "./Admin/UsersForAdmin";
+import AdminPanel from "./Admin/AdminPanel";
 
 const Styled = {
   Page: styled.div`
@@ -72,7 +74,7 @@ function App() {
         <Routes>
           <Route path="payment/:companyId" element={<PaymentForm />} />
           <Route path="settings" element={<SettingsPage />} />
-          <Route path="admin" element={<CompaniesForAdmin />} />
+          <Route path="admin/*" element={<AdminPanel />} />
           <Route path="/" element={<HomePage />} />
           <Route path="payments" element={<Payments />} />
           <Route path="communication" element={<Communication />} />
