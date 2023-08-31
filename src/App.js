@@ -47,6 +47,8 @@ import PaymentForm from "./PrivateRoute/PaymentForm";
 import CompaniesForAdmin from "./Admin/CompaniesForAdmin";
 import UsersForAdmin from "./Admin/UsersForAdmin";
 import AdminPanel from "./Admin/AdminPanel";
+import UserFullView from "./Admin/UserFullView";
+import CompanyFullView from "./Admin/CompanyFullView";
 
 const Styled = {
   Page: styled.div`
@@ -75,6 +77,11 @@ function App() {
           <Route path="payment/:companyId" element={<PaymentForm />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="admin/*" element={<AdminPanel />} />
+          <Route path="admin/users/fullView/:id" element={<UserFullView />} />
+          <Route
+            path="admin/companies/fullView/:id"
+            element={<CompanyFullView />}
+          />
           <Route path="/" element={<HomePage />} />
           <Route path="payments" element={<Payments />} />
           <Route path="communication" element={<Communication />} />

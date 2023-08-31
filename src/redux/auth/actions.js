@@ -108,4 +108,15 @@ export const updateTransaction = createAsyncThunk(
     }
   }
 );
+
+export const fetchUserById = createAsyncThunk("auth/:id", async (id) => {
+  try {
+    const response = await axios.get(`/auth/userInfo/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+    throw error;
+  }
+});
+
 export default axios;
