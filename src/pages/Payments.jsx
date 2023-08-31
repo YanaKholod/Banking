@@ -309,7 +309,6 @@ const Payments = () => {
                       key={company._id}
                       to={{
                         pathname: `/payment/${company._id}`,
-                        state: company,
                       }}
                     >
                       <Styled.Company>

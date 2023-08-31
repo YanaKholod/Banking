@@ -18,12 +18,15 @@ const Styled = {
     align-items: center;
     flex-direction: column;
     margin: 15px;
+    width: 100%;
+
     height: 100vh;
   `,
   Container: styled.div`
     width: 100%;
     text-align: center;
     background-color: ${COLORS.BLOCK_BACKGROUND};
+    text-decoration: none;
   `,
   Row: styled.div`
     display: grid;
@@ -45,6 +48,8 @@ const Styled = {
   Cell: styled.div`
     padding: 10px;
     text-align: center;
+    text-decoration: none;
+    color: ${COLORS.TEXT};
   `,
   ButtonCell: styled.div`
     display: flex;
@@ -77,6 +82,20 @@ const Styled = {
       font-size: 16px;
     }
   `,
+  ItemRow: styled(Link)`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-decoration: none;
+  `,
+  ItemSecondRow: styled.div`
+    grid-template-columns: 50px 3fr 1fr;
+    display: grid;
+    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
+    text-decoration: none;
+    :hover {
+      background-color: ${COLORS.HEADER_BACKGROUND};
+    }
+  `,
 };
 
 const UsersForAdmin = () => {
@@ -85,8 +104,6 @@ const UsersForAdmin = () => {
   const { user } = useSelector((state) => state.auth);
   const location = useLocation();
   const path = location.pathname;
-
-  console.log("USERS", users);
 
   useEffect(() => {
     if (user.role === "admin") {
@@ -109,6 +126,7 @@ const UsersForAdmin = () => {
   //   await dispatch(fetchAllCompanies());
   // };
 
+  // grid-template-columns: 50px 3fr 1fr;
   return (
     <Styled.Wrapper>
       <Styled.CreateRow></Styled.CreateRow>
@@ -122,17 +140,18 @@ const UsersForAdmin = () => {
             <Styled.Header>Settings</Styled.Header>
           </Styled.Row>
           {users.map((item, index) => (
-            <Link to={`${path}/${item._id}`} key={index}>
+            <Styled.ItemSecondRow key={index}>
               <Styled.Cell>{index + 1}</Styled.Cell>
-              <Styled.Cell>{item.fullName}</Styled.Cell>
-              <Styled.Cell>{item.phone}</Styled.Cell>
-              <Styled.Cell>{item.role}</Styled.Cell>
+              <Styled.ItemRow to={`${path}/fullView/${item._id}`}>
+                <Styled.Cell>{item.fullName}</Styled.Cell>
+                <Styled.Cell>{item.phone}</Styled.Cell>
+                <Styled.Cell>{item.role}</Styled.Cell>
+              </Styled.ItemRow>
               <Styled.ButtonCell>
                 <Styled.Button>Edit</Styled.Button>
                 <Styled.Button>Delete</Styled.Button>
               </Styled.ButtonCell>
-            </Link>
-            // {/* </Styled.Row> */}
+            </Styled.ItemSecondRow>
           ))}
         </Styled.Container>
       )}

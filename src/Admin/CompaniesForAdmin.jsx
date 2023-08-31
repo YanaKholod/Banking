@@ -11,6 +11,7 @@ import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import CompanyForm from "../PrivateRoute/CompanyForm";
+import { Link, useLocation } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.div`
@@ -19,6 +20,7 @@ const Styled = {
     align-items: center;
     flex-direction: column;
     margin: 15px;
+    width: 100%;
     height: 100vh;
   `,
   Container: styled.div`
@@ -28,7 +30,7 @@ const Styled = {
   `,
   Row: styled.div`
     display: grid;
-    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 2fr 1fr 1fr 1fr;
     border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
     &:last-child {
       border-bottom: none;
@@ -46,6 +48,8 @@ const Styled = {
   Cell: styled.div`
     padding: 10px;
     text-align: center;
+    text-decoration: none;
+    color: ${COLORS.TEXT};
   `,
   ButtonCell: styled.div`
     display: flex;
@@ -86,11 +90,27 @@ const Styled = {
       font-size: 16px;
     }
   `,
+  ItemRow: styled(Link)`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-decoration: none;
+  `,
+  ItemSecondRow: styled.div`
+    grid-template-columns: 50px 5fr 1fr;
+    display: grid;
+    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
+    text-decoration: none;
+    :hover {
+      background-color: ${COLORS.HEADER_BACKGROUND};
+    }
+  `,
 };
 
 const CompaniesForAdmin = () => {
   const [companyFormIsVisible, setCompanyFormIsVisible] = useState(false);
   const [activeCompany, setActiveCompany] = useState({});
+  const location = useLocation();
+  const path = location.pathname;
 
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companies.companies);
@@ -142,12 +162,14 @@ const CompaniesForAdmin = () => {
             <Styled.Header>Settings</Styled.Header>
           </Styled.Row>
           {companies.map((item, index) => (
-            <Styled.Row key={index}>
+            <Styled.ItemSecondRow key={index}>
               <Styled.Cell>{index + 1}</Styled.Cell>
-              <Styled.Cell>{item.companyName}</Styled.Cell>
-              <Styled.Cell>{item.iban}</Styled.Cell>
-              <Styled.Cell>{item.countryCode}</Styled.Cell>
-              <Styled.Cell>{item.edpnou}</Styled.Cell>
+              <Styled.ItemRow to={`${path}/fullView/${item._id}`}>
+                <Styled.Cell>{item.companyName}</Styled.Cell>
+                <Styled.Cell>{item.iban}</Styled.Cell>
+                <Styled.Cell>{item.countryCode}</Styled.Cell>
+                <Styled.Cell>{item.edpnou}</Styled.Cell>
+              </Styled.ItemRow>
               <Styled.ButtonCell>
                 <Styled.Button onClick={() => openCompanyModal(item)}>
                   Edit
@@ -156,7 +178,7 @@ const CompaniesForAdmin = () => {
                   Delete
                 </Styled.Button>
               </Styled.ButtonCell>
-            </Styled.Row>
+            </Styled.ItemSecondRow>
           ))}
           <Styled.CustomRodal
             width={370}
