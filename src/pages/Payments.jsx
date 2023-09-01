@@ -14,12 +14,7 @@ import {
   QuestionLine,
   AnswerLine,
 } from "../utils/generalStyled";
-import {
-  BottomArrowIcon,
-  ICONS,
-  PaymentsIcon,
-  RightArrowIcon,
-} from "../constants/icons";
+import { BottomArrowIcon, ICONS, PaymentsIcon } from "../constants/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyByIdentifier } from "../redux/companies/actions";

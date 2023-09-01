@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
 import styled from "styled-components";
@@ -92,16 +92,16 @@ const StyledForm = {
 const PaymentForm = () => {
   const { companyId } = useParams();
   const dispatch = useDispatch();
+  const [selectedCard, setSelectedCard] = useState(null);
   const companyForTransaction = useSelector(
     (state) => state.companies.companyForTransaction
   );
-  const currentUser = useSelector((state) => state.auth.user);
-
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
-    if (currentUser) {
+    if (companyId && user) {
       dispatch(fetchCompanyById(companyId));
     }
-  }, [dispatch, currentUser]);
+  }, [dispatch, user, companyId]);
 
   const {
     register,
@@ -115,10 +115,14 @@ const PaymentForm = () => {
 
   const onSubmit = async (data) => {
     const numericSum = parseFloat(data.sum);
+    console.log(selectedCard);
     dispatch(
       updateTransaction({
-        user: currentUser,
-        selectedCard: data.selectedCard,
+        user: user,
+        selectedCard: {
+          cardId: selectedCard._id,
+          cardType: selectedCard.cardType,
+        },
         transactionInfo: {
           purpose: data.purpose,
           sum: numericSum,
@@ -172,12 +176,20 @@ const PaymentForm = () => {
           ))}
           <Styled.Field>
             {/* <Styled.Label>Select card</Styled.Label> */}
-            {currentUser.cards && currentUser.cards.length > 0 ? (
+            {user.cards && user.cards.length > 0 ? (
               <StyledForm.Select
                 {...register("selectedCard", { required: true })}
+                {...register("selectedCard", { required: true })}
+                onChange={(e) => {
+                  const selectedCardId = e.target.value;
+                  const cardObject = user.cards.find(
+                    (card) => card._id === selectedCardId
+                  );
+                  setSelectedCard(cardObject);
+                }}
               >
                 <option value="">Select card</option>
-                {currentUser.cards.map((card) => (
+                {user.cards.map((card) => (
                   <option key={card._id} value={card._id}>
                     {card.cardType} - {card.balance} UAH
                   </option>
@@ -185,7 +197,7 @@ const PaymentForm = () => {
               </StyledForm.Select>
             ) : (
               <p>No cards available</p>
-            )}{" "}
+            )}
           </Styled.Field>
           <Styled.ButtonLine>
             <Styled.Button

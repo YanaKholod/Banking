@@ -106,10 +106,10 @@ const UsersForAdmin = () => {
   const path = location.pathname;
 
   useEffect(() => {
-    if (user.role === "admin") {
+    if (user && user.role === "admin") {
       dispatch(fetchAllUsers());
     }
-  }, [dispatch, user.role]);
+  }, [dispatch, user]);
 
   // const handleDeleteCompany = async (_id) => {
   //   await dispatch(deleteCompanyById(_id));
