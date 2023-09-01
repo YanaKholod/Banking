@@ -96,7 +96,8 @@ export const updateTransaction = createAsyncThunk(
     try {
       const response = await axios.patch("/auth/transaction", {
         userId: user.id,
-        cardId: selectedCard,
+        cardId: selectedCard.cardId,
+        cardType: selectedCard.cardType,
         amount: transactionInfo.sum,
         purpose: transactionInfo.purpose,
         companyId: company.id,

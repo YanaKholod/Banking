@@ -117,11 +117,12 @@ const CompaniesForAdmin = () => {
   const { user } = useSelector((state) => state.auth);
 
   console.log("COMPANIES", companies);
+
   useEffect(() => {
-    if (user.role === "admin") {
+    if (user && user.role === "admin") {
       dispatch(fetchAllCompanies());
     }
-  }, [dispatch, user.role]);
+  }, [dispatch, user]);
 
   const handleDeleteCompany = async (_id) => {
     await dispatch(deleteCompanyById(_id));
