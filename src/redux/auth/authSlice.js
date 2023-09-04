@@ -77,7 +77,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(fetchAllUsers.fulfilled, (state, action) => {
-        state.usersArray = action.payload;
+        state.usersArray = action.payload.users;
         state.error = null;
         state.isRefreshing = false;
       })

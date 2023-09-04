@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCompany,
-  deleteCompanyById,
-  fetchAllCompanies,
-  updateCompany,
-} from "../redux/companies/actions";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { fetchAllUsers } from "../redux/auth/actions";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.div`
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     margin: 15px;
-    width: 100%;
-
     height: 100vh;
+    min-width: 90vw;
+    max-width: 90vw;
   `,
   Container: styled.div`
     width: 100%;
@@ -96,6 +89,41 @@ const Styled = {
       background-color: ${COLORS.HEADER_BACKGROUND};
     }
   `,
+  Pagination: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    button {
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: ${COLORS.DESCRIPTION_COLOR};
+      cursor: pointer;
+      &:hover {
+        background-color: ${COLORS.BUTTON_BACKGROUND};
+      }
+    }
+    span {
+      font-weight: bold;
+    }
+    select {
+      border-radius: 4px;
+      padding: 5px;
+      background-color: transparent;
+      border: 1px solid ${COLORS.LIGHTER_TEXT};
+      color: white;
+    }
+  `,
+  Loading: styled.div`
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  `,
 };
 
 const UsersForAdmin = () => {
@@ -104,13 +132,46 @@ const UsersForAdmin = () => {
   const { user } = useSelector((state) => state.auth);
   const location = useLocation();
   const path = location.pathname;
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && user.role === "admin") {
-      dispatch(fetchAllUsers());
+      dispatch(fetchAllUsers({ page, perPage }))
+        .then((response) => {
+          const { currentPage, totalPages } = response.payload;
+          setPage(currentPage);
+          setTotalPages(totalPages);
+          setIsLoading(false);
+          navigate(`?page=${page}&perPage=${perPage}`);
+        })
+        .catch((error) => {
+          console.error("Error fetching users:", error);
+          setIsLoading(false);
+        });
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, page, perPage]);
 
+  if (isLoading) {
+    return <Styled.Loading>Loading...</Styled.Loading>;
+  }
+
+  const handlePageChange = async (newPage) => {
+    if (page <= totalPages) {
+      setPage(newPage);
+      await setPage(newPage);
+      navigate(`?page=${page}&perPage=${perPage}`);
+    }
+  };
+
+  const handlePerPageChange = (newPerPage) => {
+    setPerPage(newPerPage);
+    setPage(1);
+    navigate(`?page=1&perPage=${perPage}`);
+  };
   // const handleDeleteCompany = async (_id) => {
   //   await dispatch(deleteCompanyById(_id));
   //   await dispatch(fetchAllCompanies());
@@ -126,7 +187,6 @@ const UsersForAdmin = () => {
   //   await dispatch(fetchAllCompanies());
   // };
 
-  // grid-template-columns: 50px 3fr 1fr;
   return (
     <Styled.Wrapper>
       <Styled.CreateRow></Styled.CreateRow>
@@ -153,6 +213,29 @@ const UsersForAdmin = () => {
               </Styled.ButtonCell>
             </Styled.ItemSecondRow>
           ))}
+          <Styled.Pagination>
+            <button
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <span> Page {page} </span>
+            <button
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
+            <select
+              value={perPage}
+              onChange={(e) => handlePerPageChange(parseInt(e.target.value))}
+            >
+              <option value={10}>10 per page</option>
+              <option value={20}>20 per page</option>
+              <option value={50}>50 per page</option>
+            </select>
+          </Styled.Pagination>
         </Styled.Container>
       )}
       {user.role !== "admin" && (

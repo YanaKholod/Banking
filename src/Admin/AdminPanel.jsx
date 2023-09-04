@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import {
   Link,
+  NavLink,
   Route,
   Routes,
   useLocation,
   useMatch,
+  useNavigate,
   useParams,
   useRouteMatch,
 } from "react-router-dom";
@@ -16,72 +18,30 @@ import UsersForAdmin from "./UsersForAdmin";
 const Styled = {
   Wrapper: styled.div`
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     margin: 15px;
     height: 100vh;
   `,
-  Container: styled.div`
-    width: 100%;
-    text-align: center;
-    background-color: ${COLORS.BLOCK_BACKGROUND};
-  `,
-  Row: styled.div`
-    display: grid;
-    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr;
-    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
-    &:last-child {
-      border-bottom: none;
-    }
-    :hover {
-      background-color: ${(props) =>
-        props.isFirstRow ? "transparent" : COLORS.HEADER_BACKGROUND};
-    }
-  `,
-  Header: styled.div`
-    padding: 10px;
-    text-align: center;
+  Link: styled(NavLink)`
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: ${COLORS.TEXT};
+    background-color: ${COLORS.LIGHTER_FOREGROUND};
+    margin-left: 10px;
+    margin-bottom: 20px;
     font-weight: bold;
-  `,
-  Cell: styled.div`
-    padding: 10px;
-    text-align: center;
-  `,
-  ButtonCell: styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  `,
-  Button: styled.button`
-    text-align: center;
-    padding: 6px;
-    margin-right: 5px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    background-color: ${COLORS.DESCRIPTION_COLOR};
-    :hover {
-      background-color: ${COLORS.BUTTON_BACKGROUND};
+    &.active {
+      color: black;
+      background-color: ${COLORS.ACCENT};
     }
   `,
-  CreateRow: styled.div`
-    display: flex;
-    width: 100%;
-    align-items: end;
-    justify-content: end;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    button {
-      padding: 8px;
-      font-weight: bold;
-      font-size: 16px;
-    }
-  `,
-  SMTH: styled.div`
-    width: 100%;
-    height: 100vh;
+  LinksBlock: styled.div`
+    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
+    text-align: center;
+    padding: 20px;
+    width: 95%;
   `,
 };
 
@@ -90,10 +50,10 @@ const AdminPanel = () => {
   const path = location.pathname;
   return (
     <Styled.Wrapper>
-      <div>
-        <Link to="users"> Users</Link>
-        <Link to="companies"> Companies</Link>
-      </div>
+      <Styled.LinksBlock>
+        <Styled.Link to="users"> Users</Styled.Link>
+        <Styled.Link to="companies"> Companies</Styled.Link>
+      </Styled.LinksBlock>
       <div>
         {path === "/admin/users" && <UsersForAdmin />}
         {path === "/admin/companies" && <CompaniesForAdmin />}
