@@ -24,7 +24,7 @@ const companySlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(fetchAllCompanies.fulfilled, (state, action) => {
-        state.companies = action.payload;
+        state.companies = action.payload.companies;
         state.error = null;
       })
       .addCase(fetchAllCompanies.rejected, (state, action) => {

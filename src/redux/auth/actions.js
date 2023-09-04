@@ -64,15 +64,20 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
-export const fetchAllUsers = createAsyncThunk("users/all", async () => {
-  try {
-    const response = await axios.get("/auth/all");
-    return response.data;
-  } catch (error) {
-    console.log(error.message);
-    throw error;
+export const fetchAllUsers = createAsyncThunk(
+  "users/all",
+  async ({ page = 1, perPage = 10 } = {}) => {
+    try {
+      const response = await axios.get(
+        `/auth/all?page=${page}&perPage=${perPage}`
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
   }
-});
+);
 
 export const updateCurrentUserCard = createAsyncThunk(
   "auth/updateCurrentUserCard",

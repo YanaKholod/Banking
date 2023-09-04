@@ -97,6 +97,7 @@ const PaymentForm = () => {
     (state) => state.companies.companyForTransaction
   );
   const user = useSelector((state) => state.auth.user);
+
   useEffect(() => {
     if (companyId && user) {
       dispatch(fetchCompanyById(companyId));
