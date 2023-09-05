@@ -71,6 +71,7 @@ const Styled = {
 const Cards = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+
   const openCardModal = (card) => {
     setSelectedCard(card);
     setOpenModal(true);

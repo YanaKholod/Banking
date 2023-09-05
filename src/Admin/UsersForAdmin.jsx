@@ -174,17 +174,12 @@ const UsersForAdmin = () => {
   };
   // const handleDeleteCompany = async (_id) => {
   //   await dispatch(deleteCompanyById(_id));
-  //   await dispatch(fetchAllCompanies());
+  //   await dispatch(fetchAllUsers());
   // };
 
   // const handleEditCompany = async (data) => {
   //   await dispatch(updateCompany(data));
-  //   await dispatch(fetchAllCompanies());
-  // };
-
-  // const handleCreateCompanySubmit = async (data) => {
-  //   await dispatch(addCompany(data));
-  //   await dispatch(fetchAllCompanies());
+  //   await dispatch(fetchAllUsers());
   // };
 
   return (

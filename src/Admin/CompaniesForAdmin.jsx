@@ -191,17 +191,17 @@ const CompaniesForAdmin = () => {
 
   const handleDeleteCompany = async (_id) => {
     await dispatch(deleteCompanyById(_id));
-    await dispatch(fetchAllCompanies());
+    await dispatch(fetchAllCompanies({ page, perPage }));
   };
 
   const handleEditCompany = async (data) => {
     await dispatch(updateCompany(data));
-    await dispatch(fetchAllCompanies());
+    await dispatch(fetchAllCompanies({ page, perPage }));
   };
 
   const handleCreateCompanySubmit = async (data) => {
     await dispatch(addCompany(data));
-    await dispatch(fetchAllCompanies());
+    await dispatch(fetchAllCompanies({ page, perPage }));
   };
   const openCompanyModal = (item) => {
     setActiveCompany(item);
