@@ -115,6 +115,31 @@ export const updateTransaction = createAsyncThunk(
   }
 );
 
+export const makePayment = createAsyncThunk(
+  "payments/makePayment",
+  async ({
+    senderUserId,
+    recipientCardNumber,
+    amount,
+    purpose,
+    senderCardType,
+  }) => {
+    try {
+      const response = await axios.patch("/auth/makePayment", {
+        senderUserId: senderUserId,
+        recipientCardNumber: recipientCardNumber,
+        amount: amount,
+        purpose: purpose,
+        senderCardType: senderCardType,
+      });
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+);
+
 export const fetchUserById = createAsyncThunk("auth/:id", async (id) => {
   try {
     const response = await axios.get(`/auth/userInfo/${id}`);

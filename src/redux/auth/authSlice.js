@@ -5,6 +5,7 @@ import {
   getCurrentUser,
   login,
   logout,
+  makePayment,
   registerUser,
   updateCurrentUserCard,
   updateTransaction,
@@ -98,6 +99,18 @@ const authSlice = createSlice({
       .addCase(fetchUserById.rejected, (state, action) => {
         state.isLoggedIn = false;
         state.error = action.payload;
+        state.isRefreshing = false;
+      })
+      .addCase(makePayment.pending, (state) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = true;
+      })
+      .addCase(makePayment.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(makePayment.rejected, (state) => {
+        state.isLoggedIn = true;
         state.isRefreshing = false;
       });
   },

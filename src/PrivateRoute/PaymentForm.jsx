@@ -114,9 +114,18 @@ const PaymentForm = () => {
     mode: "onBlur",
   });
 
+  useEffect(() => {
+    if (companyForTransaction) {
+      setValue("id", companyForTransaction._id);
+      setValue("companyName", companyForTransaction.companyName || "");
+      setValue("countryCode", companyForTransaction.countryCode || "");
+      setValue("iban", companyForTransaction.iban || "");
+      setValue("edpnou", companyForTransaction.edpnou || "");
+    }
+  }, [companyForTransaction, setValue]);
+
   const onSubmit = async (data) => {
     const numericSum = parseFloat(data.sum);
-    console.log(selectedCard);
     dispatch(
       updateTransaction({
         user: user,
@@ -138,15 +147,6 @@ const PaymentForm = () => {
   const resetForm = () => {
     reset({ sum: "", purpose: "" });
   };
-  useEffect(() => {
-    if (companyForTransaction) {
-      setValue("id", companyForTransaction._id);
-      setValue("companyName", companyForTransaction.companyName || "");
-      setValue("countryCode", companyForTransaction.countryCode || "");
-      setValue("iban", companyForTransaction.iban || "");
-      setValue("edpnou", companyForTransaction.edpnou || "");
-    }
-  }, [companyForTransaction, setValue]);
 
   return (
     <StyledForm.MainWrapper>
@@ -176,10 +176,8 @@ const PaymentForm = () => {
             </Styled.Field>
           ))}
           <Styled.Field>
-            {/* <Styled.Label>Select card</Styled.Label> */}
             {user.cards && user.cards.length > 0 ? (
               <StyledForm.Select
-                {...register("selectedCard", { required: true })}
                 {...register("selectedCard", { required: true })}
                 onChange={(e) => {
                   const selectedCardId = e.target.value;
