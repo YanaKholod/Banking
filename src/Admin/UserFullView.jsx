@@ -13,6 +13,7 @@ const Styled = {
     flex-direction: column;
     width: 100%;
     height: 100vh;
+    overflow-y: auto;
   `,
   Info: styled.div`
     display: flex;
@@ -29,8 +30,7 @@ const Styled = {
   `,
   CardBlock: styled.div``,
   TransactionBlock: styled.div`
-    color: rgba(255, 255, 255, 0.54);
-    margin-bottom: 3px;
+    margin-bottom: 10px;
   `,
   CardLine: styled.div`
     display: flex;
@@ -40,12 +40,40 @@ const Styled = {
   `,
   CardItem: styled.div`
     background-color: ${COLORS.LIGHTER_FOREGROUND};
-    padding: 10px 10px;
+    padding: 10px;
+    width: 50%;
   `,
   CardImage: styled.img`
     width: 100px;
     height: 100px;
     margin-bottom: 10px;
+  `,
+  BlockItem: styled.div`
+    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
+    color: rgba(255, 255, 255, 0.54);
+    width: 50%;
+  `,
+  IncomeArrow: styled.span`
+    color: ${COLORS.ACCENT};
+    font-size: 20px;
+  `,
+  OutcomeArrow: styled.span`
+    color: red;
+    font-size: 20px;
+  `,
+  TransactionContainer: styled.div`
+    max-height: 300px;
+    overflow-y: auto;
+  `,
+  Sum: styled.span`
+    color: ${COLORS.ACCENT};
+  `,
+  OutSum: styled.span`
+    color: red;
+  `,
+  IconBlock: styled.div`
+    width: 100px;
+    height: 100px;
   `,
 };
 const cardTypeImages = {
@@ -59,7 +87,6 @@ const UserFullView = () => {
   const user = useSelector((state) => state.auth.user);
   const userForDetails = useSelector((state) => state.auth.userForDetails);
   const [activeCard, setActiveCard] = useState(null);
-  //   console.log("user", user);
 
   useEffect(() => {
     if (id && user) {
@@ -67,13 +94,14 @@ const UserFullView = () => {
     }
   }, [dispatch, id, user]);
 
-  // const cardImageUrl = cardTypeImages[card.cardType];
   return (
     <Styled.Wrapper>
       {userForDetails && (
         <Styled.Info>
           <Styled.UserInfo>
-            <UserIcon width="100px" height="100px" />
+            <Styled.IconBlock>
+              <UserIcon />
+            </Styled.IconBlock>
             <div>
               <div>Name: {userForDetails.fullName}</div>
               <div>Phone: {userForDetails.phone}</div>
@@ -103,22 +131,98 @@ const UserFullView = () => {
                 </div>
               </Styled.CardBlock>
               {activeCard === index && (
-                <div>
-                  {userForDetails.outcomingTransactions
-                    .filter(
-                      (transaction) => transaction.cardType === card.cardType
-                    )
-                    .map((transaction, transactionIndex) => (
-                      <Styled.TransactionBlock key={transactionIndex}>
-                        <div>
-                          <div>Date:{transaction.date}</div>
-                          <div>Amount: {transaction.amount} UAH</div>
-                          <div>Company: {transaction.company.companyName}</div>
-                          <div>Purpose: {transaction.purpose}</div>
-                        </div>
-                      </Styled.TransactionBlock>
-                    ))}
-                </div>
+                <Styled.TransactionContainer>
+                  <div>
+                    {userForDetails.outcomingTransactions
+                      .filter(
+                        (transaction) => transaction.cardType === card.cardType
+                      )
+                      .map((transaction, transactionIndex) => (
+                        <Styled.TransactionBlock
+                          key={`outcoming-${transactionIndex}`}
+                        >
+                          <Styled.BlockItem>
+                            <div>
+                              <Styled.OutcomeArrow> ⇨</Styled.OutcomeArrow>
+                            </div>
+                            <div>Date: {transaction.date}</div>
+                            <div>
+                              Amount:
+                              <Styled.OutSum>
+                                {transaction.amount} UAH
+                              </Styled.OutSum>
+                            </div>
+                            <div>
+                              Company: {transaction.company.companyName}
+                            </div>
+                            <div>Purpose: {transaction.purpose}</div>
+                          </Styled.BlockItem>
+                        </Styled.TransactionBlock>
+                      ))}
+                  </div>
+                  <div>
+                    {userForDetails.outgoingCardTransactions
+                      .filter(
+                        (transaction) => transaction.cardType === card.cardType
+                      )
+                      .map((transaction, transactionIndex) => (
+                        <Styled.TransactionBlock
+                          key={`outgoingCard-${transactionIndex}`}
+                        >
+                          <Styled.BlockItem>
+                            <div>
+                              <Styled.OutcomeArrow> ⇨</Styled.OutcomeArrow>
+                            </div>
+                            <div>Date: {transaction.date}</div>
+                            <div>
+                              Amount:
+                              <Styled.OutSum>
+                                {" "}
+                                {transaction.amount} UAH
+                              </Styled.OutSum>
+                            </div>
+                            {transaction.recipient.fullName ? (
+                              <div>
+                                Recipient: {transaction.recipient.fullName}
+                              </div>
+                            ) : (
+                              <div></div>
+                            )}
+                            <div>Purpose: {transaction.purpose}</div>
+                          </Styled.BlockItem>
+                        </Styled.TransactionBlock>
+                      ))}
+                  </div>
+
+                  <div>
+                    {userForDetails.incomingCardTransactions
+                      .filter(
+                        (transaction) => transaction.cardType === card.cardType
+                      )
+                      .map((transaction, transactionIndex) => (
+                        <Styled.TransactionBlock
+                          key={`incomingCard-${transactionIndex}`}
+                        >
+                          <Styled.BlockItem>
+                            <div>
+                              <Styled.IncomeArrow> ⇦</Styled.IncomeArrow>
+                            </div>
+                            <div>Date: {transaction.date}</div>
+                            <div>
+                              Amount:
+                              <Styled.Sum> {transaction.amount} UAH</Styled.Sum>
+                            </div>
+                            {transaction.sender.fullName ? (
+                              <div>Sender: {transaction.sender.fullName}</div>
+                            ) : (
+                              <div></div>
+                            )}
+                            <div>Purpose: {transaction.purpose}</div>
+                          </Styled.BlockItem>
+                        </Styled.TransactionBlock>
+                      ))}
+                  </div>
+                </Styled.TransactionContainer>
               )}
             </Styled.CardLine>
           ))}
