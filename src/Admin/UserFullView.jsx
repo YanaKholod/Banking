@@ -83,11 +83,13 @@ const Styled = {
     height: 100px;
   `,
 };
+
 const cardTypeImages = {
   Internet: "https://wallpapercave.com/wp/wp4358501.jpg",
   Plastic: "https://i.postimg.cc/QN5z8FJc/51-Ze-LNXdv-L-AC-SL1500-1.jpg",
   Digital: "https://wallpapercave.com/wp/wp9126648.jpg",
 };
+
 const UserFullView = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
