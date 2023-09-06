@@ -11,11 +11,6 @@ export const menu = [
     img: "https://cdn.privat24.ua/icons/file/ServiceCommunication.svg",
     submenu: [
       {
-        title: "Mobile top-up",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceMobile.svg",
-      },
-      {
         title: "Volia",
         linkTo: "",
         img: "https://cdn.privat24.ua/icons/file/ServiceVolia.svg",
@@ -69,48 +64,48 @@ export const menu = [
     link: "/moneybox",
     img: "https://cdn.privat24.ua/icons/file/ServiceMoneybox.svg",
   },
-  {
-    id: 4,
-    name: "Credits",
-    img: "https://cdn.privat24.ua/icons/file/ServiceCredit.svg",
-    submenu: [
-      {
-        title: "Сredit limit",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceCreditLimit.svg",
-      },
-      {
-        title: "Payment in installments",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServicePartPayments.svg",
-      },
-      {
-        title: "Instant installment",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceFastInstallment.svg",
-      },
-      {
-        title: "Cash loan",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceCreditCash.svg",
-      },
-      {
-        title: "Cars on credit and leasing",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceAutoCredit.svg",
-      },
-      {
-        title: "Housing loan",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceCreditHouse.svg",
-      },
-      {
-        title: "Work with overdue payments",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceCreditCollectionCompanies.svg",
-      },
-    ],
-  },
+  // {
+  //   id: 4,
+  //   name: "Credits",
+  //   img: "https://cdn.privat24.ua/icons/file/ServiceCredit.svg",
+  //   submenu: [
+  //     {
+  //       title: "Сredit limit",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServiceCreditLimit.svg",
+  //     },
+  //     {
+  //       title: "Payment in installments",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServicePartPayments.svg",
+  //     },
+  //     {
+  //       title: "Instant installment",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServiceFastInstallment.svg",
+  //     },
+  //     {
+  //       title: "Cash loan",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServiceCreditCash.svg",
+  //     },
+  //     {
+  //       title: "Cars on credit and leasing",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServiceAutoCredit.svg",
+  //     },
+  //     {
+  //       title: "Housing loan",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServiceCreditHouse.svg",
+  //     },
+  //     {
+  //       title: "Work with overdue payments",
+  //       linkTo: "",
+  //       img: "https://cdn.privat24.ua/icons/file/ServiceCreditCollectionCompanies.svg",
+  //     },
+  //   ],
+  // },
   {
     id: 5,
     name: "Cards",
