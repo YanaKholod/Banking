@@ -27,6 +27,7 @@ const Styled = {
   UserInfo: styled.div`
     display: flex;
     margin-bottom: 20px;
+    line-height: 30px;
   `,
   CardBlock: styled.div``,
   TransactionBlock: styled.div`
@@ -39,13 +40,19 @@ const Styled = {
     align-items: left;
   `,
   CardItem: styled.div`
+    display: flex;
+    justify-content: space-around;
     background-color: ${COLORS.LIGHTER_FOREGROUND};
     padding: 10px;
     width: 50%;
+    div {
+      line-height: 30px;
+    }
   `,
   CardImage: styled.img`
-    width: 100px;
+    width: 170px;
     height: 100px;
+    border-radius: 5px;
     margin-bottom: 10px;
   `,
   BlockItem: styled.div`
@@ -117,14 +124,15 @@ const UserFullView = () => {
                 }
               >
                 <Styled.CardItem>
-                  {/* <Styled.CardImage
-                    src={cardImageUrl}
+                  <Styled.CardImage
+                    src={cardTypeImages[card.cardType]}
                     alt={`${card.cardType} Card`}
-                  /> */}
-
-                  <div> Type: {card.cardType}</div>
-                  <div> Number: {card.cardNumber}</div>
-                  <div> Balance: {card.balance}</div>
+                  />
+                  <div>
+                    <div> Type: {card.cardType}</div>
+                    <div> Number: {card.cardNumber}</div>
+                    <div> Balance: {card.balance} UAH</div>
+                  </div>
                 </Styled.CardItem>
                 <div>
                   <BottomArrowIcon width="24px" height="24px" />
