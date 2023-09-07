@@ -5,10 +5,10 @@ axios.defaults.baseURL = "https://banking-5ah7.onrender.com/api";
 
 export const fetchAllCompanies = createAsyncThunk(
   "companies/all",
-  async ({ page = 1, perPage = 10 } = {}) => {
+  async ({ page = 1, perPage = 10, sort } = {}) => {
     try {
       const response = await axios.get(
-        `/companies/all?page=${page}&perPage=${perPage}`
+        `/companies/all?page=${page}&perPage=${perPage}&sort=${sort}`
       );
       return response.data;
     } catch (error) {

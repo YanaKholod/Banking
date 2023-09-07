@@ -140,6 +140,12 @@ const Styled = {
     font-size: 20px;
     font-weight: bold;
   `,
+  SortContainer: styled.div`
+    display: flex;
+    align-self: flex-start;
+    margin-right: auto;
+    margin-left: 10px;
+  `,
 };
 
 const CompaniesForAdmin = () => {
@@ -155,7 +161,9 @@ const CompaniesForAdmin = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const [sortOrder, setSortOrder] = useState("asc");
 
+  console.log("companies", companies);
   useEffect(() => {
     if (user && user.role === "admin" && companies) {
       dispatch(fetchAllCompanies({ page, perPage }))
@@ -164,7 +172,7 @@ const CompaniesForAdmin = () => {
           setPage(currentPage);
           setTotalPages(totalPages);
           setIsLoading(false);
-          navigate(`?page=${page}&perPage=${perPage}`);
+          navigate(`?page=1&perPage=${perPage}`);
         })
         .catch((error) => {
           console.error("Error fetching companies:", error);
@@ -177,6 +185,18 @@ const CompaniesForAdmin = () => {
     return <Styled.Loading>Loading...</Styled.Loading>;
   }
 
+  const handleSortAsc = async () => {
+    await setSortOrder("asc");
+    await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
+    console.log(sortOrder);
+  };
+
+  const handleSortDesc = async () => {
+    await setSortOrder("desc");
+    await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
+    console.log(sortOrder);
+  };
+
   const handlePageChange = async (newPage) => {
     if (page <= totalPages) {
       await setPage(newPage);
@@ -188,6 +208,7 @@ const CompaniesForAdmin = () => {
     setPerPage(newPerPage);
     setPage(1);
     navigate(`?page=1&perPage=${perPage}`);
+    setSortOrder("asc");
   };
 
   const handleDeleteCompany = async (_id) => {
@@ -215,6 +236,24 @@ const CompaniesForAdmin = () => {
 
   return (
     <Styled.Wrapper>
+      <div>
+        <Styled.SortContainer>
+          <button
+            onClick={() => {
+              handleSortAsc();
+            }}
+          >
+            Sort A-Z
+          </button>
+          <button
+            onClick={() => {
+              handleSortDesc();
+            }}
+          >
+            Sort Z-A
+          </button>
+        </Styled.SortContainer>
+      </div>
       <Styled.CreateRow>
         <Styled.Button onClick={openCompanyModal}>Create</Styled.Button>
       </Styled.CreateRow>
