@@ -12,7 +12,6 @@ const Styled = {
 const CreditsConverter = () => {
   return (
     <Styled.Wrapper>
-      <CreditProducts />
       <CurrencyConverter />
     </Styled.Wrapper>
   );

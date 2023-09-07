@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { menu } from "../utils/menu";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ICONS } from "../constants/icons";
 
 const Styled = {
@@ -29,7 +29,9 @@ const Styled = {
     padding: 16px 0px;
     border-left: 1px solid grey;
   `,
-  RightMenuItem: styled.div`
+  RightMenuItem: styled(Link)`
+    text-decoration: none;
+    color: white;
     display: flex;
     align-items: center;
     padding: 8px 20px;
@@ -106,7 +108,12 @@ const Menu = () => {
       {subMenuItems && (
         <Styled.RightMenu isOpen={subMenuItems}>
           {subMenuItems.map((item) => (
-            <Styled.RightMenuItem key={item.title}>
+            <Styled.RightMenuItem
+              key={item.title}
+              to={{
+                pathname: `${item.linkTo}`,
+              }}
+            >
               <Styled.MainSvg src={item.img} alt="" />
               <div>{item.title}</div>
             </Styled.RightMenuItem>

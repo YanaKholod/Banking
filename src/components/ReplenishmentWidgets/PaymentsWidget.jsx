@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "./PaymentStyles";
-import { PaymentsIcon } from "../../constants/icons";
+import { ICONS, PaymentsIcon } from "../../constants/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCompanyByIdentifier } from "../../redux/companies/actions";
 
 const PaymentsWidget = () => {
+  const dispatch = useDispatch();
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownCompanies = useSelector(
+    (state) => state.companies.dropdownCompanies
+  );
+
   const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "" },
   });
-
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const handleSearch = async (event) => {
+    let identifier = event.target.value;
+    if (identifier.length > 2) {
+      await dispatch(fetchCompanyByIdentifier(identifier));
+      setDropdownVisible(true);
+    } else {
+      await dispatch(fetchCompanyByIdentifier());
+      setDropdownVisible(false);
+    }
+  };
+  const cleanDropdown = async () => {
+    await dispatch(fetchCompanyByIdentifier());
+    setDropdownVisible(false);
   };
 
   return (
@@ -22,33 +39,45 @@ const PaymentsWidget = () => {
         </div>
         <b>Payments</b>
       </Styled.MainInfo>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Styled.Requisites>
-          <Styled.Input
-            type="text"
-            name="IBAN"
-            placeholder="UAXXXXXXXXXXXXXXXXXXXXXXX"
-            {...register("IBAN", { required: true, maxLength: 34 })}
-          />
-          <Styled.Button type="submit">
-            <svg
-              height="24px"
-              width="24px"
-              version="1.1"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
-                <path
-                  d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"
-                  fill="rgba(255, 255, 255, 0.87)"
-                  fillRule="nonzero"
-                ></path>
-                <path d="M0 0h24v24H0z"></path>
-              </g>
-            </svg>
-          </Styled.Button>
-        </Styled.Requisites>
+      <form onSubmit={handleSubmit(handleSearch)}>
+        <Styled.RequisitesLine widget>
+          <Styled.Requisites widget>
+            <Styled.Input
+              type="text"
+              name="IBAN"
+              placeholder="UAXXXXXXXXXXXXXXXXXXXXXXX"
+              {...register("identifier", { required: true, maxLength: 26 })}
+              onChange={handleSearch}
+            />
+          </Styled.Requisites>
+          {dropdownCompanies.length > 0 && (
+            <Styled.DropdownMenu visability={isDropdownVisible}>
+              {dropdownCompanies.map((company) => (
+                <div
+                  key={company._id}
+                  onClick={() => {
+                    cleanDropdown();
+                  }}
+                >
+                  <Styled.DropdownItem
+                    key={company._id}
+                    to={{
+                      pathname: `/payment/${company._id}`,
+                    }}
+                  >
+                    <Styled.Company>
+                      {company.companyName}
+                      <p> {company.iban}</p>
+                    </Styled.Company>
+                    <div>
+                      <img src={ICONS.RIGHT_ARROW} alt="" />
+                    </div>
+                  </Styled.DropdownItem>
+                </div>
+              ))}
+            </Styled.DropdownMenu>
+          )}
+        </Styled.RequisitesLine>
         <Styled.Description>
           IBAN, EDRPOU, account number or owners name
         </Styled.Description>

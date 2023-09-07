@@ -213,12 +213,6 @@ const Moneybox = () => {
           <TermsIcon width="24px" height="24px" />
           <div>Terms and conditions</div>
         </Styled.Terms>
-        <Styled.Buttons>
-          <Styled.StartButton to="">Start saving</Styled.StartButton>
-          {/* link to go  */}
-          <Styled.MoneyboxButton to="">My piggy bank</Styled.MoneyboxButton>
-          {/* link to go  */}
-        </Styled.Buttons>
       </Styled.TreasureBox>
       <Styled.HowToStartBlock>
         <h2>How to start saving with "Treasure box"?</h2>

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserById } from "../redux/auth/actions";
 import { BottomArrowIcon, UserIcon } from "../constants/icons";
+import { Navigate } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.div`
@@ -50,9 +51,10 @@ const Styled = {
     }
   `,
   CardImage: styled.img`
-    width: 100px;
+    width: 170px;
     height: 100px;
     margin-bottom: 10px;
+    border-radius: 5px;
   `,
   BlockItem: styled.div`
     border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
@@ -102,7 +104,7 @@ const UserFullView = () => {
 
   return (
     <Styled.Wrapper>
-      {userForDetails && (
+      {userForDetails && user && (
         <Styled.Info>
           <Styled.UserInfo>
             <Styled.IconBlock>
@@ -184,23 +186,19 @@ const UserFullView = () => {
                             <div>
                               Amount:
                               <Styled.OutSum>
-                                {" "}
                                 {transaction.amount} UAH
                               </Styled.OutSum>
                             </div>
-                            {transaction.recipient.fullName ? (
+                            {transaction.recipient.fullName && (
                               <div>
                                 Recipient: {transaction.recipient.fullName}
                               </div>
-                            ) : (
-                              <div></div>
                             )}
                             <div>Purpose: {transaction.purpose}</div>
                           </Styled.BlockItem>
                         </Styled.TransactionBlock>
                       ))}
                   </div>
-
                   <div>
                     {userForDetails.incomingCardTransactions
                       .filter(
@@ -219,10 +217,8 @@ const UserFullView = () => {
                               Amount:
                               <Styled.Sum> {transaction.amount} UAH</Styled.Sum>
                             </div>
-                            {transaction.sender.fullName ? (
+                            {transaction.sender.fullName && (
                               <div>Sender: {transaction.sender.fullName}</div>
-                            ) : (
-                              <div></div>
                             )}
                             <div>Purpose: {transaction.purpose}</div>
                           </Styled.BlockItem>
@@ -235,6 +231,7 @@ const UserFullView = () => {
           ))}
         </Styled.Info>
       )}
+      {user && user.role !== "admin" && <Navigate to="/" />}
     </Styled.Wrapper>
   );
 };

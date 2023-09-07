@@ -9,15 +9,14 @@ import {
   StyleWrapper,
 } from "../utils/generalStyled";
 import { charityOrganizations } from "../utils/charityOrganizations";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Styled = {
-  MainWrapper: styled(NavLink)`
+  MainWrapper: styled.div`
     background-color: ${COLORS.MENU_BACKGROUND};
     padding-top: 15px;
     text-decoration: none;
     color: white;
-
     h3 {
       font-weight: 600;
       white-space: pre-line;
@@ -25,7 +24,7 @@ const Styled = {
       font-size: 16px;
       display: flex;
       justify-content: space-between;
-      padding: 0px 10px;
+      padding: 3px 10px;
     }
     div {
       padding: 10px;
@@ -48,6 +47,10 @@ const Styled = {
     width: 95%;
     border: 1px solid ${COLORS.LIGHTER_TEXT};
   `,
+  BlockLink: styled(Link)`
+    text-decoration: none;
+    color: white;
+  `,
 };
 
 const Charity = () => {
@@ -62,16 +65,21 @@ const Charity = () => {
         </div>
       </StyleHeader>
       <Styled.MainWrapper to="">
-        {/* way to replenishment for paying */}
         {charityOrganizations.map((item) => (
           <Styled.Block key={item.id}>
-            <h3>
-              {item.name} <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
-            </h3>
-            <Styled.HorizontalLine />
-            <div>
-              {item.description} <InfoIcon width="12px" height="12px" />
-            </div>
+            <Styled.BlockLink
+              to={{
+                pathname: `${item.linkTo}`,
+              }}
+            >
+              <h3>
+                {item.name} <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
+              </h3>
+              <Styled.HorizontalLine />
+              <div>
+                {item.description} <InfoIcon width="12px" height="12px" />
+              </div>
+            </Styled.BlockLink>
           </Styled.Block>
         ))}
       </Styled.MainWrapper>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyById } from "../redux/companies/actions";
 import { getCurrentUser, updateTransaction } from "../redux/auth/actions";
 import { COLORS } from "../constants/styled";
+import { Navigate } from "react-router-dom";
 
 const companyInputsData = [
   {
@@ -150,68 +151,73 @@ const PaymentForm = () => {
 
   return (
     <StyledForm.MainWrapper>
-      <Styled.Wrapper>
-        <p>Payment</p>
-        <StyledForm.Form onSubmit={handleSubmit(onSubmit)}>
-          {companyInputsData.map((item) => (
-            <Styled.Field key={item.id}>
-              <Styled.Label>{item.labelName}</Styled.Label>
-              <Styled.Input
-                type={item.inputType}
-                {...register(item.inputName, { required: true })}
-                placeholder={item.placeholder}
-                disabled={item.isDisabled}
-                inputMode={item.inputMode}
-                {...(item.inputName === "sum" && {
-                  onKeyPress: (e) => {
-                    const allowedCharacters = /[0-9.]/;
-                    if (!allowedCharacters.test(e.key)) {
-                      e.preventDefault();
-                    } else if (e.key === "." && e.target.value.includes(".")) {
-                      e.preventDefault();
-                    }
-                  },
-                })}
-              />
+      {user && (
+        <Styled.Wrapper>
+          <p>Payment</p>
+          <StyledForm.Form onSubmit={handleSubmit(onSubmit)}>
+            {companyInputsData.map((item) => (
+              <Styled.Field key={item.id}>
+                <Styled.Label>{item.labelName}</Styled.Label>
+                <Styled.Input
+                  type={item.inputType}
+                  {...register(item.inputName, { required: true })}
+                  placeholder={item.placeholder}
+                  disabled={item.isDisabled}
+                  inputMode={item.inputMode}
+                  {...(item.inputName === "sum" && {
+                    onKeyPress: (e) => {
+                      const allowedCharacters = /[0-9.]/;
+                      if (!allowedCharacters.test(e.key)) {
+                        e.preventDefault();
+                      } else if (
+                        e.key === "." &&
+                        e.target.value.includes(".")
+                      ) {
+                        e.preventDefault();
+                      }
+                    },
+                  })}
+                />
+              </Styled.Field>
+            ))}
+            <Styled.Field>
+              {user.cards && user.cards.length > 0 ? (
+                <StyledForm.Select
+                  {...register("selectedCard", { required: true })}
+                  onChange={(e) => {
+                    const selectedCardId = e.target.value;
+                    const cardObject = user.cards.find(
+                      (card) => card._id === selectedCardId
+                    );
+                    setSelectedCard(cardObject);
+                  }}
+                >
+                  <option value="">Select card</option>
+                  {user.cards.map((card) => (
+                    <option key={card._id} value={card._id}>
+                      {card.cardType} - {card.balance} UAH
+                    </option>
+                  ))}
+                </StyledForm.Select>
+              ) : (
+                <p>No cards available</p>
+              )}
             </Styled.Field>
-          ))}
-          <Styled.Field>
-            {user.cards && user.cards.length > 0 ? (
-              <StyledForm.Select
-                {...register("selectedCard", { required: true })}
-                onChange={(e) => {
-                  const selectedCardId = e.target.value;
-                  const cardObject = user.cards.find(
-                    (card) => card._id === selectedCardId
-                  );
-                  setSelectedCard(cardObject);
+            <Styled.ButtonLine>
+              <Styled.Button
+                onClick={() => {
+                  resetForm();
                 }}
               >
-                <option value="">Select card</option>
-                {user.cards.map((card) => (
-                  <option key={card._id} value={card._id}>
-                    {card.cardType} - {card.balance} UAH
-                  </option>
-                ))}
-              </StyledForm.Select>
-            ) : (
-              <p>No cards available</p>
-            )}
-          </Styled.Field>
-          <Styled.ButtonLine>
-            <Styled.Button
-              onClick={() => {
-                resetForm();
-              }}
-            >
-              Cancel
-            </Styled.Button>
-            <Styled.Button type="submit" disabled={!isValid}>
-              Submit
-            </Styled.Button>
-          </Styled.ButtonLine>
-        </StyledForm.Form>
-      </Styled.Wrapper>
+                Cancel
+              </Styled.Button>
+              <Styled.Button type="submit" disabled={!isValid}>
+                Submit
+              </Styled.Button>
+            </Styled.ButtonLine>
+          </StyledForm.Form>
+        </Styled.Wrapper>
+      )}
     </StyledForm.MainWrapper>
   );
 };

@@ -12,43 +12,28 @@ export const menu = [
     submenu: [
       {
         title: "Volia",
-        linkTo: "",
+        linkTo: "/payment/64e6000ee1dc4fa5e19534da",
         img: "https://cdn.privat24.ua/icons/file/ServiceVolia.svg",
       },
       {
         title: "Kiyvstar",
-        linkTo: "",
+        linkTo: "/payment/64f98bc9d029d16eb152dd59",
         img: "https://cdn.privat24.ua/icons/file/ServiceKyivstar.svg",
       },
       {
         title: "UkrTelecom",
-        linkTo: "",
+        linkTo: "/payment/64f98be5d029d16eb152dd82",
         img: "https://cdn.privat24.ua/icons/file/ServiceUkrtel.svg",
       },
       {
         title: "Vega",
-        linkTo: "",
+        linkTo: "/payment/64c78818519f605bb4a157b9",
         img: "https://cdn.privat24.ua/icons/file/ServiceVega.svg",
       },
       {
         title: "PROSTO",
-        linkTo: "",
+        linkTo: "/payment/64f98c08d029d16eb152ddab",
         img: "https://cdn.privat24.ua/icons/file/ServiceProsto.svg",
-      },
-      {
-        title: "Viasat",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceViasat.svg",
-      },
-      {
-        title: "Triolan",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceTriolan.svg",
-      },
-      {
-        title: "Frehat",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceFregat.svg",
       },
     ],
   },
@@ -112,101 +97,11 @@ export const menu = [
     link: "/cards",
     img: "https://cdn.privat24.ua/icons/file/ServiceCard.svg",
   },
-  {
-    id: 6,
-    name: "Transport",
-    img: "https://cdn.privat24.ua/icons/file/ServiceTickets.svg",
-    submenu: [
-      {
-        title: "Railway tickets",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceTrain.svg",
-      },
-      {
-        title: "Bus tickets",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceBus.svg",
-      },
-      {
-        title: "Flight tickets",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceAvia.svg",
-      },
-    ],
-  },
-  {
-    id: 7,
-    name: "Insurance",
-    img: "https://cdn.privat24.ua/icons/file/ServiceInsurance.svg",
-    submenu: [
-      {
-        title: "Health insurance",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceInsuranceHealth.svg",
-      },
-      {
-        title: "Protection for every day",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceDailyInsurance.svg",
-      },
-      {
-        title: "OSCPV",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceAutoInsurance.svg",
-      },
-      {
-        title: "Green card",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceGreenCardInsurance.svg",
-      },
-      {
-        title: "Travel insurance",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceTouristicInsurance.svg",
-      },
-      {
-        title: "Real estate without inspection",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceHomeInsurance.svg",
-      },
-      {
-        title: "Fraud protection",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceInsuranceCriminals.svg",
-      },
-    ],
-  },
+
   {
     id: 9,
     name: "Charity",
     link: "/charity",
     img: "https://cdn.privat24.ua/icons/file/ServiceCharity.svg",
-  },
-  {
-    id: 10,
-    name: "Business",
-    img: "https://cdn.privat24.ua/icons/file/ServiceBusiness.svg",
-    submenu: [
-      {
-        title: "Electronic signature for a natural person",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessDigitalSign.svg",
-      },
-      {
-        title: "Currency transactions salaries and other payments",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessStatements.svg",
-      },
-      {
-        title: "Electronic document management",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessDocumentManagement.svg",
-      },
-      {
-        title: "Electronic reporting corporate client documents",
-        linkTo: "",
-        img: "https://cdn.privat24.ua/icons/file/ServiceBusinessDocuments.svg",
-      },
-    ],
   },
 ];

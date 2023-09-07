@@ -3737,7 +3737,6 @@ export const UserIcon = ({ height, width }) => (
     width="150px"
     height="150px"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    viewBox="0 0 100px 100px"
   >
     <g>
       <path

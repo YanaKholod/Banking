@@ -14,7 +14,6 @@ const ReplenishmentWidgets = () => {
   return (
     <Styled.Wrapper>
       <CardsTransfer />
-      <MobileRenewal />
     </Styled.Wrapper>
   );
 };

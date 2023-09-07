@@ -43,7 +43,7 @@ const CardsTransfer = () => {
   };
 
   return (
-    <Styled.Wrapper isFirst>
+    <Styled.Wrapper>
       <Styled.MainInfo>
         <div>
           <CardTransferIcon height="24px" width="24px" />
