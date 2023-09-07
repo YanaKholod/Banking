@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { fetchAllUsers } from "../redux/auth/actions";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.div`
@@ -172,13 +173,8 @@ const UsersForAdmin = () => {
     setPage(1);
     navigate(`?page=1&perPage=${perPage}`);
   };
-  // const handleDeleteCompany = async (_id) => {
+  // const handleDeleteUser = async (_id) => {
   //   await dispatch(deleteCompanyById(_id));
-  //   await dispatch(fetchAllUsers());
-  // };
-
-  // const handleEditCompany = async (data) => {
-  //   await dispatch(updateCompany(data));
   //   await dispatch(fetchAllUsers());
   // };
 
@@ -203,7 +199,6 @@ const UsersForAdmin = () => {
                 <Styled.Cell>{item.role}</Styled.Cell>
               </Styled.ItemRow>
               <Styled.ButtonCell>
-                <Styled.Button>Edit</Styled.Button>
                 <Styled.Button>Delete</Styled.Button>
               </Styled.ButtonCell>
             </Styled.ItemSecondRow>
@@ -233,9 +228,7 @@ const UsersForAdmin = () => {
           </Styled.Pagination>
         </Styled.Container>
       )}
-      {user.role !== "admin" && (
-        <div>You do not have permission to access this page.</div>
-      )}
+      {user.role !== "admin" && <Navigate to="/" />}
     </Styled.Wrapper>
   );
 };

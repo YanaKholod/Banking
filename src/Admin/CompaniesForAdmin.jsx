@@ -12,6 +12,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import CompanyForm from "../PrivateRoute/CompanyForm";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.div`
@@ -284,9 +285,7 @@ const CompaniesForAdmin = () => {
           </Styled.Pagination>
         </Styled.Container>
       )}
-      {user.role !== "admin" && (
-        <div>You do not have permission to access this page.</div>
-      )}
+      {user.role !== "admin" && <Navigate to="/" />}
     </Styled.Wrapper>
   );
 };

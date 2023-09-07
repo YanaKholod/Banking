@@ -72,7 +72,7 @@ const CardWidgets = () => {
             <div>Issue and payments without commission.</div>
           </Styled.Text>
         </Styled.Description>
-        <Styled.Button to="">Look at the cards</Styled.Button>
+        <Styled.Button to="cards">Look at the cards</Styled.Button>
       </Styled.EachWrapper>
       <Styled.EachWrapper>
         <b> Card of another bank of Ukraine </b>
@@ -85,7 +85,7 @@ const CardWidgets = () => {
           </div>
           <div>Pay quickly with your bank credits</div>
         </Styled.Description>
-        <Styled.Button to="">Add card</Styled.Button>
+        <Styled.Button to="cards">Add card</Styled.Button>
       </Styled.EachWrapper>
     </Styled.WidgetWrapper>
   );

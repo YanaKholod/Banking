@@ -11,9 +11,4 @@ export const depositsCategories = [
     title: "Calculator",
     svg: <CalculatorIcon width="32px" height="32px" />,
   },
-  {
-    id: 2,
-    title: "Questions",
-    svg: <QuestionIcon width="32px" height="32px" />,
-  },
 ];

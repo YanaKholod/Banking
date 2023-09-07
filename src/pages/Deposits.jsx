@@ -8,7 +8,7 @@ import {
   StyleTitle,
   StyleWrapper,
 } from "../utils/generalStyled";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { DepositsIcon, ICONS } from "../constants/icons";
 import { COLORS } from "../constants/styled";
 
@@ -40,7 +40,7 @@ const Styled = {
     width: 12px;
     height: 12px;
   `,
-  OpenTheDeposit: styled(NavLink)`
+  OpenTheDeposit: styled(Link)`
     color: ${COLORS.ACCENT};
   `,
   DepositsCategoriesWrapper: styled.div`
@@ -59,9 +59,7 @@ const Styled = {
     justify-content: center;
     align-items: center;
     border-radius: 2px;
-    :not(:first-child):not(:last-child) {
-      margin: 0 5px;
-    }
+    margin: 0 5px;
     div {
       :not(:first-child) {
         margin-top: 6px;
@@ -140,7 +138,7 @@ const Deposits = () => {
           <h2>Deposit operation in 60 seconds</h2>
           <div>
             <Styled.MyDepositsSpan>
-              <NavLink to="">"My deposits" </NavLink>
+              <Link to="">"My deposits" </Link>
               {/* replenishmennt link */}
               <span>are:</span>
             </Styled.MyDepositsSpan>

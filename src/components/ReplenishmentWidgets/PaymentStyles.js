@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
+import { Link } from "react-router-dom";
 
 export const Styled = {
   Wrapper: styled.div`
@@ -20,6 +21,7 @@ export const Styled = {
   Requisites: styled.div`
     display: flex;
     align-items: center;
+    width: ${(props) => (props.widget ? "100%" : "")};
   `,
   Button: styled.button`
     display: flex;
@@ -77,5 +79,51 @@ export const Styled = {
     text-align: left;
     width: auto;
     min-width: auto;
+  `,
+  Company: styled.div`
+    display: flex;
+    flex-direction: column;
+    p {
+      margin: 0;
+      margin-top: 4px;
+      color: ${COLORS.LIGHTER_TEXT};
+    }
+  `,
+  DropdownMenu: styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 0px 10px;
+    width: 100%;
+    background-color: transparent;
+    max-height: 350px;
+    overflow-y: auto;
+    display: ${(props) => (props.visability ? "block" : "none")};
+  `,
+  DropdownItem: styled(Link)`
+    text-decoration: none;
+    color: ${COLORS.TEXT};
+    padding: 10px 5px;
+    border-bottom: 1px solid ${COLORS.LIGHTER_TEXT};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    :hover {
+      background-color: ${COLORS.LIGHTER_FOREGROUND};
+    }
+    img {
+      width: 12px;
+      height: 12px;
+    }
+  `,
+  RequisitesLine: styled.div`
+    display: flex;
+    align-items: end;
+    flex-direction: ${(props) => (props.widget ? "column" : "")};
+    margin: ${(props) => (props.widget ? "5px 5px" : "10px 18px")};
+    width: 100%;
+    label {
+      color: rgba(255, 255, 255, 0.588);
+    }
   `,
 };
