@@ -44,11 +44,10 @@ import { useEffect } from "react";
 import { getCurrentUser } from "./redux/auth/actions";
 import SettingsPage from "./PrivateRoute/SettingsPage";
 import PaymentForm from "./PrivateRoute/PaymentForm";
-import CompaniesForAdmin from "./Admin/CompaniesForAdmin";
-import UsersForAdmin from "./Admin/UsersForAdmin";
 import AdminPanel from "./Admin/AdminPanel";
 import UserFullView from "./Admin/UserFullView";
 import CompanyFullView from "./Admin/CompanyFullView";
+import LoginForm from "./pages/LoginForm";
 
 const Styled = {
   Page: styled.div`
@@ -62,7 +61,7 @@ const Styled = {
 function App() {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
-
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     if (token) {
       dispatch(getCurrentUser());
@@ -74,7 +73,9 @@ function App() {
       <Styled.Page>
         <Header />
         <Routes>
-          <Route path="payment/:companyId" element={<PaymentForm />} />
+          {user && (
+            <Route path="payment/:companyId" element={<PaymentForm />} />
+          )}
           <Route path="settings" element={<SettingsPage />} />
           <Route path="admin/*" element={<AdminPanel />} />
           <Route path="admin/users/fullView/:id" element={<UserFullView />} />
@@ -89,31 +90,6 @@ function App() {
           <Route path="moneybox" element={<Moneybox />} />
           <Route path="cards" element={<Cards />} />
           <Route path="charity" element={<Charity />} />
-          <Route
-            path="transport/railwayTickets"
-            element={<RailwayTransport />}
-          />
-          <Route path="transport/busTickets" element={<BusTransport />} />
-          <Route path="transport/flightTickets" element={<FlightTransport />} />
-          <Route path="insurance/health" element={<HealthIns />} />
-          <Route path="insurance/forEveryDay" element={<ProtectionIns />} />
-          <Route path="insurance/oscpv" element={<OscpvIns />} />
-          <Route path="insurance/travel" element={<TravelIns />} />
-          <Route path="insurance/realEstate" element={<RealEstateIns />} />
-          <Route path="insurance/fraud" element={<FraudIns />} />
-          <Route path="business/esfanp" element={<ElectronicSignature />} />
-          <Route
-            path="business/transactionsSalaries"
-            element={<TransactionsSalaries />}
-          />
-          <Route
-            path="business/documentManagement"
-            element={<DocumentManagement />}
-          />
-          <Route
-            path="business/corporateClients"
-            element={<CorporateDocuments />}
-          />
           <Route path="comm/mobile" element={<MobileTopUp />} />
           <Route path="comm/volia" element={<Volia />} />
           <Route path="comm/kiyvstar" element={<Kiyvstar />} />
@@ -123,13 +99,6 @@ function App() {
           <Route path="comm/prosto" element={<Prosto />} />
           <Route path="comm/triolan" element={<Troilan />} />
           <Route path="comm/frehat" element={<Frehat />} />
-          <Route path="credits/limits" element={<CreditLimit />} />
-          <Route path="credits/payments" element={<PaymentInInstallments />} />
-          <Route path="credits/instant" element={<InstantInstallment />} />
-          <Route path="credits/cashLoan" element={<CashLoan />} />
-          <Route path="credits/leasing" element={<LeasingCars />} />
-          <Route path="credits/housingLoan" element={<HousingLoan />} />
-          <Route path="credits/overdue" element={<OverduePayments />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

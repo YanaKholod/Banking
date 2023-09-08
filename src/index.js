@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store";
 import styled from "styled-components";
 import { PersistGate } from "redux-persist/integration/react";
+import { CustomToastContainer } from "./utils/generalStyled";
 
 const Styled = {
   Global: styled.div`
@@ -22,6 +23,7 @@ root.render(
   <Provider store={store}>
     <Styled.Global>
       <PersistGate loading={null} persistor={persistor}>
+        <CustomToastContainer />
         <App />
       </PersistGate>
     </Styled.Global>

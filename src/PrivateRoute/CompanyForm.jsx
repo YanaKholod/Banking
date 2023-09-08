@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const companyInputsData = [
   {
@@ -58,6 +60,8 @@ const CompanyForm = ({
   handleEditCompanySubmit,
   handleCreateCompanySubmit,
 }) => {
+  const { error } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
@@ -75,6 +79,12 @@ const CompanyForm = ({
       const { id, ...newCompanyData } = data;
       await handleCreateCompanySubmit(newCompanyData);
     }
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("Company was created");
+    }
+
     reset();
     closeCompanyModal();
   };
@@ -91,7 +101,7 @@ const CompanyForm = ({
 
   return (
     <Styled.Wrapper>
-      <p>Registration</p>
+      <p>Creating company</p>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {companyInputsData.map((item) => (
           <Styled.Field key={item.id}>

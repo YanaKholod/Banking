@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "https://banking-5ah7.onrender.com/api";
 
@@ -14,74 +15,85 @@ const tokenHeaders = {
 
 export const registerUser = createAsyncThunk(
   "auth/register",
-  async (credentials) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/auth/register", credentials);
       tokenHeaders.set(data.token);
       return data;
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
     }
   }
 );
-export const login = createAsyncThunk("auth/login", async (user) => {
-  try {
-    const { data } = await axios.post("/auth/login", user);
+export const login = createAsyncThunk(
+  "auth/login",
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/auth/login", user);
 
-    tokenHeaders.set(data.token);
+      tokenHeaders.set(data.token);
 
-    return data;
-  } catch (error) {
-    console.log(error.message);
-    throw error;
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
+    }
   }
-});
+);
 
-export const logout = createAsyncThunk("auth/logout", async (user) => {
-  try {
-    await axios.post("/auth/logout", user);
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async (user, { rejectWithValue }) => {
+    try {
+      await axios.post("/auth/logout", user);
 
-    tokenHeaders.unset();
-  } catch (error) {
-    console.log(error.message);
-    throw error;
+      tokenHeaders.unset();
+    } catch (error) {
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
+    }
   }
-});
+);
 
 export const getCurrentUser = createAsyncThunk(
   "auth/current",
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const { token } = getState().auth;
     token && tokenHeaders.set(token);
     try {
       const response = await axios.get("/auth/current");
       return response.data;
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
     }
   }
 );
 
 export const fetchAllUsers = createAsyncThunk(
   "users/all",
-  async ({ page = 1, perPage = 10 } = {}) => {
+  async ({ page = 1, perPage = 10 } = {}, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         `/auth/all?page=${page}&perPage=${perPage}`
       );
       return response.data;
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
     }
   }
 );
 
 export const updateCurrentUserCard = createAsyncThunk(
   "auth/updateCurrentUserCard",
-  async ({ card, user }) => {
+  async ({ card, user }, { rejectWithValue }) => {
     try {
       const response = await axios.patch("/auth/change", {
         id: user.id,
@@ -89,15 +101,19 @@ export const updateCurrentUserCard = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
     }
   }
 );
 
 export const updateTransaction = createAsyncThunk(
   "transactions/addTransaction",
-  async ({ user, selectedCard, transactionInfo, company }) => {
+  async (
+    { user, selectedCard, transactionInfo, company },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.patch("/auth/transaction", {
         userId: user.id,
@@ -109,21 +125,19 @@ export const updateTransaction = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
     }
   }
 );
 
 export const makePayment = createAsyncThunk(
   "payments/makePayment",
-  async ({
-    senderUserId,
-    recipientCardNumber,
-    amount,
-    purpose,
-    senderCardType,
-  }) => {
+  async (
+    { senderUserId, recipientCardNumber, amount, purpose, senderCardType },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axios.patch("/auth/makePayment", {
         senderUserId: senderUserId,
@@ -134,20 +148,25 @@ export const makePayment = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.log(error.message);
-      throw error;
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
     }
   }
 );
 
-export const fetchUserById = createAsyncThunk("auth/:id", async (id) => {
-  try {
-    const response = await axios.get(`/auth/userInfo/${id}`);
-    return response.data;
-  } catch (error) {
-    console.log(error.message);
-    throw error;
+export const fetchUserById = createAsyncThunk(
+  "auth/:id",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/auth/userInfo/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response.data.message || "An error occurred"
+      );
+    }
   }
-});
+);
 
 export default axios;

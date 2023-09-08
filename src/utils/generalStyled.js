@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const StyleWrapper = styled.div`
   display: flex;
@@ -64,3 +66,18 @@ export const AnswerLine = styled.div`
   color: white;
   padding-left: 10px;
 `;
+
+export const CustomToastContainer = () => {
+  return (
+    <ToastContainer
+      position="top-right"
+      autoClose={1000}
+      hideProgressBar={false}
+      newestOnTop={true}
+      closeOnClick
+      rtl={false}
+      // draggable
+      theme="dark"
+    />
+  );
+};

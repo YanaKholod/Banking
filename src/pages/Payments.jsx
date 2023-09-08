@@ -18,6 +18,7 @@ import { BottomArrowIcon, ICONS, PaymentsIcon } from "../constants/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyByIdentifier } from "../redux/companies/actions";
+import { toast } from "react-toastify";
 
 const Styled = {
   Titles: styled.div`
@@ -229,6 +230,7 @@ const Payments = () => {
   const dropdownCompanies = useSelector(
     (state) => state.companies.dropdownCompanies
   );
+  const user = useSelector((state) => state.auth.user);
 
   const handleToggle = (index) => {
     const updatedOpenState = [...isOpen];
@@ -248,13 +250,17 @@ const Payments = () => {
   };
 
   const handleSearch = async (event) => {
-    let identifier = event.target.value;
-    if (identifier.length > 2) {
-      await dispatch(fetchCompanyByIdentifier(identifier));
-      setDropdownVisible(true);
+    if (user) {
+      let identifier = event.target.value;
+      if (identifier.length > 2) {
+        await dispatch(fetchCompanyByIdentifier(identifier));
+        setDropdownVisible(true);
+      } else {
+        await dispatch(fetchCompanyByIdentifier());
+        setDropdownVisible(false);
+      }
     } else {
-      await dispatch(fetchCompanyByIdentifier());
-      setDropdownVisible(false);
+      toast.error("Not authorized");
     }
   };
 

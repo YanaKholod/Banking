@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/auth/actions";
 import { ukrainePhoneRegex } from "../constants/reduxUsers";
 import { Styled } from "../constants/formStyled";
+import { toast } from "react-toastify";
 
 const loginInputsData = [
   {
@@ -36,7 +37,7 @@ const loginInputsData = [
 ];
 const LoginForm = ({ closeLoginModal }) => {
   const dispatch = useDispatch();
-
+  const { error } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -47,14 +48,14 @@ const LoginForm = ({ closeLoginModal }) => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const formattedPhoneNumber = `+38${data.phone}`;
+    const formattedPhoneNumber = `+38${data.phone}`;
 
-      await dispatch(login({ ...data, phone: formattedPhoneNumber }));
-    } catch (error) {
-      console.log("Login error:", error);
+    await dispatch(login({ ...data, phone: formattedPhoneNumber }));
+    if (error) {
+      toast.error(error);
     }
     reset();
+    closeLoginModal();
   };
 
   return (
