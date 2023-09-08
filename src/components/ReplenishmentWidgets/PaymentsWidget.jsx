@@ -4,6 +4,7 @@ import { Styled } from "./PaymentStyles";
 import { ICONS, PaymentsIcon } from "../../constants/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyByIdentifier } from "../../redux/companies/actions";
+import { toast } from "react-toastify";
 
 const PaymentsWidget = () => {
   const dispatch = useDispatch();
@@ -11,19 +12,24 @@ const PaymentsWidget = () => {
   const dropdownCompanies = useSelector(
     (state) => state.companies.dropdownCompanies
   );
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "" },
   });
   const handleSearch = async (event) => {
-    let identifier = event.target.value;
-    if (identifier.length > 2) {
-      await dispatch(fetchCompanyByIdentifier(identifier));
-      setDropdownVisible(true);
+    if (isLoggedIn) {
+      let identifier = event.target.value;
+      if (identifier.length > 2) {
+        await dispatch(fetchCompanyByIdentifier(identifier));
+        setDropdownVisible(true);
+      } else {
+        await dispatch(fetchCompanyByIdentifier());
+        setDropdownVisible(false);
+      }
     } else {
-      await dispatch(fetchCompanyByIdentifier());
-      setDropdownVisible(false);
+      toast.error("Not authorized.");
     }
   };
   const cleanDropdown = async () => {

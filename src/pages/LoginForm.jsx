@@ -37,7 +37,7 @@ const loginInputsData = [
 ];
 const LoginForm = ({ closeLoginModal }) => {
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.auth);
+  const reduxError = useSelector((state) => state.auth.error);
   const {
     register,
     handleSubmit,
@@ -51,8 +51,8 @@ const LoginForm = ({ closeLoginModal }) => {
     const formattedPhoneNumber = `+38${data.phone}`;
 
     await dispatch(login({ ...data, phone: formattedPhoneNumber }));
-    if (error) {
-      toast.error(error);
+    if (reduxError) {
+      toast.error(reduxError);
     }
     reset();
     closeLoginModal();

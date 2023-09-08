@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addDeposit,
   fetchAllUsers,
   fetchUserById,
   getCurrentUser,
@@ -34,7 +35,6 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoggedIn = false;
         state.error = action.payload;
-        console.log(action.payload);
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -132,6 +132,19 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(makePayment.rejected, (state, action) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+        state.error = action.payload;
+      })
+      .addCase(addDeposit.pending, (state) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = true;
+      })
+      .addCase(addDeposit.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(addDeposit.rejected, (state, action) => {
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.error = action.payload;

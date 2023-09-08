@@ -231,6 +231,7 @@ const Payments = () => {
     (state) => state.companies.dropdownCompanies
   );
   const user = useSelector((state) => state.auth.user);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleToggle = (index) => {
     const updatedOpenState = [...isOpen];
@@ -250,7 +251,7 @@ const Payments = () => {
   };
 
   const handleSearch = async (event) => {
-    if (user) {
+    if (isLoggedIn) {
       let identifier = event.target.value;
       if (identifier.length > 2) {
         await dispatch(fetchCompanyByIdentifier(identifier));
