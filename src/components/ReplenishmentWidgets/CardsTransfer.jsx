@@ -7,6 +7,8 @@ import "rodal/lib/rodal.css";
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
 import CardPaymentForm from "../../PrivateRoute/CardPaymentForm";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const WidgetStyles = {
   CustomRodal: styled(Rodal)`
@@ -21,16 +23,20 @@ const WidgetStyles = {
 const CardsTransfer = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-
+  const user = useSelector((state) => state.auth.user);
   const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: { cardNumber: "" },
   });
 
   const onSubmit = (data) => {
-    const { cardNumber } = data;
-    setSelectedCard(cardNumber);
-    setOpenModal(true);
+    if (user) {
+      const { cardNumber } = data;
+      setSelectedCard(cardNumber);
+      setOpenModal(true);
+    } else {
+      toast.error("Not authorized.");
+    }
   };
   // const openCardModal = (card) => {
   //   setSelectedCard(card);
@@ -81,19 +87,21 @@ const CardsTransfer = () => {
           VISA/MasterCard of Ukrainian and foreign banks
         </Styled.Description>
       </form>
-      <WidgetStyles.CustomRodal
-        width={500}
-        height={500}
-        visible={selectedCard !== null}
-        onClose={closeCardModal}
-      >
-        {selectedCard && (
-          <CardPaymentForm
-            card={selectedCard}
-            closeCardModal={closeCardModal}
-          />
-        )}
-      </WidgetStyles.CustomRodal>
+      {user && (
+        <WidgetStyles.CustomRodal
+          width={500}
+          height={500}
+          visible={selectedCard !== null}
+          onClose={closeCardModal}
+        >
+          {selectedCard && (
+            <CardPaymentForm
+              card={selectedCard}
+              closeCardModal={closeCardModal}
+            />
+          )}
+        </WidgetStyles.CustomRodal>
+      )}
     </Styled.Wrapper>
   );
 };

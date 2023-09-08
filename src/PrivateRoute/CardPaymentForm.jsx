@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { Styled } from "../constants/formStyled";
 import { getCurrentUser, makePayment } from "../redux/auth/actions";
+import { toast } from "react-toastify";
 
 const StyledForm = {
   // Select: styled.select`
@@ -81,8 +82,8 @@ const CardPaymentForm = ({ card, closeCardModal }) => {
   const [formattedCardNumber, setFormattedCardNumber] = useState("");
   const currentUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.auth);
 
-  // console.log("CURRENT USER", currentUser);
   const {
     register,
     handleSubmit,
@@ -118,6 +119,11 @@ const CardPaymentForm = ({ card, closeCardModal }) => {
         senderCardType: selectedCard.cardType,
       })
     );
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("Payment successful");
+    }
     await dispatch(getCurrentUser());
     closeCardModal();
   };

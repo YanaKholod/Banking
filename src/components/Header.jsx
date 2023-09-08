@@ -8,7 +8,6 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/auth/actions";
-import { HeaderIcon } from "../constants/icons";
 
 const Styled = {
   Wrapper: styled.div`
@@ -113,6 +112,11 @@ const Styled = {
       color: ${COLORS.LIGHTER_TEXT};
     }
   `,
+  Loading: styled.div`
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+  `,
 };
 const Header = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -120,6 +124,7 @@ const Header = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
@@ -177,27 +182,37 @@ const Header = () => {
         </div>
       ) : (
         <Styled.LoggedInButton>
-          {user ? (
-            <Styled.Greeting>
-              <p>Hello, {user.fullName}!</p>
-              {user.role === "admin" && <span> Role: {user.role}</span>}
-            </Styled.Greeting>
+          {isLoading ? (
+            <Styled.Loading>Wait...</Styled.Loading>
           ) : (
-            <p></p>
-          )}
-          <div>
-            {user && (
-              <>
-                <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
-                {user.role === "user" && (
-                  <Styled.CustomButton to="/settings">
-                    Settings
-                  </Styled.CustomButton>
+            <>
+              {user ? (
+                <Styled.Greeting>
+                  <p>Hello, {user.fullName}!</p>
+                  {user.role === "admin" && <span> Role: {user.role}</span>}
+                </Styled.Greeting>
+              ) : (
+                <p></p>
+              )}
+              <div>
+                {user && (
+                  <>
+                    <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
+                    {user.role === "user" && (
+                      <Styled.CustomButton to="/settings">
+                        Settings
+                      </Styled.CustomButton>
+                    )}
+                    {user.role === "admin" && (
+                      <Styled.CustomButton to="admin/users">
+                        Admin
+                      </Styled.CustomButton>
+                    )}
+                  </>
                 )}
-                {user.role === "admin" && <Link to="admin/users">Admin</Link>}
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </Styled.LoggedInButton>
       )}
     </Styled.Wrapper>

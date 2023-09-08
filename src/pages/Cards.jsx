@@ -12,7 +12,8 @@ import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import CardModal from "../PrivateRoute/CardModal";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Styled = {
   CardsBlock: styled.div`
@@ -71,6 +72,7 @@ const Styled = {
 const Cards = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const user = useSelector((state) => state.auth.user);
 
   const openCardModal = (card) => {
     setSelectedCard(card);
@@ -112,16 +114,18 @@ const Cards = () => {
           </Styled.OneBlock>
         ))}
       </Styled.CardsBlock>
-      <Styled.CustomRodal
-        width={500}
-        height={500}
-        visible={selectedCard !== null}
-        onClose={closeCardModal}
-      >
-        {selectedCard && (
-          <CardModal card={selectedCard} closeCardModal={closeCardModal} />
-        )}
-      </Styled.CustomRodal>
+      {user && (
+        <Styled.CustomRodal
+          width={500}
+          height={500}
+          visible={selectedCard !== null}
+          onClose={closeCardModal}
+        >
+          {selectedCard(
+            <CardModal card={selectedCard} closeCardModal={closeCardModal} />
+          )}
+        </Styled.CustomRodal>
+      )}
     </StyleWrapper>
   );
 };

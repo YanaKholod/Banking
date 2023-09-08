@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
 import { updateCurrentUserCard } from "../redux/auth/actions";
+import { toast } from "react-toastify";
 
 const StyledCards = {
   Wrapper: styled.div`
@@ -93,6 +94,8 @@ const StyledCards = {
 const CardModal = ({ card, closeCardModal }) => {
   const currentUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
@@ -124,9 +127,16 @@ const CardModal = ({ card, closeCardModal }) => {
   const resetForm = () => {
     closeCardModal();
   };
+
   const onSubmit = async (data) => {
-    await dispatch(updateCurrentUserCard({ card: data, user: currentUser }));
-    reset();
+    if (currentUser) {
+      await dispatch(updateCurrentUserCard({ card: data, user: currentUser }));
+    }
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("Card added");
+    }
     closeCardModal();
   };
 

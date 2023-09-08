@@ -38,7 +38,7 @@ const companySlice = createSlice({
         state.error = null;
       })
       .addCase(deleteCompanyById.rejected, (state, action) => {
-        state.error = "Error on backend side";
+        state.error = action.payload;
       })
       .addCase(updateCompany.pending, (state, action) => {
         state.isLoggedIn = true;
@@ -68,7 +68,6 @@ const companySlice = createSlice({
         state.dropdownCompanies = action.payload;
       })
       .addCase(fetchCompanyByIdentifier.rejected, (state, action) => {
-        state.isLoggedIn = false;
         state.error = action.payload;
       })
       .addCase(fetchCompanyById.pending, (state) => {
@@ -80,7 +79,6 @@ const companySlice = createSlice({
         state.companyForTransaction = action.payload;
       })
       .addCase(fetchCompanyById.rejected, (state, action) => {
-        state.isLoggedIn = false;
         state.error = action.payload;
       });
   },

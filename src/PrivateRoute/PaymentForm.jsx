@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyById } from "../redux/companies/actions";
 import { getCurrentUser, updateTransaction } from "../redux/auth/actions";
 import { COLORS } from "../constants/styled";
-import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const companyInputsData = [
   {
@@ -98,6 +98,8 @@ const PaymentForm = () => {
     (state) => state.companies.companyForTransaction
   );
   const user = useSelector((state) => state.auth.user);
+  const reduxError = useSelector((state) => state.auth.error);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (companyId && user) {
@@ -127,24 +129,33 @@ const PaymentForm = () => {
 
   const onSubmit = async (data) => {
     const numericSum = parseFloat(data.sum);
-    dispatch(
-      updateTransaction({
-        user: user,
-        selectedCard: {
-          cardId: selectedCard._id,
-          cardType: selectedCard.cardType,
-        },
-        transactionInfo: {
-          purpose: data.purpose,
-          sum: numericSum,
-        },
-        company: {
-          id: data.id,
-        },
-      })
-    );
-    dispatch(getCurrentUser());
+    try {
+      await dispatch(
+        updateTransaction({
+          user: user,
+          selectedCard: {
+            cardId: selectedCard._id,
+            cardType: selectedCard.cardType,
+          },
+          transactionInfo: {
+            purpose: data.purpose,
+            sum: numericSum,
+          },
+          company: {
+            id: data.id,
+          },
+        })
+      );
+      toast.success("Payment successful");
+
+      await dispatch(getCurrentUser());
+
+      navigate("/");
+    } catch (reduxError) {
+      toast.error(reduxError);
+    }
   };
+
   const resetForm = () => {
     reset({ sum: "", purpose: "" });
   };
