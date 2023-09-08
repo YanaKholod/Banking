@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "https://banking-5ah7.onrender.com/api";
 
@@ -22,7 +21,7 @@ export const registerUser = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -38,7 +37,7 @@ export const login = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        (await error.response.data.message) || "An error occurred"
       );
     }
   }
@@ -53,7 +52,7 @@ export const logout = createAsyncThunk(
       tokenHeaders.unset();
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -69,7 +68,7 @@ export const getCurrentUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -85,7 +84,7 @@ export const fetchAllUsers = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -102,7 +101,20 @@ export const updateCurrentUserCard = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
+      );
+    }
+  }
+);
+export const addDeposit = createAsyncThunk(
+  "auth/addDeposit",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch("/auth/addDeposit", data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -126,7 +138,7 @@ export const updateTransaction = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -149,7 +161,7 @@ export const makePayment = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -163,7 +175,7 @@ export const fetchUserById = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }

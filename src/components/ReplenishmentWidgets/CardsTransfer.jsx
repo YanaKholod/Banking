@@ -24,13 +24,14 @@ const CardsTransfer = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const user = useSelector((state) => state.auth.user);
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onBlur",
     defaultValues: { cardNumber: "" },
   });
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const onSubmit = (data) => {
-    if (user) {
+    if (isLoggedIn) {
       const { cardNumber } = data;
       setSelectedCard(cardNumber);
       setOpenModal(true);

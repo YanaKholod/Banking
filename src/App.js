@@ -3,40 +3,10 @@ import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 import Cards from "./pages/Cards";
 import Payments from "./pages/Payments";
-import Communication from "./pages/Communication";
 import Deposits from "./pages/Deposits";
 import Moneybox from "./pages/Moneybox";
 import Charity from "./pages/Charity";
 import Footer from "./components/Footer";
-import RailwayTransport from "./pages/TransportSubmenu/RailwayTransport";
-import BusTransport from "./pages/TransportSubmenu/BusTransport";
-import FlightTransport from "./pages/TransportSubmenu/FlightTransport";
-import HealthIns from "./pages/InsuranceSubmenu/HealthIns";
-import ProtectionIns from "./pages/InsuranceSubmenu/ProtectionIns";
-import OscpvIns from "./pages/InsuranceSubmenu/OscpvIns";
-import TravelIns from "./pages/InsuranceSubmenu/TravelIns";
-import RealEstateIns from "./pages/InsuranceSubmenu/RealEstateIns";
-import FraudIns from "./pages/InsuranceSubmenu/FraudIns";
-import ElectronicSignature from "./pages/BusinessSubmenu/ElectronicSignature";
-import TransactionsSalaries from "./pages/BusinessSubmenu/TransactionsSalaries";
-import DocumentManagement from "./pages/BusinessSubmenu/DocumentManagement";
-import CorporateDocuments from "./pages/BusinessSubmenu/CorporateDocuments";
-import Frehat from "./pages/CommunicationSubmenu/Frehat";
-import Volia from "./pages/CommunicationSubmenu/Volia";
-import Kiyvstar from "./pages/CommunicationSubmenu/Kiyvstar";
-import Prosto from "./pages/CommunicationSubmenu/Prosto";
-import Viasat from "./pages/CommunicationSubmenu/Viasat";
-import Troilan from "./pages/CommunicationSubmenu/Troilan";
-import UkrTelecom from "./pages/CommunicationSubmenu/UkrTelecom";
-import Vega from "./pages/CommunicationSubmenu/Vega";
-import MobileTopUp from "./pages/CommunicationSubmenu/MobileTopUp";
-import CreditLimit from "./pages/CreditsSubmenu/CreditLimit";
-import PaymentInInstallments from "./pages/CreditsSubmenu/PaymentInInstallments";
-import InstantInstallment from "./pages/CreditsSubmenu/InstantInstallment";
-import CashLoan from "./pages/CreditsSubmenu/CashLoan";
-import LeasingCars from "./pages/CreditsSubmenu/LeasingCars";
-import HousingLoan from "./pages/CreditsSubmenu/HousingLoan";
-import OverduePayments from "./pages/CreditsSubmenu/OverduePayments";
 import styled from "styled-components";
 import { COLORS } from "./constants/styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,7 +17,6 @@ import PaymentForm from "./PrivateRoute/PaymentForm";
 import AdminPanel from "./Admin/AdminPanel";
 import UserFullView from "./Admin/UserFullView";
 import CompanyFullView from "./Admin/CompanyFullView";
-import LoginForm from "./pages/LoginForm";
 
 const Styled = {
   Page: styled.div`
@@ -85,20 +54,10 @@ function App() {
           />
           <Route path="/" element={<HomePage />} />
           <Route path="payments" element={<Payments />} />
-          <Route path="communication" element={<Communication />} />
           <Route path="deposits" element={<Deposits />} />
           <Route path="moneybox" element={<Moneybox />} />
           <Route path="cards" element={<Cards />} />
           <Route path="charity" element={<Charity />} />
-          <Route path="comm/mobile" element={<MobileTopUp />} />
-          <Route path="comm/volia" element={<Volia />} />
-          <Route path="comm/kiyvstar" element={<Kiyvstar />} />
-          <Route path="comm/ukrtel" element={<UkrTelecom />} />
-          <Route path="comm/vega" element={<Vega />} />
-          <Route path="comm/viasat" element={<Viasat />} />
-          <Route path="comm/prosto" element={<Prosto />} />
-          <Route path="comm/triolan" element={<Troilan />} />
-          <Route path="comm/frehat" element={<Frehat />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />

@@ -57,8 +57,6 @@ const CompanyFullView = () => {
     (state) => state.companies.companyForTransaction
   );
 
-  console.log("companyForDetails", companyForDetails);
-
   useEffect(() => {
     if (id && user) {
       dispatch(fetchCompanyById(id));

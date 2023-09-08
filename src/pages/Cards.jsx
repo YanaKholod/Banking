@@ -12,7 +12,7 @@ import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import CardModal from "../PrivateRoute/CardModal";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Styled = {
@@ -121,7 +121,7 @@ const Cards = () => {
           visible={selectedCard !== null}
           onClose={closeCardModal}
         >
-          {selectedCard(
+          {selectedCard && (
             <CardModal card={selectedCard} closeCardModal={closeCardModal} />
           )}
         </Styled.CustomRodal>

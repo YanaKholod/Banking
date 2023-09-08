@@ -11,6 +11,9 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import { DepositsIcon, ICONS } from "../constants/icons";
 import { COLORS } from "../constants/styled";
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
+import { useSelector } from "react-redux";
 
 const Styled = {
   MyDepositsWrapper: styled.div`
@@ -40,7 +43,7 @@ const Styled = {
     width: 12px;
     height: 12px;
   `,
-  OpenTheDeposit: styled(Link)`
+  OpenTheDeposit: styled.button`
     color: ${COLORS.ACCENT};
   `,
   DepositsCategoriesWrapper: styled.div`
@@ -104,9 +107,18 @@ const Styled = {
       color: ${COLORS.ACCENT};
     }
   `,
+  CustomRodal: styled(Rodal)`
+    .rodal-dialog {
+      background-color: ${COLORS.HEADER_BACKGROUND};
+      .rodal-mask {
+        background-color: rgba(0, 0, 0, 0.414);
+      }
+    }
+  `,
 };
 
 const Deposits = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <StyleWrapper>
       <StyleHeader>
@@ -157,6 +169,18 @@ const Deposits = () => {
           />
         </Styled.StrongboxImg>
       </Styled.Strongbox>
+      {/* {user && (
+        <Styled.CustomRodal
+          width={500}
+          height={500}
+          visible={selectedCard !== null}
+          onClose={closeCardModal}
+        >
+          {selectedCard && (
+            <CardModal card={selectedCard} closeCardModal={closeCardModal} />
+          )}
+        </Styled.CustomRodal>
+      )} */}
     </StyleWrapper>
   );
 };

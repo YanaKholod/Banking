@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "https://banking-5ah7.onrender.com/api";
 
@@ -14,7 +13,7 @@ export const fetchAllCompanies = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -28,7 +27,7 @@ export const deleteCompanyById = createAsyncThunk(
       return _id;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -44,7 +43,7 @@ export const updateCompany = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -59,7 +58,7 @@ export const addCompany = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -74,7 +73,7 @@ export const fetchCompanyByIdentifier = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
@@ -88,7 +87,7 @@ export const fetchCompanyById = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.data.message || "An error occurred"
+        error.response?.data?.message || "An error occurred"
       );
     }
   }
