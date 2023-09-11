@@ -96,13 +96,7 @@ const CardModal = ({ card, closeCardModal }) => {
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.auth);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid },
-    reset,
-    setValue,
-  } = useForm({
+  const { register, handleSubmit, setValue } = useForm({
     mode: "onBlur",
   });
 

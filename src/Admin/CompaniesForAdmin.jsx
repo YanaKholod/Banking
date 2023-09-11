@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import CompanyForm from "../PrivateRoute/CompanyForm";
+import CompanyForm from "../Forms/CompanyForm";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
@@ -163,7 +163,6 @@ const CompaniesForAdmin = () => {
   const navigate = useNavigate();
   const [sortOrder, setSortOrder] = useState("asc");
 
-  console.log("companies", companies);
   useEffect(() => {
     if (user && user.role === "admin" && companies) {
       dispatch(fetchAllCompanies({ page, perPage }))

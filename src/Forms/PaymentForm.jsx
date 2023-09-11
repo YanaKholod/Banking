@@ -98,7 +98,6 @@ const PaymentForm = () => {
     (state) => state.companies.companyForTransaction
   );
   const user = useSelector((state) => state.auth.user);
-  const reduxError = useSelector((state) => state.auth.error);
   const navigate = useNavigate();
 
   useEffect(() => {

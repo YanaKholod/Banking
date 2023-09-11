@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { Styled } from "../constants/formStyled";
@@ -9,15 +8,6 @@ import { getCurrentUser, makePayment } from "../redux/auth/actions";
 import { toast } from "react-toastify";
 
 const StyledForm = {
-  // Select: styled.select`
-  //   margin-top: 5px;
-  //   padding: 5px;
-  //   font-size: 17px;
-  //   background-color: transparent;
-  //   border: 1px solid ${COLORS.LIGHTER_TEXT};
-  //   border-radius: 4px;
-  //   color: ${COLORS.TEXT};
-  // `,
   Form: styled.form`
     display: flex;
     flex-direction: column;
@@ -135,8 +125,7 @@ const CardPaymentForm = ({ card, closeCardModal }) => {
 
   return (
     <Styled.Wrapper>
-      CardPaymentForm
-      <div>MAIN</div>
+      <p> Card Payment</p>
       <StyledForm.Form onSubmit={handleSubmit(onSubmit)}>
         {cardInputsData.map((item) => (
           <Styled.Field key={item.id}>

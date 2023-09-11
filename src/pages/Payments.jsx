@@ -245,11 +245,6 @@ const Payments = () => {
     defaultValues: { IBAN: "", city: "" },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-  };
-
   const handleSearch = async (event) => {
     if (isLoggedIn) {
       let identifier = event.target.value;

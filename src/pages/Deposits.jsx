@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { depositsCategories } from "../utils/deposits";
 import styled from "styled-components";
 import {
@@ -14,6 +14,7 @@ import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useSelector } from "react-redux";
+import DepositForm from "../Forms/DepositForm";
 
 const Styled = {
   MyDepositsWrapper: styled.div`
@@ -44,7 +45,17 @@ const Styled = {
     height: 12px;
   `,
   OpenTheDeposit: styled.button`
-    color: ${COLORS.ACCENT};
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: ${COLORS.ACCENT};
+    margin-right: 12px;
+    color: black;
+    margin-left: 20px;
+    cursor: pointer;
   `,
   DepositsCategoriesWrapper: styled.div`
     display: flex;
@@ -119,6 +130,14 @@ const Styled = {
 
 const Deposits = () => {
   const { user } = useSelector((state) => state.auth);
+  const [depositFormVisible, setDepositFormVisible] = useState(false);
+
+  const closeDepositModal = () => {
+    setDepositFormVisible(false);
+  };
+  const openDeposit = () => {
+    setDepositFormVisible(true);
+  };
   return (
     <StyleWrapper>
       <StyleHeader>
@@ -135,7 +154,15 @@ const Deposits = () => {
           My deposits
           <Styled.RightArrow alt="" src={ICONS.RIGHT_ARROW} />
         </Styled.MyDeposits>
-        <Styled.OpenTheDeposit>Open deposit</Styled.OpenTheDeposit>
+        {user && (
+          <Styled.OpenTheDeposit
+            onClick={() => {
+              openDeposit();
+            }}
+          >
+            Open deposit
+          </Styled.OpenTheDeposit>
+        )}
       </Styled.MyDepositsWrapper>
       <Styled.DepositsCategoriesWrapper>
         {depositsCategories.map((item) => (
@@ -169,18 +196,16 @@ const Deposits = () => {
           />
         </Styled.StrongboxImg>
       </Styled.Strongbox>
-      {/* {user && (
+      {user && (
         <Styled.CustomRodal
           width={500}
           height={500}
-          visible={selectedCard !== null}
-          onClose={closeCardModal}
+          visible={depositFormVisible}
+          onClose={closeDepositModal}
         >
-          {selectedCard && (
-            <CardModal card={selectedCard} closeCardModal={closeCardModal} />
-          )}
+          <DepositForm closeDepositModal={closeDepositModal} />
         </Styled.CustomRodal>
-      )} */}
+      )}
     </StyleWrapper>
   );
 };

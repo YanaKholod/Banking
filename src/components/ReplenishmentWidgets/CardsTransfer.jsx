@@ -6,7 +6,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
-import CardPaymentForm from "../../PrivateRoute/CardPaymentForm";
+import CardPaymentForm from "../../Forms/CardPaymentForm";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
