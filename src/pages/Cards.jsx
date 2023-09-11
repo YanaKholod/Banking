@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
-import CardModal from "../PrivateRoute/CardModal";
+import CardModal from "../Forms/CardModal";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
