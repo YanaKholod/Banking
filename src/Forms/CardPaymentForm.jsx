@@ -17,7 +17,6 @@ const StyledForm = {
     text-align: center;
     width: 90%;
   `,
-
   Select: styled.select`
     margin-top: 5px;
     padding: 5px;
@@ -69,7 +68,6 @@ const cardInputsData = [
 ];
 const CardPaymentForm = ({ card, closeCardModal }) => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const [formattedCardNumber, setFormattedCardNumber] = useState("");
   const currentUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.auth);

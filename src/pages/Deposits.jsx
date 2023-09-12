@@ -15,6 +15,8 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useSelector } from "react-redux";
 import DepositForm from "../Forms/DepositForm";
+import ConditionsOfDeposit from "../Forms/ConditionsOfDeposit";
+import DepositCalculatorForm from "../Forms/DepositCalculatorForm";
 
 const Styled = {
   MyDepositsWrapper: styled.div`
@@ -62,8 +64,7 @@ const Styled = {
     justify-content: space-between;
     margin-bottom: 16px;
   `,
-  Category: styled(NavLink)`
-    text-decoration: none;
+  Category: styled.button`
     color: ${COLORS.TEXT};
     background-color: ${COLORS.FOREGROUND};
     width: 100%;
@@ -74,6 +75,7 @@ const Styled = {
     align-items: center;
     border-radius: 2px;
     margin: 0 5px;
+    border: none;
     div {
       :not(:first-child) {
         margin-top: 6px;
@@ -131,12 +133,35 @@ const Styled = {
 const Deposits = () => {
   const { user } = useSelector((state) => state.auth);
   const [depositFormVisible, setDepositFormVisible] = useState(false);
+  const [conditionFormVisible, setConditionFormVisible] = useState(false);
+  const [calculatorFormVisible, setCalculatorFormVisible] = useState(false);
 
   const closeDepositModal = () => {
     setDepositFormVisible(false);
   };
   const openDeposit = () => {
     setDepositFormVisible(true);
+  };
+
+  const closeConditionsModal = () => {
+    setConditionFormVisible(false);
+  };
+  const openConditionsModal = () => {
+    setConditionFormVisible(true);
+  };
+  const closeCalculatorModal = () => {
+    setCalculatorFormVisible(false);
+  };
+  const openCalculatorModal = () => {
+    setCalculatorFormVisible(true);
+  };
+
+  const handleCategoryClick = (item) => {
+    if (item.title === "Conditions of deposits") {
+      openConditionsModal();
+    } else {
+      openCalculatorModal();
+    }
   };
   return (
     <StyleWrapper>
@@ -166,7 +191,10 @@ const Deposits = () => {
       </Styled.MyDepositsWrapper>
       <Styled.DepositsCategoriesWrapper>
         {depositsCategories.map((item) => (
-          <Styled.Category to key={item.id}>
+          <Styled.Category
+            key={item.id}
+            onClick={() => handleCategoryClick(item)}
+          >
             <div>{item.svg}</div>
             <div>{item.title}</div>
           </Styled.Category>
@@ -204,6 +232,26 @@ const Deposits = () => {
           onClose={closeDepositModal}
         >
           <DepositForm closeDepositModal={closeDepositModal} />
+        </Styled.CustomRodal>
+      )}
+      {user && (
+        <Styled.CustomRodal
+          width={500}
+          height={500}
+          visible={conditionFormVisible}
+          onClose={closeConditionsModal}
+        >
+          <ConditionsOfDeposit />
+        </Styled.CustomRodal>
+      )}
+      {user && (
+        <Styled.CustomRodal
+          width={500}
+          height={500}
+          visible={calculatorFormVisible}
+          onClose={closeCalculatorModal}
+        >
+          <DepositCalculatorForm />
         </Styled.CustomRodal>
       )}
     </StyleWrapper>

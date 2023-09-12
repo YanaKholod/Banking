@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 const StyledCards = {
   Wrapper: styled.div`
     width: 100%;
-    /* background-color: ${COLORS.LIGHTER_FOREGROUND}; */
   `,
   Form: styled.form`
     display: flex;
@@ -128,8 +127,6 @@ const CardModal = ({ card, closeCardModal }) => {
     }
     if (error) {
       toast.error(error);
-    } else {
-      toast.success("Card added");
     }
     closeCardModal();
   };
