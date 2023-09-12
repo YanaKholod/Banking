@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { Styled } from "../constants/formStyled";
 import { addDeposit } from "../redux/auth/actions";
 
-const DepositStyled = {
+export const DepositStyled = {
   Form: styled.form`
     display: flex;
     flex-direction: column;

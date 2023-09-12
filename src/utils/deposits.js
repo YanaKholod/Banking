@@ -1,4 +1,4 @@
-import { CalculatorIcon, PercentIcon, QuestionIcon } from "../constants/icons";
+import { CalculatorIcon, PercentIcon } from "../constants/icons";
 
 export const depositsCategories = [
   {

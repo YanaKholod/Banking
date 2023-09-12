@@ -83,6 +83,20 @@ const Styled = {
     width: 100px;
     height: 100px;
   `,
+  DepositBlock: styled.div`
+    margin-bottom: 10px;
+    background-color: ${COLORS.LIGHTER_FOREGROUND};
+    padding: 20px;
+    border-radius: 5px;
+  `,
+  Rate: styled.span`
+    color: #6969d8;
+  `,
+  DepositChapter: styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+  `,
 };
 const cardTypeImages = {
   Internet: "https://wallpapercave.com/wp/wp4358501.jpg",
@@ -101,7 +115,6 @@ const UserFullView = () => {
       dispatch(fetchUserById(id));
     }
   }, [dispatch, id, user]);
-
   return (
     <Styled.Wrapper>
       {userForDetails && user && (
@@ -231,6 +244,31 @@ const UserFullView = () => {
           ))}
         </Styled.Info>
       )}
+      <Styled.DepositChapter>
+        {user && userForDetails && userForDetails.deposits.length > 0 && (
+          <div>
+            <h3>Deposits</h3>
+            {userForDetails.deposits.map((item) => (
+              <Styled.DepositBlock key={item._id}>
+                <div>
+                  Sum of deposit:{" "}
+                  <Styled.Sum>{item.sumOfDeposit} UAH</Styled.Sum>
+                </div>
+                <div>
+                  Rate : <Styled.Rate>{item.interestRate} %</Styled.Rate>
+                </div>
+                <div>Deposit Type: {item.depositType}</div>
+                <div>
+                  For withdrawal:
+                  <Styled.Sum>
+                    {item.sumOfDeposit * item.interestRate} UAH
+                  </Styled.Sum>
+                </div>
+              </Styled.DepositBlock>
+            ))}
+          </div>
+        )}
+      </Styled.DepositChapter>
       {user && user.role !== "admin" && <Navigate to="/" />}
     </Styled.Wrapper>
   );

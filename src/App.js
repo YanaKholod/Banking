@@ -31,6 +31,7 @@ function App() {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (token) {
       dispatch(getCurrentUser());
