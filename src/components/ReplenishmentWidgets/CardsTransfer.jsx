@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { COLORS } from "../../constants/styled";
 import CardPaymentForm from "../../Forms/CardPaymentForm";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import LoginModal from "../../Forms/LoginModal";
 
 const WidgetStyles = {
   CustomRodal: styled(Rodal)`
@@ -24,11 +24,12 @@ const CardsTransfer = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const user = useSelector((state) => state.auth.user);
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: "onBlur",
     defaultValues: { cardNumber: "" },
   });
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
 
   const onSubmit = (data) => {
     if (isLoggedIn) {
@@ -36,13 +37,10 @@ const CardsTransfer = () => {
       setSelectedCard(cardNumber);
       setOpenModal(true);
     } else {
-      toast.error("Not authorized.");
+      reset();
+      setLoginModalVisible(true);
     }
   };
-  // const openCardModal = (card) => {
-  //   setSelectedCard(card);
-  //   setOpenModal(true);
-  // };
 
   const closeCardModal = () => {
     setOpenModal(false);
@@ -92,7 +90,7 @@ const CardsTransfer = () => {
         <WidgetStyles.CustomRodal
           width={500}
           height={500}
-          visible={selectedCard !== null}
+          visible={selectedCard !== null && isOpenModal}
           onClose={closeCardModal}
         >
           {selectedCard && (
@@ -103,6 +101,10 @@ const CardsTransfer = () => {
           )}
         </WidgetStyles.CustomRodal>
       )}
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </Styled.Wrapper>
   );
 };

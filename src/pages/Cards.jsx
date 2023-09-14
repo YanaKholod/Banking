@@ -14,6 +14,7 @@ import "rodal/lib/rodal.css";
 import CardModal from "../Forms/CardModal";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LoginModal from "../Forms/LoginModal";
 
 const Styled = {
   CardsBlock: styled.div`
@@ -73,12 +74,21 @@ const Cards = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const user = useSelector((state) => state.auth.user);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
 
-  const openCardModal = (card) => {
-    setSelectedCard(card);
-    setOpenModal(true);
+  // const openCardModal = (card) => {
+  //   setSelectedCard(card);
+  //   setOpenModal(true);
+  // };
+  const logicBlockOpen = (card) => {
+    if (!isLoggedIn) {
+      setLoginModalVisible(true);
+    } else {
+      setSelectedCard(card);
+      setOpenModal(true);
+    }
   };
-
   const closeCardModal = () => {
     setOpenModal(false);
 
@@ -101,7 +111,7 @@ const Cards = () => {
           <Styled.OneBlock
             key={item.id}
             onClick={() => {
-              openCardModal(item);
+              logicBlockOpen(item);
             }}
           >
             <Styled.CardInfo>
@@ -118,7 +128,7 @@ const Cards = () => {
         <Styled.CustomRodal
           width={500}
           height={500}
-          visible={selectedCard !== null}
+          visible={selectedCard !== null && isOpenModal}
           onClose={closeCardModal}
         >
           {selectedCard && (
@@ -126,6 +136,10 @@ const Cards = () => {
           )}
         </Styled.CustomRodal>
       )}
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </StyleWrapper>
   );
 };
