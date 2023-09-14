@@ -4,7 +4,7 @@ import { Styled } from "./PaymentStyles";
 import { ICONS, PaymentsIcon } from "../../constants/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyByIdentifier } from "../../redux/companies/actions";
-import { toast } from "react-toastify";
+import LoginModal from "../../Forms/LoginModal";
 
 const PaymentsWidget = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const PaymentsWidget = () => {
   const dropdownCompanies = useSelector(
     (state) => state.companies.dropdownCompanies
   );
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const { register, handleSubmit, reset } = useForm({
@@ -29,7 +30,8 @@ const PaymentsWidget = () => {
         setDropdownVisible(false);
       }
     } else {
-      toast.error("Not authorized.");
+      reset();
+      setLoginModalVisible(true);
     }
   };
   const cleanDropdown = async () => {
@@ -88,6 +90,10 @@ const PaymentsWidget = () => {
           IBAN, EDRPOU, account number or owners name
         </Styled.Description>
       </form>
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </Styled.Wrapper>
   );
 };

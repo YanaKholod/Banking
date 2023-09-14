@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Styled } from "../constants/formStyled";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import { DepositStyled } from "./DepositForm";
 
 const depositInputsData = [
@@ -38,14 +37,8 @@ const depositInputsData = [
 ];
 
 const DepositCalculatorForm = () => {
-  const [selectedCard, setSelectedCard] = useState(null);
   const [calculatedResult, setCalculatedResult] = useState(0);
-  const {
-    register,
-    formState: { isValid },
-    reset,
-    watch,
-  } = useForm({
+  const { register, reset, watch } = useForm({
     mode: "onBlur",
   });
 
@@ -70,7 +63,6 @@ const DepositCalculatorForm = () => {
   };
   const resetForm = () => {
     reset();
-    setSelectedCard(null);
     setCalculatedResult(0);
   };
 

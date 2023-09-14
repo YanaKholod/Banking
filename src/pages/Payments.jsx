@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { paymentsCategories, questions } from "../utils/paymentCategories";
 import styled from "styled-components";
-import { COLORS, TEXT } from "../constants/styled";
+import { COLORS } from "../constants/styled";
 import { useForm } from "react-hook-form";
 import {
   StyleDescription,
@@ -18,7 +18,7 @@ import { BottomArrowIcon, ICONS, PaymentsIcon } from "../constants/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyByIdentifier } from "../redux/companies/actions";
-import { toast } from "react-toastify";
+import LoginModal from "../Forms/LoginModal";
 
 const Styled = {
   Titles: styled.div`
@@ -230,8 +230,8 @@ const Payments = () => {
   const dropdownCompanies = useSelector(
     (state) => state.companies.dropdownCompanies
   );
-  const user = useSelector((state) => state.auth.user);
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
 
   const handleToggle = (index) => {
     const updatedOpenState = [...isOpen];
@@ -240,7 +240,7 @@ const Payments = () => {
     setActiveAnswer(!activeAnswer);
   };
 
-  const { register, handleSubmit, errors, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     mode: "onBlur",
     defaultValues: { IBAN: "", city: "" },
   });
@@ -256,7 +256,7 @@ const Payments = () => {
         setDropdownVisible(false);
       }
     } else {
-      toast.error("Not authorized");
+      setLoginModalVisible(true);
     }
   };
 
@@ -361,6 +361,10 @@ const Payments = () => {
           ))}
         </div>
       </QuestionsWrapper>
+      <LoginModal
+        visible={loginModalVisible}
+        onClose={() => setLoginModalVisible(false)}
+      />
     </StyleWrapper>
   );
 };

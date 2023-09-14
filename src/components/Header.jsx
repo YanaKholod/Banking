@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 import { Link, NavLink } from "react-router-dom";
 import RegistrationForm from "../pages/RegistrationForm";
-import LoginForm from "../pages/LoginForm";
 import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/auth/actions";
+import LoginModal from "../Forms/LoginModal";
 
 const Styled = {
   Wrapper: styled.div`
@@ -130,10 +130,6 @@ const Header = () => {
     setLoginModalVisible(true);
   };
 
-  const closeLoginModal = () => {
-    setLoginModalVisible(false);
-  };
-
   const openRegisterModal = () => {
     setRegisterModalVisible(true);
   };
@@ -163,14 +159,10 @@ const Header = () => {
               Register
             </Styled.Register>
           </Styled.Buttons>
-          <Styled.CustomRodal
-            width={320}
-            height={330}
+          <LoginModal
             visible={loginModalVisible}
-            onClose={closeLoginModal}
-          >
-            <LoginForm closeLoginModal={closeLoginModal} />
-          </Styled.CustomRodal>
+            onClose={() => setLoginModalVisible(false)}
+          />
           <Styled.CustomRodal
             width={320}
             height={400}
