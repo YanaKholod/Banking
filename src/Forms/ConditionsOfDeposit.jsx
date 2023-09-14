@@ -36,8 +36,8 @@ const deposits = [
   },
   {
     id: 2,
-    title: "Money box 12%",
-    description: `When funds are received on your card, the amount or percentage chosen by you (from 1 to 12% of the received funds, including the amount of a possible commission withheld by the bank for replenishing the card) will be automatically deposited in your "Treasury".
+    title: "Money box 17%",
+    description: `When funds are received on your card, the amount or percentage chosen by you (from 1 to 17% of the received funds, including the amount of a possible commission withheld by the bank for replenishing the card) will be automatically deposited in your "Treasury".
       For example, you can choose:
       1) deposit UAH 50 in "Money box" each time money is received on the card;
       2) deposit 12% of the income in the "Treasury".`,

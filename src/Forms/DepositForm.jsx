@@ -5,7 +5,7 @@ import { COLORS } from "../constants/styled";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Styled } from "../constants/formStyled";
-import { addDeposit } from "../redux/auth/actions";
+import { addDeposit, getCurrentUser } from "../redux/auth/actions";
 
 export const DepositStyled = {
   Form: styled.form`
@@ -43,9 +43,9 @@ const depositInputsData = [
       { label: "Standart - 14%", depositType: "Standart", interestRate: 14 },
       { label: "Junior - 12.5%", depositType: "Junior", interestRate: 12.5 },
       {
-        label: "Treasure box - 12%",
+        label: "Treasure box - 17%",
         depositType: "Treasure box",
-        interestRate: 12,
+        interestRate: 17,
       },
     ],
   },
@@ -54,7 +54,7 @@ const depositInputsData = [
     inputType: "select",
     inputName: "depositTerm",
     labelName: "Deposit term",
-    options: ["1 year", "2 years", "3 years"],
+    options: ["12 months", "24 months", "36 months"],
   },
   {
     id: 2,
@@ -79,10 +79,17 @@ const DepositForm = ({ closeDepositModal }) => {
     mode: "onBlur",
   });
   const onSubmit = async (data) => {
+    const termOptions = {
+      "12 months": 1,
+      "24 months": 2,
+      "36 months": 3,
+    };
+
+    const selectedTerm = termOptions[data.depositTerm];
+
     const selectedCardId = selectedCard ? selectedCard._id : null;
     const part = data.depositType.split(" - ")[1];
     const numberWithoutPercent = parseFloat(part.slice(0, -1));
-
     const depositData = {
       userId: user.id,
       sumOfDeposit: parseFloat(data.sum),
@@ -92,9 +99,12 @@ const DepositForm = ({ closeDepositModal }) => {
       },
       depositType: data.depositType,
       interestRate: numberWithoutPercent,
+      depositTerm: selectedTerm,
     };
     await dispatch(addDeposit(depositData));
+    await dispatch(getCurrentUser());
     toast.success("Deposit was added");
+    reset();
     await closeDepositModal();
   };
 
