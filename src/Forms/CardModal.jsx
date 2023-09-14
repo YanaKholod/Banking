@@ -4,7 +4,7 @@ import { COLORS } from "../constants/styled";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
-import { updateCurrentUserCard } from "../redux/auth/actions";
+import { getCurrentUser, updateCurrentUserCard } from "../redux/auth/actions";
 import { toast } from "react-toastify";
 
 const StyledCards = {
@@ -124,6 +124,7 @@ const CardModal = ({ card, closeCardModal }) => {
   const onSubmit = async (data) => {
     if (currentUser) {
       await dispatch(updateCurrentUserCard({ card: data, user: currentUser }));
+      await dispatch(getCurrentUser());
     }
     if (error) {
       toast.error(error);

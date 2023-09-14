@@ -14,9 +14,9 @@ const depositInputsData = [
       { label: "Standart - 14%", depositType: "Standart", interestRate: 14 },
       { label: "Junior - 12.5%", depositType: "Junior", interestRate: 12.5 },
       {
-        label: "Treasure box - 12%",
+        label: "Treasure box - 17%",
         depositType: "Treasure box",
-        interestRate: 12,
+        interestRate: 17,
       },
     ],
   },
@@ -25,7 +25,7 @@ const depositInputsData = [
     inputType: "select",
     inputName: "depositTerm",
     labelName: "Deposit term",
-    options: ["12 months", "24 months", "36 months"],
+    options: ["1 year", "2 years", "3 years"],
   },
   {
     id: 2,
@@ -51,7 +51,10 @@ const DepositCalculatorForm = () => {
 
   const calculateResult = (data) => {
     const selectedDepositType = watch("depositType");
-    if (selectedDepositType) {
+    const selectedTermString = watch("depositTerm");
+    const selectedTerm = parseInt(selectedTermString, 10);
+
+    if (selectedDepositType && !isNaN(selectedTerm)) {
       const selectedOption = depositInputsData
         .find((input) => input.inputName === "depositType")
         .options.find((option) => option.label === selectedDepositType);
@@ -60,7 +63,7 @@ const DepositCalculatorForm = () => {
         const interestRate = selectedOption.interestRate;
 
         const sum = parseFloat(data.sum);
-        const result = ((sum * interestRate) / 100) * term;
+        const result = sum + (sum * interestRate * selectedTerm) / 100;
         setCalculatedResult(result);
       }
     }
