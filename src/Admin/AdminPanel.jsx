@@ -1,17 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
-import {
-  Link,
-  NavLink,
-  Route,
-  Routes,
-  useLocation,
-  useMatch,
-  useNavigate,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import CompaniesForAdmin from "./CompaniesForAdmin";
 import UsersForAdmin from "./UsersForAdmin";
 

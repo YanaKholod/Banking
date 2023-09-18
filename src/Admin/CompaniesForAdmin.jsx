@@ -184,17 +184,17 @@ const CompaniesForAdmin = () => {
     return <Styled.Loading>Loading...</Styled.Loading>;
   }
 
-  const handleSortAsc = async () => {
-    await setSortOrder("asc");
-    await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
-    console.log(sortOrder);
-  };
+  // const handleSortAsc = async () => {
+  //   await setSortOrder("asc");
+  //   await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
+  //   console.log(sortOrder);
+  // };
 
-  const handleSortDesc = async () => {
-    await setSortOrder("desc");
-    await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
-    console.log(sortOrder);
-  };
+  // const handleSortDesc = async () => {
+  //   await setSortOrder("desc");
+  //   await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
+  //   console.log(sortOrder);
+  // };
 
   const handlePageChange = async (newPage) => {
     if (page <= totalPages) {
@@ -236,7 +236,7 @@ const CompaniesForAdmin = () => {
   return (
     <Styled.Wrapper>
       <div>
-        <Styled.SortContainer>
+        {/* <Styled.SortContainer>
           <button
             onClick={() => {
               handleSortAsc();
@@ -251,7 +251,7 @@ const CompaniesForAdmin = () => {
           >
             Sort Z-A
           </button>
-        </Styled.SortContainer>
+        </Styled.SortContainer> */}
       </div>
       <Styled.CreateRow>
         <Styled.Button onClick={openCompanyModal}>Create</Styled.Button>
