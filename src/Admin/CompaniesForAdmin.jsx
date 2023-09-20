@@ -144,7 +144,30 @@ const Styled = {
     display: flex;
     align-self: flex-start;
     margin-right: auto;
-    margin-left: 10px;
+  `,
+  SortButton: styled.button`
+    text-align: center;
+    padding: 4px;
+    margin-right: 5px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: ${(props) =>
+      props.activeSort === "asc"
+        ? `${COLORS.BUTTON_BACKGROUND}`
+        : ` ${COLORS.DESCRIPTION_COLOR}`};
+  `,
+  SortButton2: styled.button`
+    text-align: center;
+    padding: 4px;
+    margin-right: 5px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: ${(props) =>
+      props.activeSort === "desc"
+        ? `${COLORS.BUTTON_BACKGROUND}`
+        : `${COLORS.DESCRIPTION_COLOR}`};
   `,
 };
 
@@ -161,40 +184,44 @@ const CompaniesForAdmin = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortCriteria, setSortCriteria] = useState({
+    sortBy: "companyName",
+    sortOrder: "asc",
+  });
+  const [sortData, setSortData] = useState("asc");
 
   useEffect(() => {
-    if (user && user.role === "admin" && companies) {
-      dispatch(fetchAllCompanies({ page, perPage }))
+    if (user && user.role === "admin") {
+      dispatch(fetchAllCompanies({ page, perPage, sort: sortCriteria }))
         .then((response) => {
           const { currentPage, totalPages } = response.payload;
           setPage(currentPage);
           setTotalPages(totalPages);
           setIsLoading(false);
-          navigate(`?page=1&perPage=${perPage}`);
+          navigate(
+            `?page=1&perPage=${perPage}&sortBy=${sortCriteria.sortBy}&sortOrder=${sortCriteria.sortOrder}`
+          );
         })
         .catch((error) => {
           console.error("Error fetching companies:", error);
           setIsLoading(false);
         });
     }
-  }, [dispatch, user, page, perPage]);
+  }, [dispatch, user, page, perPage, sortCriteria, navigate]);
 
   if (isLoading) {
     return <Styled.Loading>Loading...</Styled.Loading>;
   }
 
-  // const handleSortAsc = async () => {
-  //   await setSortOrder("asc");
-  //   await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
-  //   console.log(sortOrder);
-  // };
+  const handleSortAsc = async () => {
+    setSortData("asc");
+    setSortCriteria({ sortBy: "companyName", sortOrder: "asc" });
+  };
 
-  // const handleSortDesc = async () => {
-  //   await setSortOrder("desc");
-  //   await dispatch(fetchAllCompanies({ page, perPage, sort: sortOrder }));
-  //   console.log(sortOrder);
-  // };
+  const handleSortDesc = async () => {
+    setSortData("desc");
+    setSortCriteria({ sortBy: "companyName", sortOrder: "desc" });
+  };
 
   const handlePageChange = async (newPage) => {
     if (page <= totalPages) {
@@ -207,7 +234,6 @@ const CompaniesForAdmin = () => {
     setPerPage(newPerPage);
     setPage(1);
     navigate(`?page=1&perPage=${perPage}`);
-    setSortOrder("asc");
   };
 
   const handleDeleteCompany = async (_id) => {
@@ -236,22 +262,24 @@ const CompaniesForAdmin = () => {
   return (
     <Styled.Wrapper>
       <div>
-        {/* <Styled.SortContainer>
-          <button
+        <Styled.SortContainer>
+          <Styled.SortButton
+            activeSort={sortData}
             onClick={() => {
               handleSortAsc();
             }}
           >
             Sort A-Z
-          </button>
-          <button
+          </Styled.SortButton>
+          <Styled.SortButton2
+            activeSort={sortData}
             onClick={() => {
               handleSortDesc();
             }}
           >
             Sort Z-A
-          </button>
-        </Styled.SortContainer> */}
+          </Styled.SortButton2>
+        </Styled.SortContainer>
       </div>
       <Styled.CreateRow>
         <Styled.Button onClick={openCompanyModal}>Create</Styled.Button>

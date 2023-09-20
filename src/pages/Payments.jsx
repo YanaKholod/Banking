@@ -107,6 +107,7 @@ const Styled = {
     border-style: none;
     border-color: rgb(141, 198, 65);
     margin-bottom: 20px;
+    cursor: pointer;
   `,
   Categories: styled.div`
     padding: 0 24px;
@@ -327,8 +328,18 @@ const Payments = () => {
         <Styled.Titles>Popular templates</Styled.Titles>
         <Styled.TemplatesDescription>
           <h3>This is where your templates will be </h3>
-          <div>Log in to CatBank to see them</div>
-          <Styled.Button>Entrance</Styled.Button>
+          {!isLoggedIn && (
+            <div>
+              <div>Log in to CatBank to see them</div>
+              <Styled.Button
+                onClick={() => {
+                  setLoginModalVisible(true);
+                }}
+              >
+                Entrance
+              </Styled.Button>
+            </div>
+          )}
         </Styled.TemplatesDescription>
         <Styled.Categories>
           <h3>Categories</h3>
