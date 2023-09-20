@@ -7,8 +7,9 @@ export const fetchAllCompanies = createAsyncThunk(
   "companies/all",
   async ({ page = 1, perPage = 10, sort } = {}, { rejectWithValue }) => {
     try {
+      const { sortBy, sortOrder } = sort;
       const response = await axios.get(
-        `/companies/all?page=${page}&perPage=${perPage}&sort=${sort}`
+        `/companies/all?page=${page}&perPage=${perPage}&sortBy=${sortBy}&sortOrder=${sortOrder}`
       );
       return response.data;
     } catch (error) {

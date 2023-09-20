@@ -39,14 +39,7 @@ function App() {
     if (token) {
       dispatch(getCurrentUser());
     }
-    if (!isLoggedIn) {
-      const loginModalTimeout = setTimeout(() => {
-        setLoginModalVisible(true);
-      }, 20000);
-
-      return () => clearTimeout(loginModalTimeout);
-    }
-  }, [token, dispatch, isLoggedIn]);
+  }, [token, dispatch]);
 
   return (
     <BrowserRouter>
