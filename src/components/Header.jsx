@@ -8,6 +8,7 @@ import "rodal/lib/rodal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/auth/actions";
 import LoginModal from "../Forms/LoginModal";
+import BurgerMenu from "./BurgerMenu";
 
 const Styled = {
   Wrapper: styled.div`
@@ -117,6 +118,22 @@ const Styled = {
     font-size: 15px;
     font-weight: bold;
   `,
+  BurgerButton: styled.button`
+    display: none;
+    @media (max-width: 850px) {
+      display: block;
+      background-color: transparent;
+      color: ${COLORS.ACCENT};
+      border: none;
+      cursor: pointer;
+      font-size: 40px;
+    }
+  `,
+  LogoLine: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
 };
 const Header = () => {
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -125,6 +142,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
+  const [isOpenBurger, setIsOpenBurger] = useState(false);
 
   const openLoginModal = () => {
     setLoginModalVisible(true);
@@ -145,12 +163,24 @@ const Header = () => {
   };
   return (
     <Styled.Wrapper>
-      <Styled.Logo to="/">
-        <img
-          src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/19452/cartoon-cat-face-clipart-md.png"
-          alt=""
-        />
-      </Styled.Logo>
+      <Styled.LogoLine>
+        <Styled.BurgerButton onClick={() => setIsOpenBurger(!isOpenBurger)}>
+          ☰
+        </Styled.BurgerButton>
+        {isOpenBurger && <BurgerMenu />}
+        {/* <Styled.BurgerMenu onClick={() => setIsOpen(!isOpen)}>
+        <Styled.Div></Styled.Div>
+        <Styled.Div></Styled.Div>
+        <Styled.Div></Styled.Div>
+        {isOpen && <BurgerMenu />}
+      </Styled.BurgerMenu> */}
+        <Styled.Logo to="/">
+          <img
+            src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/19452/cartoon-cat-face-clipart-md.png"
+            alt=""
+          />
+        </Styled.Logo>
+      </Styled.LogoLine>
       {!isLoggedIn ? (
         <div>
           <Styled.Buttons>

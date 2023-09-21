@@ -12,6 +12,9 @@ const Styled = {
     font-size: 16px;
     display: flex;
     position: relative;
+    @media (max-width: 850px) {
+      display: none;
+    }
   `,
   LeftMenu: styled.div`
     width: 270px;

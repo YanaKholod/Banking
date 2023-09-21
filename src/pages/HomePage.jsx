@@ -7,6 +7,12 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     margin: 20px 80px;
+    @media (max-width: 850px) {
+      margin: 20px 20px;
+    }
+    @media (max-width: 520px) {
+      margin: 10px 0px;
+    }
   `,
   Menu: styled.div``,
 };
