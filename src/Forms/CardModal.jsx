@@ -10,6 +10,10 @@ import { toast } from "react-toastify";
 const StyledCards = {
   Wrapper: styled.div`
     width: 100%;
+    @media (max-width: 850px) {
+      width: 170px;
+      height: 170px;
+    }
   `,
   Form: styled.form`
     display: flex;
@@ -19,9 +23,9 @@ const StyledCards = {
     margin: 0;
     text-align: center;
     padding: 15px;
-    /* @media (max-width: 550px) {
+    @media (max-width: 550px) {
       width: 250px;
-    } */
+    }
   `,
 
   Img: styled.img`

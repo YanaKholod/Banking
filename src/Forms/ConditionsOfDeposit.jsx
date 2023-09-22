@@ -1,13 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
-import { Styled } from "../constants/formStyled";
 
 const ConditionsStyled = {
+  Wrapper: styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    p {
+      font-size: 22px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.76);
+    }
+  `,
   Form: styled.div`
     max-height: 400px;
     overflow-y: auto;
     width: 470px;
+    @media (max-width: 550px) {
+      width: 280px;
+    }
   `,
   Title: styled.div`
     font-size: 17px;
@@ -45,7 +58,7 @@ const deposits = [
 ];
 const ConditionsOfDeposit = () => {
   return (
-    <Styled.Wrapper>
+    <ConditionsStyled.Wrapper>
       <p>Conditions of deposits</p>
       <ConditionsStyled.Form>
         {deposits.map((item) => (
@@ -57,7 +70,7 @@ const ConditionsOfDeposit = () => {
           </div>
         ))}
       </ConditionsStyled.Form>
-    </Styled.Wrapper>
+    </ConditionsStyled.Wrapper>
   );
 };
 

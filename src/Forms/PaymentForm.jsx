@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Styled } from "../constants/formStyled";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompanyById } from "../redux/companies/actions";
 import { getCurrentUser, updateTransaction } from "../redux/auth/actions";
@@ -69,6 +69,9 @@ const companyInputsData = [
 const StyledForm = {
   MainWrapper: styled.div`
     height: 100vh;
+    @media (max-width: 550px) {
+      height: 100%;
+    }
   `,
   Form: styled.form`
     display: flex;
@@ -99,6 +102,7 @@ const PaymentForm = () => {
   );
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (companyId && user) {
@@ -161,7 +165,7 @@ const PaymentForm = () => {
 
   return (
     <StyledForm.MainWrapper>
-      {user && (
+      {user && isLoggedIn ? (
         <Styled.Wrapper>
           <p>Payment</p>
           <StyledForm.Form onSubmit={handleSubmit(onSubmit)}>
@@ -227,6 +231,8 @@ const PaymentForm = () => {
             </Styled.ButtonLine>
           </StyledForm.Form>
         </Styled.Wrapper>
+      ) : (
+        <Navigate to="/" />
       )}
     </StyledForm.MainWrapper>
   );

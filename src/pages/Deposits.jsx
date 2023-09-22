@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import DepositForm from "../Forms/DepositForm";
 import ConditionsOfDeposit from "../Forms/ConditionsOfDeposit";
 import DepositCalculatorForm from "../Forms/DepositCalculatorForm";
+import { CustomRodal } from "../utils/generalStyled";
 
 const Styled = {
   MyDepositsWrapper: styled.div`
@@ -120,14 +121,6 @@ const Styled = {
       color: ${COLORS.ACCENT};
     }
   `,
-  CustomRodal: styled(Rodal)`
-    .rodal-dialog {
-      background-color: ${COLORS.HEADER_BACKGROUND};
-      .rodal-mask {
-        background-color: rgba(0, 0, 0, 0.414);
-      }
-    }
-  `,
 };
 
 const Deposits = () => {
@@ -225,34 +218,25 @@ const Deposits = () => {
         </Styled.StrongboxImg>
       </Styled.Strongbox>
       {user && (
-        <Styled.CustomRodal
-          width={500}
-          height={500}
-          visible={depositFormVisible}
-          onClose={closeDepositModal}
-        >
+        <CustomRodal visible={depositFormVisible} onClose={closeDepositModal}>
           <DepositForm closeDepositModal={closeDepositModal} />
-        </Styled.CustomRodal>
+        </CustomRodal>
       )}
       {user && (
-        <Styled.CustomRodal
-          width={500}
-          height={500}
+        <CustomRodal
           visible={conditionFormVisible}
           onClose={closeConditionsModal}
         >
           <ConditionsOfDeposit />
-        </Styled.CustomRodal>
+        </CustomRodal>
       )}
       {user && (
-        <Styled.CustomRodal
-          width={500}
-          height={500}
+        <CustomRodal
           visible={calculatorFormVisible}
           onClose={closeCalculatorModal}
         >
           <DepositCalculatorForm />
-        </Styled.CustomRodal>
+        </CustomRodal>
       )}
     </StyleWrapper>
   );

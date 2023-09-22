@@ -19,6 +19,9 @@ const Styled = {
     background-color: ${COLORS.HEADER_BACKGROUND};
     color: ${COLORS.TEXT};
     /* z-index: 998; */
+    @media (max-width: 850px) {
+      align-items: baseline;
+    }
   `,
   Logo: styled(Link)`
     img {
@@ -31,6 +34,9 @@ const Styled = {
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 850px) {
+      padding: 2px;
+    }
   `,
   Login: styled(NavLink)`
     font-size: 16px;
@@ -44,6 +50,12 @@ const Styled = {
     text-decoration: none;
     margin-right: 7px;
     cursor: pointer;
+    @media (max-width: 850px) {
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 5px 10px;
+    }
+
     /* :hover {
 
     } */
@@ -60,6 +72,11 @@ const Styled = {
     text-decoration: none;
     color: black;
     cursor: pointer;
+    @media (max-width: 850px) {
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 5px 10px;
+    }
 
     /* :hover {
 
@@ -89,6 +106,11 @@ const Styled = {
     color: black;
     margin-left: 20px;
     cursor: pointer;
+    @media (max-width: 850px) {
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 4px 8px;
+    }
   `,
   CustomButton: styled(Link)`
     font-size: 16px;
@@ -102,6 +124,11 @@ const Styled = {
     border: 1px solid ${COLORS.ACCENT};
     text-decoration: none;
     cursor: pointer;
+    @media (max-width: 850px) {
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 4px 8px;
+    }
   `,
 
   Greeting: styled.div`
@@ -111,6 +138,9 @@ const Styled = {
     }
     span {
       color: ${COLORS.LIGHTER_TEXT};
+    }
+    @media (max-width: 470px) {
+      display: none;
     }
   `,
   Loading: styled.div`
@@ -133,6 +163,9 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
+  `,
+  MediaLine: styled.div`
+    display: flex;
   `,
 };
 const Header = () => {
@@ -161,13 +194,16 @@ const Header = () => {
     setLoginModalVisible(false);
     setRegisterModalVisible(false);
   };
+  const closeBurgerMenu = () => {
+    setIsOpenBurger(false);
+  };
   return (
     <Styled.Wrapper>
       <Styled.LogoLine>
         <Styled.BurgerButton onClick={() => setIsOpenBurger(!isOpenBurger)}>
           ☰
         </Styled.BurgerButton>
-        {isOpenBurger && <BurgerMenu />}
+        {isOpenBurger && <BurgerMenu closeBurgerMenu={closeBurgerMenu} />}
         {/* <Styled.BurgerMenu onClick={() => setIsOpen(!isOpen)}>
         <Styled.Div></Styled.Div>
         <Styled.Div></Styled.Div>
@@ -216,7 +252,7 @@ const Header = () => {
               ) : (
                 <p></p>
               )}
-              <div>
+              <Styled.MediaLine>
                 {user && (
                   <>
                     <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
@@ -232,7 +268,7 @@ const Header = () => {
                     )}
                   </>
                 )}
-              </div>
+              </Styled.MediaLine>
             </>
           )}
         </Styled.LoggedInButton>

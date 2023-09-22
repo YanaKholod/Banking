@@ -16,8 +16,8 @@ const Styled = {
     left: 0;
     top: 11%;
     bottom: 0;
-    z-index: 999;
     width: 50%;
+    z-index: 500;
   `,
   ItemWrapper: styled(Link)`
     padding: 8px 10px;
@@ -46,30 +46,22 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
   `,
-  //   RightMenuItem: styled(Link)`
-  //     text-decoration: none;
-  //     color: white;
-  //     display: flex;
-  //     flex-direction: column;
-  //     align-items: center;
-  //     padding: 8px 20px;
-  //     width: 220px;
-  //     /* hyphens: auto; */
-  //     :hover {
-  //       background-color: ${COLORS.HOVER};
-  //     }
-  //   `,
   RightMenu: styled.div`
     position: absolute;
-    right: -97%;
+    right: 0;
     top: 0;
     bottom: 0;
+    left: 0;
     background-color: ${COLORS.MENU_BACKGROUND};
     color: ${COLORS.TEXT};
     display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-    z-index: 998;
     padding: 16px 0px;
     border-left: 1px solid grey;
+    @media (max-width: 850px) {
+      background-color: ${COLORS.MENU_BACKGROUND};
+      color: ${COLORS.TEXT};
+      z-index: 999;
+    }
   `,
   RightMenuItem: styled(Link)`
     text-decoration: none;
@@ -82,10 +74,18 @@ const Styled = {
     :hover {
       background-color: ${COLORS.HOVER};
     }
+    @media (max-width: 850px) {
+      background-color: ${COLORS.MENU_BACKGROUND};
+      color: ${COLORS.TEXT};
+      z-index: 999;
+    }
+  `,
+  RightMenuItemWrapper: styled.div`
+    position: relative;
   `,
 };
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ closeBurgerMenu }) => {
   const [subMenuItems, setSubmenuItems] = useState(null);
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -104,49 +104,89 @@ const BurgerMenu = () => {
   return (
     <Styled.MenuWrapper>
       {menu.map((item, index) => (
-        <div>
-          <Styled.ItemWrapper
-            key={item.id}
-            to={item.link}
-            onClick={() => toggleMenu(index)}
-          >
-            <Styled.MainSvg src={item.img} alt="" />
-            <div>{item.name}</div>
-            {item.submenu && (
-              <div>
-                <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
+        <div key={item.name}>
+          <Styled.RightMenuItemWrapper>
+            <Styled.ItemWrapper
+              to={item.link}
+              onClick={() => {
+                toggleMenu(index);
+                if (!item.submenu) {
+                  closeBurgerMenu();
+                }
+              }}
+            >
+              <Styled.MainSvg src={item.img} alt="" />
+              <div>{item.name}</div>
+              {item.submenu && (
                 <div>
-                  {item.submenu ? (
-                    <Styled.RightMenu>
-                      {item.submenu.map((item) => {
-                        <Styled.RightMenuItem key={item.id}>
-                          {item.title}
-                        </Styled.RightMenuItem>;
-                      })}
-                    </Styled.RightMenu>
-                  ) : (
-                    <div></div>
-                  )}
+                  <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
                 </div>
-              </div>
+              )}
+            </Styled.ItemWrapper>
+            {item.submenu && (
+              <Styled.RightMenu isOpen={openIndex === index}>
+                {item.submenu.map((submenuItem) => (
+                  <Styled.RightMenuItem
+                    key={submenuItem.id}
+                    to={submenuItem.linkTo}
+                    onClick={() => {
+                      closeBurgerMenu();
+                    }}
+                  >
+                    <Styled.MainSvg src={submenuItem.img} alt="" />
+                    <div>{submenuItem.title}</div>
+                  </Styled.RightMenuItem>
+                ))}
+              </Styled.RightMenu>
             )}
-          </Styled.ItemWrapper>
-          {/* {subMenuItems &&
-            subMenuItems.map((item) => (
-              <Styled.RightMenuItem
-                key={item.title}
-                to={{
-                  pathname: `${item.linkTo}`,
-                }}
-              >
-                <Styled.MainSvg src={item.img} alt="" />
-                <div>{item.title}</div>
-              </Styled.RightMenuItem>
-            ))} */}
+          </Styled.RightMenuItemWrapper>
         </div>
       ))}
     </Styled.MenuWrapper>
   );
 };
+//   return (
+//     <Styled.MenuWrapper>
+//       {menu.map((item, index) => (
+//         <div key={item.id}>
+//           <Styled.ItemWrapper to={item.link} onClick={() => toggleMenu(index)}>
+//             <Styled.MainSvg src={item.img} alt="" />
+//             <div>{item.name}</div>
+//             {item.submenu && (
+//               <div>
+//                 <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
+//                 <div>
+//                   {item.submenu ? (
+//                     <Styled.RightMenu>
+//                       {item.submenu.map((item) => (
+//                         <Styled.RightMenuItem key={item.id}>
+//                           {item.title}
+//                         </Styled.RightMenuItem>
+//                       ))}
+//                     </Styled.RightMenu>
+//                   ) : (
+//                     <div></div>
+//                   )}
+//                 </div>
+//               </div>
+//             )}
+//           </Styled.ItemWrapper>
+//           {/* {subMenuItems &&
+//             subMenuItems.map((item) => (
+//               <Styled.RightMenuItem
+//                 key={item.title}
+//                 to={{
+//                   pathname: `${item.linkTo}`,
+//                 }}
+//               >
+//                 <Styled.MainSvg src={item.img} alt="" />
+//                 <div>{item.title}</div>
+//               </Styled.RightMenuItem>
+//             ))} */}
+//         </div>
+//       ))}
+//     </Styled.MenuWrapper>
+//   );
+// };
 
 export default BurgerMenu;
