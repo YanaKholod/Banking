@@ -9,12 +9,11 @@ import {
 } from "../utils/generalStyled";
 import styled from "styled-components";
 import { COLORS } from "../constants/styled";
-import Rodal from "rodal";
-import "rodal/lib/rodal.css";
 import CardModal from "../Forms/CardModal";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginModal from "../Forms/LoginModal";
+import { CustomRodal } from "../utils/generalStyled";
 
 const Styled = {
   CardsBlock: styled.div`
@@ -32,9 +31,13 @@ const Styled = {
     }
     img {
       width: 328px;
-      height: 211px; //change with media
+      height: 211px;
       border-radius: 10px;
       margin-right: 10px;
+      @media (max-width: 850px) {
+        width: 228px;
+        height: 111px;
+      }
     }
   `,
   OneBlock: styled(Link)`
@@ -61,15 +64,16 @@ const Styled = {
       color: ${COLORS.LIGHTER_TEXT};
     }
   `,
-  CustomRodal: styled(Rodal)`
-    .rodal-dialog {
-      background-color: ${COLORS.HEADER_BACKGROUND};
-      .rodal-mask {
-        background-color: rgba(0, 0, 0, 0.414);
-      }
-    }
-  `,
+  // CustomRodal: styled(Rodal)`
+  //   .rodal-dialog {
+  //     background-color: ${COLORS.HEADER_BACKGROUND};
+  //     .rodal-mask {
+  //       background-color: rgba(0, 0, 0, 0.414);
+  //     }
+  //   }
+  // `,
 };
+
 const Cards = () => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -125,16 +129,14 @@ const Cards = () => {
         ))}
       </Styled.CardsBlock>
       {user && (
-        <Styled.CustomRodal
-          width={500}
-          height={500}
+        <CustomRodal
           visible={selectedCard !== null && isOpenModal}
           onClose={closeCardModal}
         >
           {selectedCard && (
             <CardModal card={selectedCard} closeCardModal={closeCardModal} />
           )}
-        </Styled.CustomRodal>
+        </CustomRodal>
       )}
       <LoginModal
         visible={loginModalVisible}
