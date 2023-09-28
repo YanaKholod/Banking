@@ -204,12 +204,6 @@ const Header = () => {
           ☰
         </Styled.BurgerButton>
         {isOpenBurger && <BurgerMenu closeBurgerMenu={closeBurgerMenu} />}
-        {/* <Styled.BurgerMenu onClick={() => setIsOpen(!isOpen)}>
-        <Styled.Div></Styled.Div>
-        <Styled.Div></Styled.Div>
-        <Styled.Div></Styled.Div>
-        {isOpen && <BurgerMenu />}
-      </Styled.BurgerMenu> */}
         <Styled.Logo to="/">
           <img
             src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/19452/cartoon-cat-face-clipart-md.png"
@@ -256,11 +250,11 @@ const Header = () => {
                 {user && (
                   <>
                     <Styled.Logout onClick={logoutLogic}>Logout</Styled.Logout>
-                    {user.role === "user" && (
+                    {/* {user.role === "user" && (
                       <Styled.CustomButton to="/settings">
                         Settings
                       </Styled.CustomButton>
-                    )}
+                    )} */}
                     {user.role === "admin" && (
                       <Styled.CustomButton to="admin/users">
                         Admin
