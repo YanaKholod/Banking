@@ -131,7 +131,7 @@ const CardModal = ({ card, closeCardModal }) => {
       await dispatch(getCurrentUser());
     }
     if (error) {
-      toast.error(error);
+      toast.error("Something wrong!");
     }
     closeCardModal();
   };

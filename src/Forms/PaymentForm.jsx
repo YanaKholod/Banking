@@ -90,6 +90,9 @@ const StyledForm = {
     border: 1px solid ${COLORS.LIGHTER_TEXT};
     border-radius: 4px;
     color: ${COLORS.TEXT};
+    option {
+      background-color: transparent;
+    }
   `,
 };
 
@@ -155,7 +158,7 @@ const PaymentForm = () => {
 
       navigate("/");
     } catch (reduxError) {
-      toast.error(reduxError);
+      toast.error("Payment rejected");
     }
   };
 

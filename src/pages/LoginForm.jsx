@@ -52,7 +52,7 @@ const LoginForm = ({ closeLoginModal }) => {
 
     await dispatch(login({ ...data, phone: formattedPhoneNumber }));
     if (reduxError) {
-      toast.error(reduxError);
+      toast.error("Try again!");
     }
     reset();
     closeLoginModal();
