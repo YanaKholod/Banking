@@ -18,7 +18,7 @@ const Styled = {
     bottom: 0;
     width: 50%;
     z-index: 500;
-    @media (max-width: 460px) {
+    @media (max-width: 500px) {
       width: 100%;
     }
   `,
@@ -64,6 +64,7 @@ const Styled = {
       background-color: ${COLORS.MENU_BACKGROUND};
       color: ${COLORS.TEXT};
       z-index: 999;
+      border-left: 0;
     }
   `,
   RightMenuItem: styled(Link)`
@@ -81,11 +82,49 @@ const Styled = {
       background-color: ${COLORS.MENU_BACKGROUND};
       color: ${COLORS.TEXT};
       z-index: 999;
+      width: 90%;
     }
   `,
   RightMenuItemWrapper: styled.div`
     position: relative;
   `,
+};
+const RightMenu = ({
+  isOpen,
+  onCloseSubMenu,
+  submenuItems,
+  onCloseBurgerMenu,
+}) => {
+  return (
+    <Styled.RightMenu isOpen={isOpen}>
+      {/* Back Button */}
+      {isOpen && (
+        <Styled.RightMenuItemWrapper>
+          <Styled.RightMenuItem
+            onClick={() => {
+              onCloseSubMenu(); // Call the callback to close the submenu
+            }}
+          >
+            <div>Back</div>
+          </Styled.RightMenuItem>
+        </Styled.RightMenuItemWrapper>
+      )}
+      {isOpen &&
+        submenuItems &&
+        submenuItems.map((submenuItem) => (
+          <Styled.RightMenuItem
+            key={submenuItem.title}
+            to={submenuItem.linkTo}
+            onClick={() => {
+              onCloseBurgerMenu();
+            }}
+          >
+            <Styled.MainSvg src={submenuItem.img} alt="" />
+            <div>{submenuItem.title}</div>
+          </Styled.RightMenuItem>
+        ))}
+    </Styled.RightMenu>
+  );
 };
 
 const BurgerMenu = ({ closeBurgerMenu }) => {
@@ -102,6 +141,10 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
         setSubmenuItems(menu[index].submenu);
       }
     }
+  };
+  const closeSubMenu = () => {
+    setOpenIndex(null);
+    setSubmenuItems(null);
   };
 
   return (
@@ -126,70 +169,17 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
                 </div>
               )}
             </Styled.ItemWrapper>
-            {item.submenu && (
-              <Styled.RightMenu isOpen={openIndex === index}>
-                {item.submenu.map((submenuItem) => (
-                  <Styled.RightMenuItem
-                    key={submenuItem.title}
-                    to={submenuItem.linkTo}
-                    onClick={() => {
-                      closeBurgerMenu();
-                    }}
-                  >
-                    <Styled.MainSvg src={submenuItem.img} alt="" />
-                    <div>{submenuItem.title}</div>
-                  </Styled.RightMenuItem>
-                ))}
-              </Styled.RightMenu>
-            )}
           </Styled.RightMenuItemWrapper>
         </div>
       ))}
+      <RightMenu
+        isOpen={openIndex !== null}
+        onCloseSubMenu={closeSubMenu}
+        submenuItems={subMenuItems}
+        onCloseBurgerMenu={closeBurgerMenu}
+      />
     </Styled.MenuWrapper>
   );
 };
-//   return (
-//     <Styled.MenuWrapper>
-//       {menu.map((item, index) => (
-//         <div key={item.id}>
-//           <Styled.ItemWrapper to={item.link} onClick={() => toggleMenu(index)}>
-//             <Styled.MainSvg src={item.img} alt="" />
-//             <div>{item.name}</div>
-//             {item.submenu && (
-//               <div>
-//                 <Styled.Svg src={ICONS.RIGHT_ARROW} alt="" />
-//                 <div>
-//                   {item.submenu ? (
-//                     <Styled.RightMenu>
-//                       {item.submenu.map((item) => (
-//                         <Styled.RightMenuItem key={item.id}>
-//                           {item.title}
-//                         </Styled.RightMenuItem>
-//                       ))}
-//                     </Styled.RightMenu>
-//                   ) : (
-//                     <div></div>
-//                   )}
-//                 </div>
-//               </div>
-//             )}
-//           </Styled.ItemWrapper>
-//           {/* {subMenuItems &&
-//             subMenuItems.map((item) => (
-//               <Styled.RightMenuItem
-//                 key={item.title}
-//                 to={{
-//                   pathname: `${item.linkTo}`,
-//                 }}
-//               >
-//                 <Styled.MainSvg src={item.img} alt="" />
-//                 <div>{item.title}</div>
-//               </Styled.RightMenuItem>
-//             ))} */}
-//         </div>
-//       ))}
-//     </Styled.MenuWrapper>
-//   );
-// };
 
 export default BurgerMenu;
