@@ -70,7 +70,6 @@ const CardPaymentForm = ({ card, closeCardModal }) => {
   const [selectedCard, setSelectedCard] = useState(null);
   const currentUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.auth);
 
   const {
     register,
@@ -107,11 +106,9 @@ const CardPaymentForm = ({ card, closeCardModal }) => {
         senderCardType: selectedCard.cardType,
       })
     );
-    if (error) {
-      toast.error(error);
-    } else {
-      toast.success("Payment successful");
-    }
+
+    toast.success("Payment successful");
+
     await dispatch(getCurrentUser());
     closeCardModal();
   };

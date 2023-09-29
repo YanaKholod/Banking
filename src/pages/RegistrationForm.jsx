@@ -62,7 +62,7 @@ const RegistrationForm = ({ closeRegisterModal }) => {
     const formattedPhoneNumber = `+38${data.phone}`;
     await dispatch(registerUser({ ...data, phone: formattedPhoneNumber }));
     if (error) {
-      toast.error(error);
+      toast.error("Try again!");
     } else {
       toast.success("Registration success");
     }
