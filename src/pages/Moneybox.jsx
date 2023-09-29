@@ -127,14 +127,26 @@ const Styled = {
       display: flex;
       align-items: baseline;
     }
+    @media (max-width: 640px) {
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   `,
   ItemBoxStarting: styled.div`
     display: flex;
     flex-direction: column;
-    @media (max-width: 670px) {
+    @media (max-width: 690px) {
       img {
         height: 90px;
         width: 90px;
+      }
+    }
+    @media (max-width: 640px) {
+      img {
+        height: 120px;
+        width: 120px;
       }
     }
   `,
