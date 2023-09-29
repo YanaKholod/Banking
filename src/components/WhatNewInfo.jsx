@@ -9,7 +9,9 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     padding: 16px;
     width: 100%;
-    width: 100%;
+    @media (max-width: 520px) {
+      margin-top: 10px;
+    }
   `,
   Header: styled(Link)`
     display: flex;

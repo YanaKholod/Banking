@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import CurrencyConverter from "./CreditsAndConverter/CurrencyConverter";
-import CreditProducts from "./CreditsAndConverter/CreditProducts";
 const Styled = {
   Wrapper: styled.div`
     display: flex;
     margin-bottom: 16px;
+    @media (max-width: 520px) {
+      width: 98%;
+      margin-bottom: 10px;
+    }
   `,
 };
 

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const StyledCards = {
   Wrapper: styled.div`
     width: 100%;
-    @media (max-width: 850px) {
+    @media (max-width: 350px) {
       width: 170px;
       height: 170px;
     }
@@ -23,7 +23,7 @@ const StyledCards = {
     margin: 0;
     text-align: center;
     padding: 15px;
-    @media (max-width: 550px) {
+    @media (max-width: 350px) {
       width: 250px;
     }
   `,

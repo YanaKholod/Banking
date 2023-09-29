@@ -11,6 +11,10 @@ const Styled = {
     /* overflow: hidden; */
     margin-bottom: 15px;
     z-index: 100;
+    @media (max-width: 520px) {
+      width: 97%;
+      margin: 0;
+    }
   `,
 };
 

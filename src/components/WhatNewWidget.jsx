@@ -7,6 +7,11 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     margin-bottom: 16px;
+    @media (max-width: 520px) {
+      flex-direction: column;
+      width: 90%;
+      margin-bottom: 10px;
+    }
   `,
 };
 
