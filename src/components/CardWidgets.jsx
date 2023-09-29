@@ -7,6 +7,11 @@ const Styled = {
   WidgetWrapper: styled.div`
     display: flex;
     margin-bottom: 16px;
+    @media (max-width: 520px) {
+      flex-direction: column;
+      width: 90%;
+      margin-bottom: 10px;
+    }
   `,
   EachWrapper: styled.div`
     display: flex;
@@ -19,6 +24,9 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     b {
       margin: 0px 0px 16px;
+    }
+    @media (max-width: 520px) {
+      margin-top: 10px;
     }
   `,
   Img: styled.img`

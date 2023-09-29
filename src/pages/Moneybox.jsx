@@ -41,6 +41,12 @@ const Styled = {
       margin-right: 0;
     }
     margin: 24px 0px;
+    @media (max-width: 490px) {
+      flex-direction: column;
+      justify-content: baseline;
+      align-items: baseline;
+      margin: 10px 0px;
+    }
   `,
   ItemBox: styled.div`
     display: flex;
@@ -125,6 +131,12 @@ const Styled = {
   ItemBoxStarting: styled.div`
     display: flex;
     flex-direction: column;
+    @media (max-width: 670px) {
+      img {
+        height: 90px;
+        width: 90px;
+      }
+    }
   `,
   ConditionsBlock: styled.div`
     margin: 18px 0px;
@@ -171,6 +183,9 @@ const Styled = {
       border-radius: 16px;
       background-color: ${COLORS.DISABLED_HOVER};
       padding: 15px 7px;
+    }
+    @media (max-width: 670px) {
+      flex-basis: 100%;
     }
   `,
 };

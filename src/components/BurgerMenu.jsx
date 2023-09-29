@@ -18,6 +18,9 @@ const Styled = {
     bottom: 0;
     width: 50%;
     z-index: 500;
+    @media (max-width: 460px) {
+      width: 100%;
+    }
   `,
   ItemWrapper: styled(Link)`
     padding: 8px 10px;
@@ -104,7 +107,7 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
   return (
     <Styled.MenuWrapper>
       {menu.map((item, index) => (
-        <div key={item.name}>
+        <div key={item.id}>
           <Styled.RightMenuItemWrapper>
             <Styled.ItemWrapper
               to={item.link}
@@ -127,7 +130,7 @@ const BurgerMenu = ({ closeBurgerMenu }) => {
               <Styled.RightMenu isOpen={openIndex === index}>
                 {item.submenu.map((submenuItem) => (
                   <Styled.RightMenuItem
-                    key={submenuItem.id}
+                    key={submenuItem.title}
                     to={submenuItem.linkTo}
                     onClick={() => {
                       closeBurgerMenu();

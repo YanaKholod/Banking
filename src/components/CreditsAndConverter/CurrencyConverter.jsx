@@ -8,7 +8,9 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     padding: 16px;
     width: 100%;
-    width: 100%;
+    @media (max-width: 520px) {
+      width: 92%;
+    }
   `,
   Header: styled.div`
     display: flex;

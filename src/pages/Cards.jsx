@@ -64,14 +64,6 @@ const Styled = {
       color: ${COLORS.LIGHTER_TEXT};
     }
   `,
-  // CustomRodal: styled(Rodal)`
-  //   .rodal-dialog {
-  //     background-color: ${COLORS.HEADER_BACKGROUND};
-  //     .rodal-mask {
-  //       background-color: rgba(0, 0, 0, 0.414);
-  //     }
-  //   }
-  // `,
 };
 
 const Cards = () => {

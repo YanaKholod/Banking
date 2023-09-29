@@ -48,7 +48,7 @@ export const conditions = [
     id: 3,
     name: "Rounding off the remainder",
     description1: `At the end of each day, the balance of the card is rounded up to UAH 10, and small change is automatically sent to the "Treasury".`,
-    description2: `For example, at the end of the day, the balance of the card is UAH 124.5. The next morning, the balance of the card will be UAH 120, and UAH 4.5 will be transferred to the "Treasury".`,
+    description2: `If the balance of the card will be UAH 120, and UAH 4.5 will be transferred to the "Treasury".`,
   },
 ];
 
