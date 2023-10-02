@@ -10,6 +10,8 @@ export const StyleWrapper = styled.div`
   flex-direction: column;
   margin: 0px 80px;
   padding: 24px 0;
+  height: 100vh;
+  margin-bottom: 10px;
   @media (max-width: 850px) {
     margin: 0px 10px;
   }
