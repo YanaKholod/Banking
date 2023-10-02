@@ -7,6 +7,9 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     margin: 20px 80px;
+    @media (min-width: 1900px) {
+      margin: 20px 220px;
+    }
     @media (max-width: 850px) {
       margin: 20px 20px;
     }

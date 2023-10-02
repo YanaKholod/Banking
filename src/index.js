@@ -11,8 +11,7 @@ const Styled = {
   Global: styled.div`
     margin: 0;
     padding: 0;
-    max-height: 100vh;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     font-family: "Open Sans", sans-serif;
     box-sizing: border-box;
