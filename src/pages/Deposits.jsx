@@ -121,6 +121,13 @@ const Styled = {
       color: ${COLORS.ACCENT};
     }
   `,
+  WrapperInfo: styled.div`
+    @media (min-width: 1300px) {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+  `,
 };
 
 const Deposits = () => {
@@ -167,77 +174,78 @@ const Deposits = () => {
           <StyleDescription>Manage your deposits online</StyleDescription>
         </div>
       </StyleHeader>
-      <Styled.MyDepositsWrapper>
-        <Styled.MyDeposits>
-          My deposits
-          <Styled.RightArrow alt="" src={ICONS.RIGHT_ARROW} />
-        </Styled.MyDeposits>
-        {user && (
-          <Styled.OpenTheDeposit
-            onClick={() => {
-              openDeposit();
-            }}
-          >
-            Open deposit
-          </Styled.OpenTheDeposit>
-        )}
-      </Styled.MyDepositsWrapper>
-      <Styled.DepositsCategoriesWrapper>
-        {depositsCategories.map((item) => (
-          <Styled.Category
-            key={item.id}
-            onClick={() => handleCategoryClick(item)}
-          >
-            <div>{item.svg}</div>
-            <div>{item.title}</div>
-          </Styled.Category>
-        ))}
-      </Styled.DepositsCategoriesWrapper>
-      <Styled.Strongbox>
-        <div>
-          <h2>Deposit operation in 60 seconds</h2>
+      <Styled.WrapperInfo>
+        <Styled.MyDepositsWrapper>
+          <Styled.MyDeposits>
+            My deposits
+            <Styled.RightArrow alt="" src={ICONS.RIGHT_ARROW} />
+          </Styled.MyDeposits>
+          {user && (
+            <Styled.OpenTheDeposit
+              onClick={() => {
+                openDeposit();
+              }}
+            >
+              Open deposit
+            </Styled.OpenTheDeposit>
+          )}
+        </Styled.MyDepositsWrapper>
+        <Styled.DepositsCategoriesWrapper>
+          {depositsCategories.map((item) => (
+            <Styled.Category
+              key={item.id}
+              onClick={() => handleCategoryClick(item)}
+            >
+              <div>{item.svg}</div>
+              <div>{item.title}</div>
+            </Styled.Category>
+          ))}
+        </Styled.DepositsCategoriesWrapper>
+        <Styled.Strongbox>
           <div>
-            <Styled.MyDepositsSpan>
-              <Link to="">"My deposits" </Link>
-              {/* replenishmennt link */}
-              <span>are:</span>
-            </Styled.MyDepositsSpan>
-            <ul>
-              <li>special application for depositors;</li>
-              <li>simple and convenient interface;</li>
-              <li>convenient management of deposits at any time.</li>
-            </ul>
-            <b>And you don't need to go to the branch </b>
+            <h2>Deposit operation in 60 seconds</h2>
+            <div>
+              <Styled.MyDepositsSpan>
+                <Link to="">"My deposits" </Link>
+                <span>are:</span>
+              </Styled.MyDepositsSpan>
+              <ul>
+                <li>special application for depositors;</li>
+                <li>simple and convenient interface;</li>
+                <li>convenient management of deposits at any time.</li>
+              </ul>
+              <b>And you don't need to go to the branch </b>
+            </div>
           </div>
-        </div>
-        <Styled.StrongboxImg>
-          <img
-            alt=""
-            src="https://i.ibb.co/z4D69nY/9357593be676e7cf5043-1.png"
-          />
-        </Styled.StrongboxImg>
-      </Styled.Strongbox>
-      {user && (
-        <CustomRodal visible={depositFormVisible} onClose={closeDepositModal}>
-          <DepositForm closeDepositModal={closeDepositModal} />
-        </CustomRodal>
-      )}
-      {user && (
-        <CustomRodal
-          visible={conditionFormVisible}
-          onClose={closeConditionsModal}
-        >
-          <ConditionsOfDeposit />
-        </CustomRodal>
-      )}
-      {user && (
-        <CustomRodal
-          visible={calculatorFormVisible}
-          onClose={closeCalculatorModal}
-        >
-          <DepositCalculatorForm />
-        </CustomRodal>
-      )}
+          <Styled.StrongboxImg>
+            <img
+              alt=""
+              src="https://i.ibb.co/z4D69nY/9357593be676e7cf5043-1.png"
+            />
+          </Styled.StrongboxImg>
+        </Styled.Strongbox>
+        {user && (
+          <CustomRodal visible={depositFormVisible} onClose={closeDepositModal}>
+            <DepositForm closeDepositModal={closeDepositModal} />
+          </CustomRodal>
+        )}
+        {user && (
+          <CustomRodal
+            visible={conditionFormVisible}
+            onClose={closeConditionsModal}
+          >
+            <ConditionsOfDeposit />
+          </CustomRodal>
+        )}
+        {user && (
+          <CustomRodal
+            visible={calculatorFormVisible}
+            onClose={closeCalculatorModal}
+          >
+            <DepositCalculatorForm />
+          </CustomRodal>
+        )}
+      </Styled.WrapperInfo>
     </StyleWrapper>
   );
 };

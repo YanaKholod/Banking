@@ -17,6 +17,12 @@ const Styled = {
     padding-top: 15px;
     text-decoration: none;
     color: white;
+    @media (min-width: 1300px) {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
     h3 {
       font-weight: 600;
       white-space: pre-line;

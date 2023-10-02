@@ -22,6 +22,10 @@ const Styled = {
     background-color: ${COLORS.MENU_BACKGROUND};
     border-radius: 5px;
     padding: 24px;
+    @media (min-width: 1300px) {
+      height: 100vh;
+      justify-content: space-around;
+    }
     h3 {
       line-height: 28px;
       font-weight: 600;

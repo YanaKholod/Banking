@@ -97,19 +97,20 @@ export const CustomRodal = styled(Rodal).attrs({
     .rodal-mask {
       background-color: rgba(0, 0, 0, 0.414);
     }
-    width: auto;
-    height: auto;
-    max-width: 80%;
-    max-height: 80%;
-    position: fixed;
-    top: 90%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
   @media (max-width: 850px) {
     .rodal-dialog {
-      max-width: 90%;
-      max-height: 90%;
+      width: auto;
+      height: auto;
+      max-width: 80%;
+      max-height: 80%;
+      position: absolute;
+    }
+  }
+  @media (min-width: 1200px) {
+    .rodal-dialog {
+      background-color: ${COLORS.HEADER_BACKGROUND};
+      position: absolute;
     }
   }
 `;
