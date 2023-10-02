@@ -9,6 +9,7 @@ const Styled = {
     margin: 20px 80px;
     @media (min-width: 1900px) {
       margin: 20px 220px;
+      height: 100vh;
     }
     @media (max-width: 850px) {
       margin: 20px 20px;
