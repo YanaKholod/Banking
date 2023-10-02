@@ -85,6 +85,7 @@ const Styled = {
   CustomRodal: styled(Rodal)`
     .rodal-dialog {
       background-color: ${COLORS.HEADER_BACKGROUND};
+      position: absolute;
       .rodal-mask {
         background-color: rgba(0, 0, 0, 0.414);
       }
