@@ -21,6 +21,7 @@ const Styled = {
     /* z-index: 998; */
     @media (max-width: 850px) {
       align-items: baseline;
+      position: relative;
     }
   `,
   Logo: styled(Link)`
@@ -151,6 +152,7 @@ const Styled = {
   `,
   BurgerButton: styled.button`
     display: none;
+
     @media (max-width: 850px) {
       display: block;
       background-color: transparent;

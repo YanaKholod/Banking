@@ -92,6 +92,7 @@ const StyledForm = {
     color: ${COLORS.TEXT};
     option {
       background-color: transparent;
+      color: ${COLORS.TEXT};
     }
   `,
 };
