@@ -6,6 +6,7 @@ import { persistor, store } from "./redux/store";
 import styled from "styled-components";
 import { PersistGate } from "redux-persist/integration/react";
 import { CustomToastContainer } from "./utils/generalStyled";
+import { COLORS } from "./constants/styled";
 
 const Styled = {
   Global: styled.div`
@@ -15,6 +16,19 @@ const Styled = {
     width: 100%;
     font-family: "Open Sans", sans-serif;
     box-sizing: border-box;
+    select {
+      background-color: transparent;
+      border: 1px solid ${COLORS.LIGHTER_TEXT};
+      border-radius: 4px;
+      color: ${COLORS.TEXT};
+      padding: 5px;
+      font-size: 17px;
+    }
+
+    select option {
+      background-color: transparent;
+      color: ${COLORS.TEXT};
+    }
   `,
 };
 

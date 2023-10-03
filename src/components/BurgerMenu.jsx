@@ -14,10 +14,12 @@ const Styled = {
     flex-direction: column;
     position: absolute;
     left: 0;
-    top: 11%;
-    bottom: 0;
+    bottom: -288px;
     width: 50%;
     z-index: 500;
+    @media (max-width: 500px) {
+      width: 100%;
+    }
     @media (max-width: 500px) {
       width: 100%;
     }
@@ -102,7 +104,7 @@ const RightMenu = ({
         <Styled.RightMenuItemWrapper>
           <Styled.RightMenuItem
             onClick={() => {
-              onCloseSubMenu(); // Call the callback to close the submenu
+              onCloseSubMenu();
             }}
           >
             <div>Back</div>
