@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "../components/Menu";
 import MainContent from "../components/MainContent";
 import styled from "styled-components";
+import Chat from "../components/Chat";
 
 const Styled = {
   Wrapper: styled.div`
@@ -19,14 +20,35 @@ const Styled = {
     }
   `,
   Menu: styled.div``,
+  ChatButton: styled.button`
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0074e4;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  `,
 };
 const HomePage = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
   return (
     <Styled.Wrapper>
       <Styled.Menu>
         <Menu />
       </Styled.Menu>
       <MainContent />
+      {isChatOpen && <Chat closeChat={toggleChat} />}
+      <Styled.ChatButton onClick={toggleChat}>
+        {isChatOpen ? "Close Chat" : "Open Chat"}
+      </Styled.ChatButton>
     </Styled.Wrapper>
   );
 };
