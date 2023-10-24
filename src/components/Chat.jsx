@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { COLORS } from "../constants/styled";
 
 const ChatContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
   position: fixed;
   z-index: 999;
   bottom: 10px;
@@ -14,11 +17,18 @@ const ChatContainer = styled.div`
   border: 1px solid ${COLORS.ACCENT};
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  button {
+    background: none;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
 `;
 
 const ChatInputContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  width: 100%;
   input {
     width: 100%;
     color: ${COLORS.LIGHTER_TEXT};
@@ -59,6 +69,7 @@ const ChatBox = styled.div`
   font-size: 13px;
   line-height: 1.5;
 `;
+
 const Chat = ({ closeChat }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -114,13 +125,13 @@ const Chat = ({ closeChat }) => {
 
   return (
     <ChatContainer>
-      <div
+      <button
         onClick={() => {
           closeChat();
         }}
       >
-        x
-      </div>
+        X
+      </button>
       <ChatBox>
         {messages.map((message) => (
           <div key={message.text}>
